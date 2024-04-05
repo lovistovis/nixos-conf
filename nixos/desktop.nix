@@ -2,6 +2,20 @@
 {
   programs = {
     bash.enable = true;
+    git = {
+      enable = true;
+      lfs.enable = true;
+      package = pkgs.gitFull;
+      userName = "Love Lysell Berglund";
+      userEmail = "lovistovis0@gmail.com";
+      extraConfig = {
+        core = {
+	  editor = "nvim";
+	};
+        credential.helper = "oauth";
+      };
+    };
+
     firefox = let
       lock-false = {
         Value = false;
@@ -83,8 +97,8 @@
 
   home.packages = with pkgs; [
     tmux
+    neofetch
     gimp
-    git
     discord
     neovim
     tree
@@ -92,4 +106,7 @@
   ];
 
   home.file.".config/awesome".source = ../awesome;
+
+  # DMZ white cursor
+  home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 }
