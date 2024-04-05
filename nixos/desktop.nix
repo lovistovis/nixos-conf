@@ -105,7 +105,7 @@
     kitty
   ];
 
-  home.file.".config/awesome".source = ../awesome;
+  xdg.configFile.".config/awesome".source = ../awesome;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
