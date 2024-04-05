@@ -103,6 +103,7 @@
     neovim
     tree
     kitty
+    qdirstat
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
