@@ -100,6 +100,7 @@
 
   home.packages = with pkgs; [
     tmux
+    pavucontrol
     neofetch
     gimp
     discord

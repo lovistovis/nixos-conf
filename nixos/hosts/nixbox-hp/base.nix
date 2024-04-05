@@ -27,29 +27,42 @@
     };
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  programs = {
+    light.enable = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-
-    prime = {
-      sync.enable = true;
-
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
     };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+      prime = {
+        sync.enable = true;
+
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
+
+  services = {
+    xserver.videoDrivers = [ "nvidia" ];
+    blueman = {
+      enable = true;
+    };
   };
 
   time.hardwareClockInLocalTime = true;
