@@ -2,6 +2,10 @@
 {
   programs = {
     bash.enable = true;
+    alacritty = {
+      enable = true;
+      settings = {};
+    };
     git = {
       enable = true;
       lfs.enable = true;
@@ -15,7 +19,6 @@
         credential.helper = "oauth";
       };
     };
-
     firefox = let
       lock-false = {
         Value = false;
@@ -103,6 +106,7 @@
     neovim
     tree
     kitty
+    st
     qdirstat
   ];
 
@@ -110,4 +114,6 @@
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+
+  home.file.".background-image".source = ../wallpapers;
 }
