@@ -38,10 +38,10 @@
       sddm = {
         enable = true;
       };
-      defaultSession = "none+awesome";
+      defaultSession = "none+i3";
     };
 
-    windowManager.awesome = {
+    windowManager.i3 = {
       enable = true;
     };
   };
