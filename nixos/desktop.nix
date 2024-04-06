@@ -16,7 +16,7 @@
         core = {
 	  editor = "nvim";
 	};
-        credential.helper = "oauth";
+        credential.helper = "libsecret";
       };
     };
     firefox = let
@@ -112,6 +112,7 @@
     qdirstat
     nerdfonts
     davinci-resolve
+    unityhub
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
