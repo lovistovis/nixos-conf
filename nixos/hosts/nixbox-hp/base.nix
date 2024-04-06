@@ -65,5 +65,23 @@
     };
   };
 
+  containers = {
+    vpn = {
+      config = { config, pkgs, ... }: {
+        environment.systemPackages = with pkgs; [
+	  protonvpn-cli
+	  tmux
+	  dbus
+	  firefox
+	  aria
+	];
+        users.extraUsers.user = {
+	  isNormalUser = true;
+	  uid = 1000;
+	};
+      };
+    };
+  };
+
   time.hardwareClockInLocalTime = true;
 }

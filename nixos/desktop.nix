@@ -107,8 +107,10 @@
     neovim
     tree
     kitty
+    chromium
     st
     qdirstat
+    nerdfonts
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
