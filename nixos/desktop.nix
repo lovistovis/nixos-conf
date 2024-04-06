@@ -111,6 +111,7 @@
     st
     qdirstat
     nerdfonts
+    davinci-resolve
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
