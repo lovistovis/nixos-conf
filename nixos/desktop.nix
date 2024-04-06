@@ -114,6 +114,7 @@
     davinci-resolve
     unityhub
     vlc
+    spotify
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
