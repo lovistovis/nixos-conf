@@ -113,6 +113,7 @@
     nerdfonts
     davinci-resolve
     unityhub
+    vlc
   ];
 
   xdg.configFile.".config/awesome".source = ../awesome;
