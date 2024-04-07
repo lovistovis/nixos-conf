@@ -29,6 +29,7 @@
 
   programs = {
     light.enable = true;
+    xss-lock.enable = true;
   };
 
   hardware = {
@@ -66,23 +67,12 @@
     blueman = {
       enable = true;
     };
-  };
-
-  containers = {
-    vpn = {
-      config = { config, pkgs, ... }: {
-        environment.systemPackages = with pkgs; [
-	  protonvpn-cli
-	  tmux
-	  dbus
-	  firefox
-	  aria
-	];
-        users.extraUsers.user = {
-	  isNormalUser = true;
-	  uid = 1000;
-	};
-      };
+    logind = {
+      extraConfig = ''
+        HandlePowerKey=suspend
+	IdleAction=hybrid-sleep
+	IdleActionSec=1m
+      '';
     };
   };
 
