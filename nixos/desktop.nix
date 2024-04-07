@@ -115,6 +115,7 @@
     unityhub
     vlc
     spotify
+    tor
   ];
 
   home.sessionVariables = {
