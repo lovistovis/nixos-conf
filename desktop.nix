@@ -107,7 +107,7 @@
     neovim
     tree
     kitty
-    chromium
+  # chromium
     st
     qdirstat
     nerdfonts
@@ -119,9 +119,10 @@
     git-credential-oauth
   ];
 
-  home.sessionVariables = {
+  home.sessionVariables = rec {
     EDITOR = "nvim";
     BROWSER = "firefox";
+    DEFAULT_BROWSER = "${BROWSER}";
     TERMINAL = "kitty";
   };
 
