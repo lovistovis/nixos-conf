@@ -1,10 +1,30 @@
 { pkgs, ... }:
+let
+  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
+in
 {
   programs = {
-    bash.enable = true;
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      #autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        update = "sudo nixos-rebuild switch";
+      };
+      history.size = 10000;
+      oh-my-zsh = {
+        enable = true;
+	plugins = [ "git" ];
+	theme = "robbyrussell";
+      };
+    };
     alacritty = {
       enable = true;
-      settings = {};
+      settings = {
+        window.opacity = 0.3;
+	font.size = 8.0;
+      };
     };
     git = {
       enable = true;
@@ -117,13 +137,15 @@
     spotify
     tor-browser-bundle-bin
     git-credential-oauth
+    xsel
+    tmux-sessionizer
   ];
 
   home.sessionVariables = rec {
     EDITOR = "nvim";
     BROWSER = "firefox";
     DEFAULT_BROWSER = "${BROWSER}";
-    TERMINAL = "kitty";
+    TERMINAL = "alacritty";
   };
 
   xdg.configFile."awesome".source = ./config/awesome;
