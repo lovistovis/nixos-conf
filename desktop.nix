@@ -24,6 +24,7 @@ in
       settings = {
         window.opacity = 0.3;
 	font.size = 8.0;
+	#shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
     tmux = {
@@ -159,7 +160,7 @@ in
       enable = true;
       config = with { mod = "Mod4"; }; {
         modifier = mod;
-	terminal = "alacritty";
+	terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
       };
     };
   };
