@@ -141,6 +141,12 @@ in
     tmux-sessionizer
   ];
 
+  xsession = {
+    windowManager.i3 = {
+      enable = true;
+    };
+  };
+
   home.sessionVariables = rec {
     EDITOR = "nvim";
     BROWSER = "firefox";

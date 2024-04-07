@@ -36,15 +36,13 @@
     xkb.layout = "se";
     # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+    windowManager.i3.enable = true;
+
     displayManager = {
       sddm = {
         enable = true;
       };
       defaultSession = "none+i3";
-    };
-
-    windowManager.i3 = {
-      enable = true;
     };
   };
 
