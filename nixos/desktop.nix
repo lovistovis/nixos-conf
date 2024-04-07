@@ -117,6 +117,12 @@
     spotify
   ];
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    BROWSER = "firefox";
+    TERMINAL = "kitty";
+  };
+
   xdg.configFile.".config/awesome".source = ../awesome;
 
   # DMZ white cursor
