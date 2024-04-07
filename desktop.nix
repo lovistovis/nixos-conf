@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
 in
@@ -31,7 +31,7 @@ in
       enable = true;
       historyLimit = 10000;
       plugins = with pkgs; [ ];
-      extraConfig = import ./raw/tmux.nix;
+      extraConfig = (import ./raw/tmux.nix { inherit config; });
     };
     git = {
       enable = true;

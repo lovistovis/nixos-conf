@@ -1,3 +1,4 @@
+{ config }:
 ''
 unbind C-b
 set-option -g prefix C-a
@@ -7,5 +8,9 @@ set -as terminal-features ",alacritty*:RGB"
 
 set -g base-index 1
 
-bind-key -r f run-shell "tmux neww tmux-sessionizer"
+bind-key r source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf
+
+bind-key f run-shell "tmux neww tmux-sessionizer"
+bind-key C-c run-shell "tmux neww tmux-sessionizer ~/.nixos-conf"
+bind-key C-q run-shell "tmux neww tmux-sessionizer ~"
 ''
