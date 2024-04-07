@@ -16,7 +16,7 @@
         core = {
 	  editor = "nvim";
 	};
-        credential.helper = "libsecret";
+        credential.helper = "oauth";
       };
     };
     firefox = let
@@ -116,6 +116,7 @@
     vlc
     spotify
     tor-browser-bundle-bin
+    git-credential-oauth
   ];
 
   home.sessionVariables = {
