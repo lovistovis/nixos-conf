@@ -26,6 +26,12 @@ in
 	font.size = 8.0;
       };
     };
+    tmux = {
+      enable = true;
+      historyLimit = 10000;
+      plugins = with pkgs; [ ];
+      extraConfig = import ./raw/tmux.nix;
+    };
     git = {
       enable = true;
       lfs.enable = true;
@@ -141,17 +147,21 @@ in
     tmux-sessionizer
   ];
 
-  xsession = {
-    windowManager.i3 = {
-      enable = true;
-    };
-  };
-
   home.sessionVariables = rec {
     EDITOR = "nvim";
     BROWSER = "firefox";
     DEFAULT_BROWSER = "${BROWSER}";
     TERMINAL = "alacritty";
+  };
+
+  xsession = {
+    windowManager.i3 = {
+      enable = true;
+      config = with { mod = "Mod4"; }; {
+        modifier = mod;
+	terminal = "alacritty";
+      };
+    };
   };
 
   xdg.configFile."awesome".source = ./config/awesome;
