@@ -124,10 +124,10 @@
     TERMINAL = "kitty";
   };
 
-  xdg.configFile.".config/awesome".source = ../awesome;
+  xdg.configFile."awesome".source = ./config/awesome;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 
-  home.file.".background-image".source = ../wallpapers;
+  home.file.".background-image".source = ./wallpapers;
 }

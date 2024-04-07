@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  username = "mogos";
   hostname = "nixbox-hp";
 in
 {
@@ -9,7 +10,7 @@ in
     # <home-manager/nixos>
       ./global.nix
       (import "${home-manager}/nixos")
-      (import "/home/mogos/.dotfiles/nixos/hosts/${hostname}/base.nix")
+      (import "/home/${username}/.nixos-conf/hosts/${hostname}/base.nix")
     ];
 
   networking.hostName = hostname;
@@ -31,7 +32,7 @@ in
 
     imports = [
       ./desktop.nix
-      (import "/home/mogos/.dotfiles/nixos/hosts/${hostname}/desktop.nix")
+      (import "/home/${username}/.nixos-conf/hosts/${hostname}/desktop.nix")
     ];
   };
 
