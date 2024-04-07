@@ -115,7 +115,7 @@
     unityhub
     vlc
     spotify
-    tor
+    tor-browser-bundle-bin
   ];
 
   home.sessionVariables = {
