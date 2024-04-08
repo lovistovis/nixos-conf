@@ -13,6 +13,6 @@ pkgs.writeShellScriptBin "rebuild" ''
   sudo nixos-rebuild switch &>nixos-switch.log || (
    cat nixos-switch.log | grep --color error && false)
   gen=$(nixos-rebuild list-generations | grep current)
-  git commit -am "$gen"
+  ${pkgs.git}/bin/git commit -am "$gen"
   popd
 ''
