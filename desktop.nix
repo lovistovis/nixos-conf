@@ -1,10 +1,16 @@
-{ config, pkgs, ... }:
-let
-  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
-  path = builtins.toString ./.;
-  rebuild = import ./scripts/rebuild.nix { inherit pkgs; inherit path; };
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix {inherit pkgs;};
+  path = builtins.toString ./.;
+  rebuild = import ./scripts/rebuild.nix {
+    inherit pkgs;
+    inherit path;
+  };
+  # test comment
+in {
   programs = {
     zsh = {
       enable = true;
@@ -17,23 +23,23 @@ in
       history.size = 10000;
       oh-my-zsh = {
         enable = true;
-	plugins = [ "git" ];
-	theme = "robbyrussell";
+        plugins = ["git"];
+        theme = "robbyrussell";
       };
     };
     alacritty = {
       enable = true;
       settings = {
         window.opacity = 0.3;
-	font.size = 8.0;
-	#shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
+        font.size = 8.0;
+        #shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
     tmux = {
       enable = true;
       historyLimit = 10000;
-      plugins = with pkgs; [ ];
-      extraConfig = (import ./raw/tmux.nix { inherit config; });
+      plugins = with pkgs; [];
+      extraConfig = import ./raw/tmux.nix {inherit config;};
     };
     git = {
       enable = true;
@@ -43,8 +49,8 @@ in
       userEmail = "lovistovis0@gmail.com";
       extraConfig = {
         core = {
-	  editor = "nvim";
-	};
+          editor = "nvim";
+        };
         credential.helper = "oauth";
       };
     };
@@ -98,7 +104,10 @@ in
         };
 
         Preferences = {
-          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
+          "browser.contentblocking.category" = {
+            Value = "strict";
+            Status = "locked";
+          };
           "extensions.pocket.enabled" = lock-false;
           "extensions.screenshots.disabled" = lock-true;
           "browser.topsites.contile.enabled" = lock-false;
@@ -136,7 +145,7 @@ in
     neovim
     tree
     kitty
-  # chromium
+    # chromium
     st
     qdirstat
     nerdfonts
@@ -161,9 +170,9 @@ in
   xsession = {
     windowManager.i3 = {
       enable = true;
-      config = with { mod = "Mod4"; }; {
+      config = with {mod = "Mod4";}; {
         modifier = mod;
-	terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
+        terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
       };
     };
   };
