@@ -160,7 +160,6 @@ in {
     opentoonz
     discord
     neovim
-    tree
     kitty
     # chromium
     st
