@@ -10,7 +10,7 @@ in
     # <home-manager/nixos>
       ./global.nix
       (import "${home-manager}/nixos")
-      (import "/home/${username}/.nixos-conf/hosts/${hostname}/base.nix")
+      (import "/home/${username}/nixos-conf/hosts/${hostname}/base.nix")
     ];
 
   networking.hostName = hostname;
@@ -32,7 +32,7 @@ in
 
     imports = [
       ./desktop.nix
-      (import "/home/${username}/.nixos-conf/hosts/${hostname}/desktop.nix")
+      (import "/home/${username}/nixos-conf/hosts/${hostname}/desktop.nix")
     ];
   };
 

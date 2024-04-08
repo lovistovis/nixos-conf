@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 let
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
+  path = builtins.toString ./.;
+  rebuild = import ./scripts/rebuild.nix { inherit pkgs; inherit path; };
 in
 {
   programs = {
@@ -146,6 +148,7 @@ in
     git-credential-oauth
     xsel
     tmux-sessionizer
+    rebuild
   ];
 
   home.sessionVariables = rec {
