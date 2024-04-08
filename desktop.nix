@@ -56,7 +56,15 @@ in {
         tmuxPlugins.cpu
         {
           plugin = tmuxPlugins.resurrect;
-          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+          extraConfig = ''
+	    set -g @resurrect-capture-pane-contents 'on'
+	    set -g @resurrect-strategy-nvim 'session'
+            #set -g @resurrect-processes '"~nvim->nvim *"'
+
+            resurrect_dir="$XDG_DATA_HOME/tmux/resurrect/sessions"
+            set -g @resurrect-dir $resurrect_dir
+            set -g @resurrect-hook-post-save-all 'sed -i "s/\/tmp.*nvim/nvim/" $resurrect_dir/last'
+	  '';
         }
         {
           plugin = tmuxPlugins.continuum;
