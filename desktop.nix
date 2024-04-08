@@ -165,7 +165,7 @@ in {
     # chromium
     st
     qdirstat
-    davinci-resolve
+    # davinci-resolve
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
