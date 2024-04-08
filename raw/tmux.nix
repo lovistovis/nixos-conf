@@ -10,6 +10,6 @@
   bind-key r source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf
 
   bind-key C-f run-shell "tmux neww tmux-sessionizer"
-  bind-key C-c run-shell "tmux neww tmux-sessionizer ~/.nixos-conf"
+  bind-key C-c run-shell "tmux neww tmux-sessionizer ~/nixos-conf"
   bind-key C-q run-shell "tmux neww tmux-sessionizer ~"
 ''
