@@ -3,13 +3,18 @@
   pkgs,
   ...
 }: let
+  dotDir = ".tmux"; # tmux dotdir
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix {inherit pkgs;};
+  tmux-store = import ./scripts/tmux-store.nix {
+    inherit pkgs;
+    inherit dotDir;
+  };
+  tmux-start = import ./scripts/tmux-start.nix {inherit pkgs;};
   path = builtins.toString ./.;
   rebuild = import ./scripts/rebuild.nix {
     inherit pkgs;
     inherit path;
   };
-  # test comment
 in {
   programs = {
     zsh = {
@@ -26,6 +31,17 @@ in {
         plugins = ["git"];
         theme = "robbyrussell";
       };
+      prezto = {
+        #enable = true;
+	#python.virtualenvAutoSwitch = true;
+      };
+      inherit dotDir; 
+      initExtra = ''
+        function shellExit {
+	  tmux detatch 
+	}
+	trap shellExit EXIT
+      '';
     };
     alacritty = {
       enable = true;
@@ -141,6 +157,7 @@ in {
     pavucontrol
     neofetch
     gimp
+    opentoonz
     discord
     neovim
     tree
@@ -148,15 +165,16 @@ in {
     # chromium
     st
     qdirstat
-    nerdfonts
     davinci-resolve
     unityhub
     vlc
-    spotify
+    nur.repos.nltch.spotify-adblock
     tor-browser-bundle-bin
     git-credential-oauth
     xsel
     tmux-sessionizer
+    tmux-store
+    tmux-start
     rebuild
   ];
 
@@ -172,7 +190,7 @@ in {
       enable = true;
       config = with {mod = "Mod4";}; {
         modifier = mod;
-        terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
+        terminal = "alacritty -e zsh -c tmux-start"; # ugly fix but ok
       };
     };
   };

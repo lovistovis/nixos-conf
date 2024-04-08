@@ -20,6 +20,14 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "libtiff-4.0.3-opentoonz"
+    ];
+    packageOverrides = pkgs; {
+      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+        inherit pkgs;
+      };
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
