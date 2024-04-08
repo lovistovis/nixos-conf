@@ -24,6 +24,7 @@ in {
       syntaxHighlighting.enable = true;
       shellAliases = {
         update = "sudo nixos-rebuild switch";
+	clean = "sudo nix-collect-garbage --delete-old";
       };
       history.size = 10000;
       oh-my-zsh = {
