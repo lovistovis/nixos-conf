@@ -11,7 +11,8 @@ dump() {
 }
 
 save() {
-  dump > ~/${dotDir}/.tmux-session
+  dump > "~/${dotDir}/.tmux-session"
+  echo "saved to $(~/${dotDir}/)"
 }
 
 terminal_size() {

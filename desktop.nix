@@ -3,12 +3,10 @@
   pkgs,
   ...
 }: let
-  dotDir = ".tmux"; # tmux dotdir
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix {inherit pkgs;};
-  tmux-store = import ./scripts/tmux-store.nix {
-    inherit pkgs;
-    inherit dotDir;
-  };
+  #tmux-store = import ./scripts/tmux-store.nix {
+  #  inherit pkgs;
+  #};
   tmux-start = import ./scripts/tmux-start.nix {inherit pkgs;};
   path = builtins.toString ./.;
   rebuild = import ./scripts/rebuild.nix {
@@ -36,13 +34,13 @@ in {
         #enable = true;
 	#python.virtualenvAutoSwitch = true;
       };
-      inherit dotDir; 
-      initExtra = ''
-        function shellExit {
-	  tmux detatch 
-	}
-	trap shellExit EXIT
-      '';
+      dotDir = ".zsh"; 
+      #initExtra = ''
+      #  function shellExit {
+      #    tmux-store save
+      #  }
+      #  trap shellExit EXIT
+      #'';
     };
     alacritty = {
       enable = true;
@@ -54,8 +52,21 @@ in {
     };
     tmux = {
       enable = true;
+      plugins = with pkgs; [
+        tmuxPlugins.cpu
+        {
+          plugin = tmuxPlugins.resurrect;
+          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+        }
+        {
+          plugin = tmuxPlugins.continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '20' # minutes
+          '';
+        }
+      ];
       historyLimit = 10000;
-      plugins = with pkgs; [];
       extraConfig = import ./raw/tmux.nix {inherit config;};
     };
     git = {
@@ -173,7 +184,7 @@ in {
     git-credential-oauth
     xsel
     tmux-sessionizer
-    tmux-store
+    #tmux-store
     tmux-start
     rebuild
   ];
@@ -196,6 +207,7 @@ in {
   };
 
   xdg.configFile."awesome".source = ./config/awesome;
+  xdg.configFile."nvim".source = ./config/nvim;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
