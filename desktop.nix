@@ -238,6 +238,7 @@ in {
 
   #xdg.configFile."awesome".source = ./config/awesome;
   xdg.configFile."nvim".source = ./config/nvim;
+  xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";

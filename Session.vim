@@ -13,12 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 ~/nixos-conf
-badd +1 desktop.nix
+badd +0 .git/COMMIT_EDITMSG
 argglobal
 %argdel
-$argadd ~/nixos-conf
-edit desktop.nix
+$argadd .git/COMMIT_EDITMSG
+edit .git/COMMIT_EDITMSG
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -30,12 +29,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 15) / 30)
+let s:l = 1 - ((0 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 0
+normal! 07|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
