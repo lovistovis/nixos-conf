@@ -1,2 +1,2 @@
 *.log
-Session.vim
+**/Session.vim
