@@ -19,12 +19,12 @@
                configfile "($ubuntu)/boot/grub/grub.cfg"
              }
              menuentry "WindowsManual" {
-        insmod part_gpt
-        insmod fat
-        insmod search_fs_uuid
-        insmod chain
-        search --set=root --fs-uuid 4db76f03-619c-4f36-9c46-b22b1b095c44
-        chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+               insmod part_gpt
+               insmod fat
+               insmod search_fs_uuid
+               insmod chain
+               search --set=root --fs-uuid 4db76f03-619c-4f36-9c46-b22b1b095c44
+               chainloader /EFI/Microsoft/Boot/bootmgfw.efi
              }
       '';
     };
@@ -32,7 +32,7 @@
 
   programs = {
     light.enable = true;
-    xss-lock.enable = true;
+    #xss-lock.enable = true;
   };
 
   hardware = {
@@ -65,17 +65,19 @@
     };
   };
 
+  services.systemd-lock-handler.enable = false;
+
   services = {
-    xserver.videoDrivers = ["nvidia"];
+    xserver.videoDrivers = [ "nvidia" ];
     blueman = {
       enable = true;
     };
     logind = {
-      extraConfig = ''
-               HandlePowerKey=suspend
-        IdleAction=hybrid-sleep
-        IdleActionSec=1m
-      '';
+      #extraConfig = ''
+      #  HandlePowerKey=suspend
+      #  IdleAction=hybrid-sleep
+      #  IdleActionSec=1m
+      #'';
     };
   };
 

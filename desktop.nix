@@ -195,6 +195,7 @@ in {
     gimp
     opentoonz
     discord
+    vesktop
     neovim
     kitty
     # chromium
@@ -211,6 +212,8 @@ in {
     #tmux-store
     tmux-start
     rebuild
+    spotdl
+    brightnessctl
   ];
 
   home.sessionVariables = rec {
