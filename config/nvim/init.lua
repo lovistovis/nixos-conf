@@ -6,5 +6,5 @@ local save_session_on_exit_group = augroup('SaveSessionOnExit', {})
 autocmd({"VimLeave"}, {
     group = save_session_on_exit_group,
     pattern = "*",
-    command = [[mksession]],
+    command = [[mksession!]],
 })

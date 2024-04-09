@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.writeShellScriptBin "tmux-sessionizer" ''
   if [[ $# -eq 1 ]]; then
       selected=$1
@@ -23,4 +23,5 @@ pkgs.writeShellScriptBin "tmux-sessionizer" ''
   fi
 
   ${pkgs.tmux}/bin/tmux switch-client -t $selected_name
+  ${pkgs.tmux}/bin/tmux send-keys C-a r
 ''

@@ -14,6 +14,10 @@
     inherit path;
   };
 in {
+  imports = [
+    ./home-systemd.nix
+  ];
+
   programs = {
     zsh = {
       enable = true;
@@ -22,7 +26,10 @@ in {
       syntaxHighlighting.enable = true;
       shellAliases = {
         update = "sudo nixos-rebuild switch";
+	fupdate = "sudo nixos-rebuild switch --fast";
+	upgrade = "sudo nix-channel --update; update";
 	clean = "sudo nix-collect-garbage --delete-old";
+	n = "nvim -S";
       };
       history.size = 10000;
       oh-my-zsh = {
@@ -50,7 +57,11 @@ in {
         #shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
-    tmux = {
+    tmux = let
+      auto-restore = import ./scripts/auto-restore.nix {
+        inherit pkgs;
+      };
+    in {
       enable = true;
       plugins = with pkgs; [
         tmuxPlugins.cpu
@@ -59,23 +70,32 @@ in {
           extraConfig = ''
 	    set -g @resurrect-capture-pane-contents 'on'
 	    set -g @resurrect-strategy-nvim 'session'
-            #set -g @resurrect-processes '"~nvim->nvim *"'
+            set -g @resurrect-processes '"~nvim->nvim *"'
 
-            resurrect_dir="$XDG_DATA_HOME/tmux/resurrect/sessions"
-            set -g @resurrect-dir $resurrect_dir
-            set -g @resurrect-hook-post-save-all 'sed -i "s/\/tmp.*nvim/nvim/" $resurrect_dir/last'
+	    run '${auto-restore}/bin/auto-restore'
+
+            set-hook -g 'client-detached' "run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh" # auto save
+
+            #resurrect_dir="$(show resurrect-dir)"
+            #resurrect_dir="$HOME/.tmux/resurrect"
+            #set -g @resurrect-dir $resurrect_dir
+            #set -g @resurrect-hook-post-save-all 'sed -i "s/*nvim/nvim/" $resurrect_dir/last'
+	    #show -g @resurrect-dir
 	  '';
         }
         {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
-            set -g @continuum-restore 'on'
+            #set -g @continuum-restore 'on'
             set -g @continuum-save-interval '20' # minutes
           '';
         }
       ];
       historyLimit = 10000;
-      extraConfig = import ./raw/tmux.nix {inherit config;};
+      extraConfig = import ./raw/tmux.nix {
+        inherit pkgs;
+	inherit config;
+      };
     };
     git = {
       enable = true;
@@ -211,10 +231,13 @@ in {
         modifier = mod;
         terminal = "alacritty -e zsh -c tmux-start"; # ugly fix but ok
       };
+      extraConfig = ''
+        exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+      '';
     };
   };
 
-  xdg.configFile."awesome".source = ./config/awesome;
+  #xdg.configFile."awesome".source = ./config/awesome;
   xdg.configFile."nvim".source = ./config/nvim;
 
   # DMZ white cursor

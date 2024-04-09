@@ -67,6 +67,7 @@
     vim
     wget
     tree
+    efibootmgr
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
