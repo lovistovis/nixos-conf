@@ -13,14 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +20 raw/tmux.nix
-badd +75 desktop.nix
-badd +10 scripts/auto-restore.nix
-badd +2 scripts/tmux-sessionizer.nix
+badd +0 .git/COMMIT_EDITMSG
 argglobal
 %argdel
-$argadd ~/nixos-conf/
-edit scripts/auto-restore.nix
+$argadd .git/COMMIT_EDITMSG
+edit .git/COMMIT_EDITMSG
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -32,13 +29,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 5 - ((4 * winheight(0) + 22) / 44)
+let s:l = 1 - ((0 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
-normal! 037|
-lcd ~/nixos-conf
+keepjumps 1
+normal! 049|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -14,10 +14,6 @@
     inherit path;
   };
 in {
-  imports = [
-    ./home-systemd.nix
-  ];
-
   programs = {
     zsh = {
       enable = true;
