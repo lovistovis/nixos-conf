@@ -88,7 +88,7 @@
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
-	HandleLidSwitch=ignore #suspend-then-hibernate
+	HandleLidSwitch=ignore
         HandleLidSwitchExternalPower=ignore
         IdleAction=suspend-then-hibernate
         IdleActionSec=1m

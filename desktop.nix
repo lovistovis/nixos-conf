@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 let
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   #tmux-store = import ./scripts/tmux-store.nix {
@@ -57,6 +57,8 @@ in {
       };
     in {
       enable = true;
+      historyLimit = 10000;
+      keyMode = "vi";
       plugins = with pkgs; [
         tmuxPlugins.cpu
         {
@@ -81,11 +83,10 @@ in {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
             #set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '20' # minutes
+	    set -g @continuum-save-interval '20' # minutes
           '';
         }
       ];
-      historyLimit = 10000;
       extraConfig = import ./raw/tmux.nix {
         inherit pkgs;
 	inherit config;
@@ -219,6 +220,7 @@ in {
     rebuild
     spotdl
     brightnessctl
+    xorg.xev
   ];
 
   home.sessionVariables = rec {
@@ -237,6 +239,8 @@ in {
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+
+
       '';
     };
   };
