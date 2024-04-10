@@ -96,6 +96,10 @@ in {
       package = pkgs.gitFull;
       userName = "Love Lysell Berglund";
       userEmail = "lovistovis0@gmail.com";
+      ignores = [
+        "**/nixos-switch.log"
+	"**/Session.vim"
+      ];
       extraConfig = {
         core = {
           editor = "nvim";
