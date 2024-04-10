@@ -65,19 +65,22 @@
     };
   };
 
-  services.systemd-lock-handler.enable = false;
+  #services.systemd-lock-handler.enable = false;
+
+  powerManagement.enable = true;
 
   services = {
     xserver.videoDrivers = [ "nvidia" ];
+    thermald.enable = true;
     blueman = {
       enable = true;
     };
     logind = {
-      #extraConfig = ''
-      #  HandlePowerKey=suspend
-      #  IdleAction=hybrid-sleep
-      #  IdleActionSec=1m
-      #'';
+      extraConfig = ''
+        HandlePowerKey=suspend
+        IdleAction=hybrid-sleep
+        IdleActionSec=1m
+      '';
     };
   };
 
