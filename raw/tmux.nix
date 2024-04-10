@@ -14,8 +14,8 @@ bind-key r source-file $CONFIG
 set-hook -g 'session-created' 'source-file $CONFIG' # Fixes C-a+a not working
 
 bind-key C-f run-shell "tmux neww tmux-sessionizer"
-bind-key C-c run-shell "tmux neww tmux-sessionizer ~/nixos-conf"
 bind-key C-q run-shell "tmux neww tmux-sessionizer ~"
-
-#set-hook -g 'session-closed' 'run "${pkgs.tmux}/bin/tmux send-keys C-a C-s"'
+bind-key C-c run-shell "tmux neww tmux-sessionizer ~/nixos-conf"
+bind-key C-H run-shell "tmux neww tmux-sessionizer ~/nixos-conf/hosts/nixbox-hp"
+bind-key C-P run-shell "tmux neww tmux-sessionizer ~/nixos-conf/hosts/nixbox-pc"
 ''

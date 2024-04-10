@@ -10,22 +10,24 @@
     };
     grub = {
       enable = true;
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       efiSupport = true;
       useOSProber = true;
+      timeoutStyle = "hidden";
       extraEntries = ''
-             menuentry "UbuntuManual" {
-               search --set=ubuntu --fs-uuid 4db76f03-619c-4f36-9c46-b22b1b095c44
-               configfile "($ubuntu)/boot/grub/grub.cfg"
-             }
-             menuentry "WindowsManual" {
-               insmod part_gpt
-               insmod fat
-               insmod search_fs_uuid
-               insmod chain
-               search --set=root --fs-uuid 4db76f03-619c-4f36-9c46-b22b1b095c44
-               chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-             }
+        menuentry "UbuntuManual" {
+	  insmod search_fs_uuid
+          search --set=root --fs-uuid 48d5e96d-cd77-476b-8aa3-4eb0218caa25
+          configfile "/boot/grub/grub.cfg"
+        }
+        menuentry "WindowsManual" {
+          insmod part_gpt
+          insmod fat
+          insmod search_fs_uuid
+          insmod chain
+          search --set=root --fs-uuid 0CB0-93CB 
+          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
       '';
     };
   };
@@ -47,12 +49,17 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
-      powerManagement.finegrained = false;
+      powerManagement.finegrained = true;
       open = false;
       nvidiaSettings = true;
 
       prime = {
-        sync.enable = true;
+        #sync.enable = true;
+
+	offload = {
+	  enable = true;
+          enableOffloadCmd = true;
+	};
 
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -70,7 +77,10 @@
   powerManagement.enable = true;
 
   services = {
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver = {
+      videoDrivers = [ "nvidia" ];
+      dpi = 80;
+    };
     thermald.enable = true;
     blueman = {
       enable = true;
@@ -78,8 +88,11 @@
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
-        IdleAction=hybrid-sleep
+	HandleLidSwitch=ignore #suspend-then-hibernate
+        HandleLidSwitchExternalPower=ignore
+        IdleAction=suspend-then-hibernate
         IdleActionSec=1m
+        HibernateDelaySec=5m
       '';
     };
   };

@@ -63,11 +63,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    dbus
-    vim
-    wget
-    tree
-    efibootmgr
+    vim        # Emergency editor
+    wget       # Retrive guides
+    efibootmgr # Change boot order
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

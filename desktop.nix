@@ -1,13 +1,10 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix {inherit pkgs;};
+{ config, pkgs, ...}:
+let
+  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   #tmux-store = import ./scripts/tmux-store.nix {
   #  inherit pkgs;
   #};
-  tmux-start = import ./scripts/tmux-start.nix {inherit pkgs;};
+  tmux-start = import ./scripts/tmux-start.nix { inherit pkgs; };
   path = builtins.toString ./.;
   rebuild = import ./scripts/rebuild.nix {
     inherit pkgs;
@@ -189,6 +186,9 @@ in {
   };
 
   home.packages = with pkgs; [
+    dbus
+    tree
+    parted
     tmux
     pavucontrol
     neofetch
@@ -226,7 +226,7 @@ in {
   xsession = {
     windowManager.i3 = {
       enable = true;
-      config = with {mod = "Mod4";}; {
+      config = with { mod = "Mod4"; }; {
         modifier = mod;
         terminal = "alacritty -e zsh -c tmux-start"; # ugly fix but ok
       };
