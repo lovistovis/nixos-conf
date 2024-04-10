@@ -22,6 +22,7 @@ in {
 	fupdate = "sudo nixos-rebuild switch --fast";
 	upgrade = "sudo nix-channel --update; update";
 	clean = "sudo nix-collect-garbage --delete-old";
+	reload-systemd = "systemctl reload systemd-logind.service";
 	n = "nvim -S";
       };
       history.size = 10000;
