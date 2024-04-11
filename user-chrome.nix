@@ -1,6 +1,6 @@
 ''
-  /* Minimize fullscreen transition time */
-  #navigator-toolbox[fullscreenShouldAnimate] {
-    transition: 100ms !important;
-  }
+/* Minimize fullscreen transition time */
+#navigator-toolbox[fullscreenShouldAnimate] {
+  transition: 100ms !important;
+}
 ''

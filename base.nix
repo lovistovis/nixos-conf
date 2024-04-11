@@ -1,10 +1,4 @@
-{
-  pkgs,
-  config,
-  #username,
-  #hostname,
-  ...
-}: let
+{ pkgs, config, ... }: let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   username = "mogos";
   hostname = "nixbox-hp";
@@ -33,7 +27,7 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mogos = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   home-manager.useGlobalPkgs = true;

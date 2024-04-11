@@ -28,7 +28,7 @@ in {
       history.size = 10000;
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"];
+        plugins = [ "git" ];
         theme = "robbyrussell";
       };
       prezto = {
@@ -193,6 +193,7 @@ in {
 
   home.packages = with pkgs; [
     dbus
+    unzip
     tree
     parted
     tmux
@@ -202,6 +203,7 @@ in {
     opentoonz
     discord
     vesktop
+    discordo
     neovim
     kitty
     # chromium
@@ -215,12 +217,12 @@ in {
     git-credential-oauth
     xsel
     tmux-sessionizer
-    #tmux-store
     tmux-start
     rebuild
     spotdl
     brightnessctl
     xorg.xev
+    renpy
   ];
 
   home.sessionVariables = rec {
@@ -239,9 +241,8 @@ in {
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-
-
-      '';
+        workspace "1" 
+      ''; # TODO: Make this work regardless of the display name
     };
   };
 
