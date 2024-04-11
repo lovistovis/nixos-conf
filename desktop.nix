@@ -23,7 +23,7 @@ in {
 	upgrade = "sudo nix-channel --update; update";
 	clean = "sudo nix-collect-garbage --delete-old";
 	reload-systemd = "systemctl reload systemd-logind.service";
-	n = "nvim -S";
+	n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
       };
       history.size = 10000;
       oh-my-zsh = {
@@ -32,7 +32,7 @@ in {
         theme = "robbyrussell";
       };
       prezto = {
-        #enable = true;
+        #enable = true
 	#python.virtualenvAutoSwitch = true;
       };
       dotDir = ".zsh"; 
@@ -241,7 +241,7 @@ in {
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-        workspace "1" 
+        workspace "1" output eDP-1
       ''; # TODO: Make this work regardless of the display name
     };
   };
