@@ -24,6 +24,7 @@ in {
 	clean = "sudo nix-collect-garbage --delete-old";
 	reload-systemd = "systemctl reload systemd-logind.service";
 	n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
+	rust = "nix-shell ${path}/shell/rust.nix";
       };
       history.size = 10000;
       oh-my-zsh = {
@@ -35,6 +36,18 @@ in {
         #enable = true
 	#python.virtualenvAutoSwitch = true;
       };
+      #plugins = [ # currenly not working out rust
+      #  {
+      #    name = "zsh-nix-shell";
+      #    file = "nix-shell.plugin.zsh";
+      #    src = pkgs.fetchFromGitHub {
+      #      owner = "chisui";
+      #      repo = "zsh-nix-shell";
+      #      rev = "v0.8.0";
+      #      sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+      #    };
+      #  }
+      #];
       dotDir = ".zsh"; 
       #initExtra = ''
       #  function shellExit {
@@ -230,6 +243,22 @@ in {
     BROWSER = "firefox";
     DEFAULT_BROWSER = "${BROWSER}";
     TERMINAL = "alacritty";
+  };
+
+  gtk = {
+    enable = true;
+    #gtk3.extraConfig.gtk-decoration-layout = "menu:";
+    theme = {
+      name = "Tokyonight-Dark-B";
+      package = pkgs.tokyo-night-gtk;
+    };
+    iconTheme = {
+      name = "Tokyonight-Dark";
+    };
+    #cursorTheme = {
+    #  name = gtkCursorTheme;
+    #  package = pkgs.bibata-cursors;
+    #};
   };
 
   xsession = {
