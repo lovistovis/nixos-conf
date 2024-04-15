@@ -30,6 +30,7 @@
 
   programs = {
     light.enable = true;
+    dconf.enable = true;
     #xss-lock.enable = true;
   };
 
@@ -74,7 +75,11 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "nvidia" "modsetting" ];
+      videoDrivers = [ "intel" ];
+      deviceSection = ''
+        Option "DRI" "2"
+        Option "TearFree" "true"
+      '';
       dpi = 80;
     };
     thermald.enable = true;

@@ -63,8 +63,11 @@ in {
     alacritty = {
       enable = true;
       settings = {
-        window.opacity = 0.3;
+        #window.opacity = 0.95;
         font.size = 8.0;
+	colors.primary = {
+	  background = "#000000";
+	};
         #shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
@@ -269,7 +272,7 @@ in {
       enable = true;
       config = with { mod = "Mod4"; }; {
         modifier = mod;
-        terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
+        terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; # ugly fix but ok
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
