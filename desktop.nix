@@ -25,6 +25,9 @@ in {
 	reload-systemd = "systemctl reload systemd-logind.service";
 	n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
 	rust = "nix-shell ${path}/shell/rust.nix";
+	shu = "shutdown now"; # TODO: Is this actually good?
+	reb = "sudo reboot now";
+	hib = "systemctl hibernate";
       };
       history.size = 10000;
       oh-my-zsh = {
