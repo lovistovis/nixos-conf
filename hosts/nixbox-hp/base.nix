@@ -74,7 +74,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" "modsetting" ];
       dpi = 80;
     };
     thermald.enable = true;
@@ -90,6 +90,9 @@
         IdleActionSec=1m
         HibernateDelaySec=5m
       '';
+    };
+    dbus = {
+      implementation = "dbus";
     };
   };
 

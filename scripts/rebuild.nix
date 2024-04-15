@@ -4,7 +4,7 @@ set -e
 pushd ${path}
 ${pkgs.neovim}/bin/nvim .
 ${pkgs.git}/bin/git add .
-${pkgs.alejandra}/bin/alejandra . &>/dev/null
+#${pkgs.alejandra}/bin/alejandra . &>/dev/null
 ${pkgs.git}/bin/git diff -U0 *.nix
 echo "NixOS Rebuilding..."
 sudo nixos-rebuild switch &>nixos-switch.log || (

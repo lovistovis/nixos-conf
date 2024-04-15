@@ -4,7 +4,8 @@ let
   #tmux-store = import ./scripts/tmux-store.nix {
   #  inherit pkgs;
   #};
-  tmux-start = import ./scripts/tmux-start.nix { inherit pkgs; };
+  #tmux-start = import ./scripts/tmux-start.nix { inherit pkgs; };
+  tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   path = builtins.toString ./.;
   rebuild = import ./scripts/rebuild.nix {
     inherit pkgs;
@@ -233,7 +234,6 @@ in {
     git-credential-oauth
     xsel
     tmux-sessionizer
-    tmux-start
     rebuild
     spotdl
     brightnessctl
@@ -269,7 +269,7 @@ in {
       enable = true;
       config = with { mod = "Mod4"; }; {
         modifier = mod;
-        terminal = "alacritty -e zsh -c tmux-start"; # ugly fix but ok
+        terminal = "alacritty -e zsh -c tmux"; # ugly fix but ok
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions

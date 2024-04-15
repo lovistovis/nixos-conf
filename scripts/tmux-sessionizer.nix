@@ -1,3 +1,5 @@
+# Source: TODO: Add source
+# Sessionize directories to allow searching and quick shortcuts to return to a session
 { pkgs }:
 pkgs.writeShellScriptBin "tmux-sessionizer" ''
 if [[ $# -eq 1 ]]; then
