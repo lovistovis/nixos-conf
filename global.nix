@@ -38,12 +38,13 @@
 
     windowManager.i3.enable = true;
 
-    displayManager = {
-      sddm = {
-        enable = true;
-      };
-      defaultSession = "none+i3";
+  };
+
+  services.displayManager = {
+    sddm = {
+      enable = true;
     };
+    defaultSession = "none+i3";
   };
 
   # Enable CUPS to print documents.
