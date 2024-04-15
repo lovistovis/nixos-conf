@@ -75,7 +75,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "intel" ];
+      videoDrivers = [ "nvidia" "intel" ];
       deviceSection = ''
         Option "DRI" "2"
         Option "TearFree" "true"
