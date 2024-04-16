@@ -5,7 +5,8 @@ pkgs.writeShellScriptBin "tmux-sessionizer" ''
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/projects ~/experiments -mindepth 1 -maxdepth 1 -type d | ${pkgs.fzf}/bin/fzf)
+    root_paths=$(echo "${import ../raw/search-paths.nix}" | xargs -I {} bash -c "realpath {}")
+    selected=$(echo -e "$root_paths" | xargs -I {} find {} -mindepth 1 -maxdepth 1 -type d | ${pkgs.fzf}/bin/fzf)
 fi
 
 if [[ -z $selected ]]; then
