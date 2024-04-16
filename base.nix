@@ -1,13 +1,12 @@
-{ pkgs, config, ... }: let
+{ pkgs, config, username, hostname, ... }:
+let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  username = "mogos";
-  hostname = "nixbox-hp";
+  path = builtins.toString ./.;
 in {
   imports = [
-    # <home-manager/nixos>
     ./global.nix
-    (import "${home-manager}/nixos")
-    (import "/home/${username}/nixos-conf/hosts/${hostname}/base.nix")
+    ("${home-manager}/nixos")
+    ("${path}/hosts/${hostname}/base.nix")
   ];
 
   networking.hostName = hostname;
@@ -25,7 +24,7 @@ in {
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mogos = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
@@ -37,7 +36,7 @@ in {
 
     imports = [
       ./desktop.nix
-      (import "/home/${username}/nixos-conf/hosts/${hostname}/desktop.nix")
+      ("${path}/hosts/${hostname}/desktop.nix")
     ];
   };
 

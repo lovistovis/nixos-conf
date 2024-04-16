@@ -1,6 +1,6 @@
 # symlink to /etc/nixos/configuration.nix
 
-{ config, lib, pkgs, ... }:
+{ pkgs, config, lib, ... }:
 let
   username = "mogos";
   hostname = "nixbox-hp";
@@ -10,6 +10,8 @@ in
     [ # Include the results of the hardware scan.
       # { _module.args = { inherit username hostname; }; }
       ./hardware-configuration.nix
-      (import "/home/${username}/nixos-conf/base.nix" )#{ inherit username ; })
+      (import "/home/${username}/nixos-conf/base.nix" {
+        inherit pkgs config username hostname;
+      })
     ];
 }

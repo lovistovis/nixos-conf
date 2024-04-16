@@ -1,16 +1,9 @@
 { config, pkgs, ... }:
 let
-  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
-  #tmux-store = import ./scripts/tmux-store.nix {
-  #  inherit pkgs;
-  #};
-  #tmux-start = import ./scripts/tmux-start.nix { inherit pkgs; };
-  tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   path = builtins.toString ./.;
-  rebuild = import ./scripts/rebuild.nix {
-    inherit pkgs;
-    inherit path;
-  };
+  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
+  tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
+  rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
 in {
   programs = {
     zsh = {
@@ -25,7 +18,8 @@ in {
 	clean = "sudo nix-collect-garbage --delete-old";
 	reload-systemd = "systemctl reload systemd-logind.service";
 	n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
-	rust = "nix-shell ${path}/shell/rust.nix";
+	rustshell = "nix-shell ${path}/shell/rust.nix";
+	zigshell = "nix-shell ${path}/shell/zig.nix";
 	shu = "shutdown now"; # TODO: Is this actually good?
 	reb = "sudo reboot now";
 	hib = "systemctl hibernate";
@@ -108,8 +102,7 @@ in {
         }
       ];
       extraConfig = import ./raw/tmux.nix {
-        inherit pkgs;
-	inherit config;
+        inherit pkgs config;
       };
     };
     git = {
@@ -236,12 +229,13 @@ in {
     tor-browser-bundle-bin
     git-credential-oauth
     xsel
-    tmux-sessionizer
-    rebuild
     spotdl
     brightnessctl
     xorg.xev
     renpy
+    tmux-sessionizer
+    tmux-create
+    rebuild
   ];
 
   home.sessionVariables = rec {
