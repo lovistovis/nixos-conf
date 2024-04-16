@@ -2,8 +2,8 @@
 
 { pkgs, config, lib, ... }:
 let
-  username = "mogos";
-  hostname = "nixbox-hp";
+  username = "mogos";     # TODO: Customize
+  hostname = "nixbox-hp"; # Mapped to a dir in ./hosts
 in
 {
   imports =
