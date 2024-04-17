@@ -4,6 +4,7 @@ let
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
+  stable = import <nixos-stable> { config = { allowUnfree = true; }; };
 in {
   programs = {
     zsh = {
@@ -13,16 +14,16 @@ in {
       syntaxHighlighting.enable = true;
       shellAliases = {
         update = "sudo nixos-rebuild switch";
-	fupdate = "sudo nixos-rebuild switch --fast";
-	upgrade = "sudo nix-channel --update; update";
-	clean = "sudo nix-collect-garbage --delete-old";
-	reload-systemd = "systemctl reload systemd-logind.service";
-	n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
-	rustshell = "nix-shell ${path}/shell/rust.nix";
-	zigshell = "nix-shell ${path}/shell/zig.nix";
-	shu = "shutdown now"; # TODO: Is this actually good?
-	reb = "sudo reboot now";
-	hib = "systemctl hibernate";
+        fupdate = "sudo nixos-rebuild switch --fast";
+        upgrade = "sudo nix-channel --update; update";
+        clean = "sudo nix-collect-garbage --delete-old";
+        reload-systemd = "systemctl reload systemd-logind.service";
+        n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
+        rustshell = "nix-shell ${path}/shell/rust.nix";
+        zigshell = "nix-shell ${path}/shell/zig.nix";
+        shu = "shutdown now"; # TODO: Is this actually good?
+        reb = "sudo reboot now";
+        hib = "systemctl hibernate";
       };
       history.size = 10000;
       oh-my-zsh = {
@@ -31,8 +32,9 @@ in {
         theme = "robbyrussell";
       };
       prezto = {
-        #enable = true
-	#python.virtualenvAutoSwitch = true;
+        # enable = true;
+        # python.virtualenvAutoSwitch = true;
+        # python.virtualenvInitialize = true;
       };
       #plugins = [ # currenly not working out rust
       #  {
@@ -235,6 +237,8 @@ in {
     renpy
     ripgrep
     python3
+    python311Packages.pip
+    # pipenv
     gcc
     tmux-sessionizer
     tmux-create
