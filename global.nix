@@ -47,6 +47,12 @@
     defaultSession = "none+i3";
   };
 
+  fonts = {
+    fontconfig = {
+      antialias = true;
+    };
+  };
+
   services.compton.enable = true;
 
   # Enable CUPS to print documents.
