@@ -277,8 +277,8 @@ in {
       };
       extraConfig = ''
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-        workspace "1" output eDP-1
-      ''; # TODO: Make this work regardless of the display name
+        workspace "1" output primary
+      '';
     };
   };
 
