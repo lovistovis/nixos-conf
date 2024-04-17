@@ -233,6 +233,9 @@ in {
     brightnessctl
     xorg.xev
     renpy
+    ripgrep
+    python3
+    gcc
     tmux-sessionizer
     tmux-create
     rebuild
