@@ -32,6 +32,9 @@
     light.enable = true;
     dconf.enable = true;
     #xss-lock.enable = true;
+    zsh.shellAliases = {
+      mount-windows = "if [ ! -d /mnt/windows ]; then sudo mkdir /mnt/windows; fi; sudo mount -t ntfs3 /dev/nvme0n1p3 /mnt/windows";
+    };
   };
 
   hardware = {
