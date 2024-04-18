@@ -21,6 +21,7 @@ in {
         n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
         rustshell = "nix-shell ${path}/shell/rust.nix";
         zigshell = "nix-shell ${path}/shell/zig.nix";
+        hdmi1 = "xrandr --output HDMI-1 --auto";
         shu = "shutdown now"; # TODO: Is this actually good?
         reb = "sudo reboot now";
         hib = "systemctl hibernate";
@@ -36,18 +37,18 @@ in {
         # python.virtualenvAutoSwitch = true;
         # python.virtualenvInitialize = true;
       };
-      #plugins = [ # currenly not working out rust
-      #  {
-      #    name = "zsh-nix-shell";
-      #    file = "nix-shell.plugin.zsh";
-      #    src = pkgs.fetchFromGitHub {
-      #      owner = "chisui";
-      #      repo = "zsh-nix-shell";
-      #      rev = "v0.8.0";
-      #      sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-      #    };
-      #  }
-      #];
+      plugins = [ # currenly not working out rust
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.8.0";
+            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+          };
+        }
+      ];
       dotDir = ".zsh"; 
       #initExtra = ''
       #  function shellExit {
@@ -158,7 +159,7 @@ in {
         SearchBar = "unified";
 
         ExtensionSettings = {
-          "*".installation_mode = "blocked";
+          #"*".installation_mode = "blocked";
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
@@ -236,9 +237,9 @@ in {
     xorg.xev
     renpy
     ripgrep
-    python3
-    python311Packages.pip
     # pipenv
+    python3
+    nodejs_21
     gcc
     tmux-sessionizer
     tmux-create
@@ -276,8 +277,14 @@ in {
         terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; # ugly fix but ok
       };
       extraConfig = ''
-        exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
         workspace "1" output primary
+
+        assign [class="Pavucontrol"] 10
+        assign [class=".blueman-manager-wrapped"] 10
+
+        exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+        exec pavucontrol
+        exec blueman-manager
       '';
     };
   };

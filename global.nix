@@ -53,7 +53,22 @@
     };
   };
 
+  location.latitude = 57.70;
+  location.longitude = 11.96;
+
   services.compton.enable = true;
+
+  services.redshift = {
+    enable = true;
+    brightness = {
+      day = "1";
+      night = "1";
+    };
+    temperature = {
+      day = 5500;
+      night = 2700;
+    };
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
