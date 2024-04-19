@@ -22,7 +22,8 @@ in {
         rustshell = "nix-shell ${path}/shell/rust.nix";
         zigshell = "nix-shell ${path}/shell/zig.nix";
         hdmi1 = "xrandr --output HDMI-1 --auto";
-        shu = "shutdown now"; # TODO: Is this actually good?
+        hdmi1-off = "xrandr --output HDMI-1 --off";
+        shu = "shutdown now"; # TODO: Is this actually good? I say probably but im not yet sure.
         reb = "sudo reboot now";
         hib = "systemctl hibernate";
       };
