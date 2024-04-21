@@ -226,7 +226,7 @@ in {
     # chromium
     st
     qdirstat
-    # davinci-resolve
+    stable.davinci-resolve
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
@@ -242,6 +242,8 @@ in {
     python3
     nodejs_21
     gcc
+    # llvm
+    vscodium
     tmux-sessionizer
     tmux-create
     rebuild
@@ -293,7 +295,7 @@ in {
   };
 
   #xdg.configFile."awesome".source = ./config/awesome;
-  xdg.configFile."nvim".source = ./config/nvim;
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
