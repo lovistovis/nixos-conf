@@ -217,7 +217,7 @@ in {
     pavucontrol
     neofetch
     gimp
-    opentoonz
+    # opentoonz
     discord
     vesktop
     discordo
@@ -236,7 +236,7 @@ in {
     spotdl
     brightnessctl
     xorg.xev
-    renpy
+    stable.renpy
     ripgrep
     # pipenv
     python3
@@ -271,14 +271,16 @@ in {
   };
 
   xsession = {
-    windowManager.i3 = {
+    windowManager.i3 = with { mod = "Mod4"; }; {
       enable = true;
-      config = with { mod = "Mod4"; }; {
+      config = {
         modifier = mod;
         terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; # ugly fix but ok
       };
       extraConfig = ''
         workspace "1" output primary
+
+        bindsym ${mod}+Shift+w sticky toggle
 
         assign [class="Pavucontrol"] 10
         assign [class=".blueman-manager-wrapped"] 10

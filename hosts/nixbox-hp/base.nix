@@ -72,8 +72,6 @@
     };
   };
 
-  #services.systemd-lock-handler.enable = false;
-
   powerManagement.enable = true;
 
   services = {
