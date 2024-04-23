@@ -18,11 +18,11 @@ in
       };
       timers = [
         { # quiet-suspend-quick
-          delay = 60;
+          delay = 600;
           command = "if [ $sink_count -eq 0 ]; then ${pkgs.systemd}/bin/systemctl suspend; fi";
         }
         { # quiet-hibernate-quick
-          delay = 10;
+          delay = 600;
           command = "if [ $sink_count -eq 0 ]; then ${pkgs.systemd}/bin/systemctl hibernate; fi";
         }
         { # always-suspend-slow

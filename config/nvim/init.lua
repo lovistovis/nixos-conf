@@ -104,8 +104,16 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Move to the beginning of the previous "greater" paragraph
+vim.keymap.set('n', ']}', '?\\n\\n\\n<CR><cmd>nohlsearch<CR>', { silent = true })
+
+-- Move to the beginning of the next "greater" paragraph
+vim.keymap.set('n', '[}', '/\\n\\n\\n<CR><cmd>nohlsearch<CR>', { silent = true })
+
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -117,6 +125,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -685,15 +694,15 @@ require('lazy').setup({
     -- opts = {
     --   transparent = true
     -- }
-    -- init = function()
-    --   -- Load the colorscheme here.
-    --   -- Like many other themes, this one has different styles, and you could load
-    --   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    --   vim.cmd.colorscheme 'tokyonight-night'
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'tokyonight-night'
 
-    --   -- You can configure highlights by doing something like:
-    --   vim.cmd.hi 'Comment gui=none'
-    -- end,
+      -- You can configure highlights by doing something like:
+      -- vim.cmd.hi 'Comment gui=none'
+    end,
   },
 
   -- Highlight todo, notes, etc in comments

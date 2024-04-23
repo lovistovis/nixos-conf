@@ -1,4 +1,12 @@
 { pkgs, config }: ''
+#set status-utf8 on
+#set utf8 on
+
+#set -g default-terminal "screen-256color"
+
+set -g status-bg colour0
+set -g status-fg white
+
 unbind C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix

@@ -217,7 +217,7 @@ in {
     pavucontrol
     neofetch
     gimp
-    # opentoonz
+    opentoonz
     discord
     vesktop
     discordo
@@ -244,6 +244,8 @@ in {
     gcc
     # llvm
     vscodium
+    audacity
+    jetbrains-toolbox
     tmux-sessionizer
     tmux-create
     rebuild
