@@ -32,5 +32,6 @@ read -r -p ""
 echo $clear
 cd $selected
 mkdir $REPLY
-tmux-sessionizer ./$REPLY
+echo $(realpath ./$REPLY)
+tmux-sessionizer $(realpath ./$REPLY)
 ''

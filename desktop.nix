@@ -226,7 +226,7 @@ in {
     # chromium
     st
     qdirstat
-    stable.davinci-resolve
+    #stable.davinci-resolve
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
@@ -240,7 +240,7 @@ in {
     ripgrep
     # pipenv
     python3
-    nodejs_21
+    nodePackages.nodejs
     gcc
     # llvm
     vscodium
@@ -250,6 +250,13 @@ in {
     tmux-create
     rebuild
   ];
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
 
   home.sessionVariables = rec {
     EDITOR = "nvim";

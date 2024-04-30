@@ -29,6 +29,9 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 -- vim.opt.clipboard = 'unnamedplus'
 
+-- Fully disable the mouse
+vim.opt.mouse = ""
+
 -- Enable break indent
 vim.opt.breakindent = true
 
