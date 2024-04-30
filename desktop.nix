@@ -3,6 +3,7 @@ let
   path = builtins.toString ./.;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
+  tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   stable = import <nixos-stable> { config = { allowUnfree = true; }; };
 in {
@@ -248,6 +249,7 @@ in {
     jetbrains-toolbox
     tmux-sessionizer
     tmux-create
+    tmux-delete
     rebuild
   ];
 

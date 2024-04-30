@@ -28,8 +28,12 @@ line=$(printf '─%.0s' $(eval echo {1..$count}))
 echo -e "$prompt_str$bold_dark_gray$line"
 echo -en "$bold_blue> $bold_white"
 read -r -p ""
-
 echo $clear
+
+if [[ -z $REPLY ]]; then
+    exit 0
+fi
+
 cd $selected
 mkdir $REPLY
 echo $(realpath ./$REPLY)
