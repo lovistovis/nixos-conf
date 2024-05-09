@@ -17,7 +17,14 @@ in {
       "libtiff-4.0.3-opentoonz"
     ];
     packageOverrides = pkgs: {
-      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      nur = import (
+        builtins.fetchTarball {
+          # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
+          url = "https://github.com/nix-community/NUR/archive/186d65571fdd7c6a1e0793e571bd9081dbef2633.tar.gz";
+          # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
+          sha256 = "015qvy4la51afn65qpradfi82jzr15r2g2g6hzbbzy9j8rwhpqps";
+        }
+      ) {
         inherit pkgs;
       };
     };

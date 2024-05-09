@@ -214,9 +214,12 @@ in {
     unzip
     tree
     parted
+    dolphin
+    chromium
     tmux
     pavucontrol
     neofetch
+    chromium
     gimp
     opentoonz
     discord
@@ -297,10 +300,13 @@ in {
 
         assign [class="Pavucontrol"] 10
         assign [class=".blueman-manager-wrapped"] 10
+        #assign [class="Discord"] 4
+        #assing [class="vesktop"] 4
 
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
         exec pavucontrol
         exec blueman-manager
+        #exec vesktop
       '';
     };
   };
