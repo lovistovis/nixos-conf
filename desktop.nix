@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stdenv, ... }:
 let
   path = builtins.toString ./.;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
@@ -24,9 +24,10 @@ in {
         zigshell = "nix-shell ${path}/shell/zig.nix";
         hdmi1 = "xrandr --output HDMI1 --auto";
         hdmi1-off = "xrandr --output HDMI1 --off";
-        shu = "shutdown now"; # TODO: Is this actually good? I say probably but im not yet sure.
+        shu = "shutdown now";
         reb = "sudo reboot now";
         hib = "systemctl hibernate";
+        ryujinx-portable = "ryujinx -r ~/ryujinx-data";
       };
       history.size = 10000;
       oh-my-zsh = {
@@ -64,9 +65,9 @@ in {
       settings = {
         #window.opacity = 0.95;
         font.size = 8.0;
-	colors.primary = {
-	  background = "#000000";
-	};
+        colors.primary = {
+          background = "#000000";
+        };
         #shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
@@ -83,11 +84,11 @@ in {
         {
           plugin = tmuxPlugins.resurrect;
           extraConfig = ''
-	    set -g @resurrect-capture-pane-contents 'on'
-	    set -g @resurrect-strategy-nvim 'session'
+            set -g @resurrect-capture-pane-contents 'on'
+            set -g @resurrect-strategy-nvim 'session'
             set -g @resurrect-processes '"~nvim->nvim *"'
 
-	    run '${auto-restore}/bin/auto-restore'
+            run '${auto-restore}/bin/auto-restore'
 
             set-hook -g 'client-detached' "run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh" # auto save
 
@@ -95,14 +96,14 @@ in {
             #resurrect_dir="$HOME/.tmux/resurrect"
             #set -g @resurrect-dir $resurrect_dir
             #set -g @resurrect-hook-post-save-all 'sed -i "s/*nvim/nvim/" $resurrect_dir/last'
-	    #show -g @resurrect-dir
-	  '';
+            #show -g @resurrect-dir
+          '';
         }
         {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
             #set -g @continuum-restore 'on'
-	    set -g @continuum-save-interval '20' # minutes
+            set -g @continuum-save-interval '20' # minutes
           '';
         }
       ];
@@ -118,7 +119,7 @@ in {
       userEmail = "lovistovis0@gmail.com";
       ignores = [
         "**/nixos-switch.log"
-	"**/Session.vim"
+        "**/Session.vim"
       ];
       extraConfig = {
         core = {
@@ -215,11 +216,9 @@ in {
     tree
     parted
     dolphin
-    chromium
     tmux
     pavucontrol
     neofetch
-    chromium
     gimp
     opentoonz
     discord
@@ -244,17 +243,37 @@ in {
     ripgrep
     # pipenv
     python3
-    nodePackages.nodejs
+    nodejs
     gcc
     # llvm
     vscodium
     audacity
-    jetbrains-toolbox
+    # jetbrains-toolbox
+    ryujinx
     tmux-sessionizer
     tmux-create
     tmux-delete
     rebuild
   ];
+
+  # nixpkgs.overlays = [ (final: prev: {
+  #     neovim = prev.neovim.override {
+  #       configure = {
+  #         customRC = ''
+  #           if filereadable($HOME . "/.vimrc")
+  #             source ~/.vimrc
+  #           endif
+  #           let $RUST_SRC_PATH = '${stdenv.mkDerivation {
+  #             inherit (rustc) src;
+  #             inherit (rustc.src) name;
+  #             phases = ["unpackPhase" "installPhase"];
+  #             installPhase = ''cp -r library $out'';
+  #           }}'
+  #         '';
+  #       };
+  #     };
+  #   })
+  # ];
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
