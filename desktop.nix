@@ -119,6 +119,7 @@ in {
       userEmail = "lovistovis0@gmail.com";
       ignores = [
         "**/nixos-switch.log"
+        "**/shell.nix"
         "**/Session.vim"
       ];
       extraConfig = {
@@ -250,6 +251,8 @@ in {
     audacity
     # jetbrains-toolbox
     ryujinx
+    blender
+    transmission-gtk
     tmux-sessionizer
     tmux-create
     tmux-delete

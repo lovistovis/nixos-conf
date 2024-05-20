@@ -100,6 +100,7 @@
     vim        # Emergency editor
     wget       # Retrive guides
     efibootmgr # Change boot order
+    exfat      # Exfat fs support
   ];
 
   virtualisation.libvirtd.enable = true;
