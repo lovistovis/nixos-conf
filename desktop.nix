@@ -17,7 +17,7 @@ in {
         update = "sudo nixos-rebuild switch";
         fupdate = "sudo nixos-rebuild switch --fast";
         upgrade = "sudo nix-channel --update; update";
-        clean = "sudo nix-collect-garbage --delete-old";
+        clean = "nix-collect-garbage --delete-old; sudo nix-collect-garbage --delete-old";
         reload-systemd = "systemctl reload systemd-logind.service";
         n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
         rustshell = "nix-shell ${path}/shell/rust.nix";
@@ -216,7 +216,7 @@ in {
     unzip
     tree
     parted
-    dolphin
+    # dolphin
     tmux
     pavucontrol
     neofetch
@@ -227,10 +227,12 @@ in {
     discordo
     neovim
     kitty
-    # chromium
+    chromium
+    ffmpeg
     st
     qdirstat
-    #stable.davinci-resolve
+    steam
+    # stable.davinci-resolve
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
@@ -252,6 +254,7 @@ in {
     # jetbrains-toolbox
     ryujinx
     blender
+    youtube-dl
     transmission-gtk
     tmux-sessionizer
     tmux-create

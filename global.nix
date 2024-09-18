@@ -90,6 +90,12 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Experimental = true;
+      Disable = "Handsfree";
+    };
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
