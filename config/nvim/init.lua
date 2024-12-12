@@ -369,6 +369,21 @@ require("lazy").setup({
 			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
+			local lspconfig = require("lspconfig")
+			lspconfig.clangd.setup({
+				cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+				init_options = {
+					fallbackFlags = { "-std=c++17" },
+				},
+			})
+			-- fix this shit https://discourse.nixos.org/t/clang-clang-and-clangd-cant-find-headers-even-with-compile-commands-json/54657
+			-- require("clangd").setup({
+			-- 	cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+			-- 	init_options = {
+			-- 		fallbackFlags = { "-std=c++17" },
+			-- 	},
+			-- })
+
 			-- Brief aside: **What is LSP?**
 			--
 			-- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -492,7 +507,9 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
+				-- clangd = {
+				--   mason = false,
+				-- },
 				-- gopls = {},
 				pyright = {},
 				jedi_language_server = {},
