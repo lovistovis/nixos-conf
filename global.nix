@@ -37,7 +37,6 @@
     # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
     windowManager.i3.enable = true;
-
   };
 
   services.displayManager = {
@@ -88,7 +87,7 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.settings = {
     General = {

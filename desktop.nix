@@ -221,19 +221,19 @@ in {
     pavucontrol
     neofetch
     gimp
-    opentoonz
-    discord
+    # opentoonz
+    # discord
     vesktop
-    discordo
+    # discordo
     neovim
     kitty
-    chromium
+    # chromium
     ffmpeg
     st
     qdirstat
-    steam
+    # steam
     # stable.davinci-resolve
-    unityhub
+    # unityhub
     vlc
     nur.repos.nltch.spotify-adblock
     tor-browser-bundle-bin
@@ -245,16 +245,17 @@ in {
     stable.renpy
     ripgrep
     # pipenv
-    python3
+    # python3
     nodejs
     gcc
     # llvm
-    vscodium
-    audacity
+    # vscodium
+    # audacity
     # jetbrains-toolbox
-    ryujinx
-    blender
-    youtube-dl
+    # ryujinx
+    # blender
+    yt-dlp
+    sonobus
     transmission-gtk
     tmux-sessionizer
     tmux-create

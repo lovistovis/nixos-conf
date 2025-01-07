@@ -1,6 +1,6 @@
 { pkgs, config, username, hostname, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   path = builtins.toString ./.;
 in {
   imports = [
@@ -20,9 +20,9 @@ in {
       nur = import (
         builtins.fetchTarball {
           # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
-          url = "https://github.com/nix-community/NUR/archive/186d65571fdd7c6a1e0793e571bd9081dbef2633.tar.gz";
+          url = "https://github.com/nix-community/NUR/archive/d46254dd3f4953aede636c8938ded8b27b791730.tar.gz";
           # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
-          sha256 = "015qvy4la51afn65qpradfi82jzr15r2g2g6hzbbzy9j8rwhpqps";
+          sha256 = "0s1vik0kawm33njw72x6nz072mymg93dwsjq9aq1rrar9k4wddsx";
         }
       ) {
         inherit pkgs;

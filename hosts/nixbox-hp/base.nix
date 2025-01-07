@@ -41,10 +41,11 @@
   hardware = {
     opengl = {
       enable = true;
-      driSupport = true;
+      # driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
+        mesa.drivers
       ];
     };
     nvidia = {
@@ -77,7 +78,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "nvidia" "intel" ];
+      videoDrivers = [ "intel" ];
       deviceSection = ''
         Option "DRI" "2"
         Option "TearFree" "true"
@@ -100,6 +101,9 @@
     };
     dbus = {
       implementation = "dbus";
+    };
+    pipewire = {
+      enable = false;
     };
   };
 
