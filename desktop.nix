@@ -222,7 +222,7 @@ in {
     neofetch
     gimp
     # opentoonz
-    # discord
+    discord
     vesktop
     # discordo
     neovim
@@ -257,6 +257,7 @@ in {
     yt-dlp
     sonobus
     transmission-gtk
+    steam-run
     tmux-sessionizer
     tmux-create
     tmux-delete
@@ -318,6 +319,7 @@ in {
       config = {
         modifier = mod;
         terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; # ugly fix but ok
+        menu = "i3-dmenu-desktop";
       };
       extraConfig = ''
         workspace "1" output primary
@@ -327,7 +329,7 @@ in {
         assign [class="Pavucontrol"] 10
         assign [class=".blueman-manager-wrapped"] 10
         #assign [class="Discord"] 4
-        #assing [class="vesktop"] 4
+        #assign [class="vesktop"] 4
 
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
         exec pavucontrol
@@ -339,7 +341,7 @@ in {
 
   #xdg.configFile."awesome".source = ./config/awesome;
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
-  xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
+  # xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
