@@ -226,14 +226,13 @@ in {
     vesktop
     # discordo
     neovim
-    kitty
     # chromium
     ffmpeg
     st
     qdirstat
     # steam
     # stable.davinci-resolve
-    # unityhub
+    unityhub
     vlc
     nur.repos.nltch.spotify-adblock
     tor-browser-bundle-bin
@@ -341,7 +340,7 @@ in {
 
   #xdg.configFile."awesome".source = ./config/awesome;
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
-  # xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
+  xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
