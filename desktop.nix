@@ -235,18 +235,18 @@ in {
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
-    tor-browser-bundle-bin
+    # tor-browser-bundle-bin
     git-credential-oauth
     xsel
     spotdl
     brightnessctl
-    xorg.xev
-    stable.renpy
+    # xorg.xev
+    # stable.renpy
     ripgrep
     # pipenv
     # python3
-    nodejs
-    gcc
+    # nodejs
+    # gcc
     # llvm
     # vscodium
     # audacity
@@ -255,8 +255,11 @@ in {
     # blender
     yt-dlp
     sonobus
-    transmission-gtk
+    # transmission-gtk
     steam-run
+    dotnetCorePackages.sdk_8_0
+    # dotnetCorePackages.runtime_8_0
+    jetbrains.rider
     tmux-sessionizer
     tmux-create
     tmux-delete
@@ -282,12 +285,12 @@ in {
   #   })
   # ];
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
+  # dconf.settings = {
+  #   "org/virt-manager/virt-manager/connections" = {
+  #     autoconnect = ["qemu:///system"];
+  #     uris = ["qemu:///system"];
+  #   };
+  # };
 
   home.sessionVariables = rec {
     EDITOR = "nvim";

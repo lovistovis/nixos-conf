@@ -511,9 +511,9 @@ require("lazy").setup({
 				--   mason = false,
 				-- },
 				-- gopls = {},
-				pyright = {},
-				jedi_language_server = {},
-				rust_analyzer = {},
+				-- pyright = {},
+				-- jedi_language_server = {},
+				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -551,10 +551,10 @@ require("lazy").setup({
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"pyright",
-				"pylint",
-				"isort",
+				-- "stylua", -- Used to format Lua code
+				-- "pyright",
+				-- "pylint",
+				-- "isort",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
