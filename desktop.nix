@@ -6,8 +6,43 @@ let
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   stable = import <nixos-stable> { config = { allowUnfree = true; }; };
+  nixvim = import (builtins.fetchGit {
+      url = "https://github.com/nix-community/nixvim";
+      ref = "nixos-24.05";
+  });
 in {
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
   programs = {
+    nixvim = {
+      enable = true;
+      colorschemes.tokyonight.enable = true;
+      globals = {
+        mapleader = " ";
+        maplocalleader = " ";
+        have_nerd_font = false;
+      };
+      plugins = {
+        none-ls = {
+          sources = {
+            diagnostics = {
+              golangci_lint.enable = true;
+            };
+            formatting = {
+              gofmt.enable = true;
+            };
+          };
+        };
+        lsp = {
+          enable = true;
+          servers = {
+            gopls.enable = true;
+          };
+        };
+      };
+      extraConfigLua = (builtins.readFile ./config/nvim/init.lua);
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -212,6 +247,7 @@ in {
   };
 
   home.packages = with pkgs; [
+    go
     dbus
     unzip
     tree
@@ -225,7 +261,7 @@ in {
     discord
     vesktop
     # discordo
-    neovim
+    # neovim
     # chromium
     ffmpeg
     st
@@ -342,7 +378,7 @@ in {
   };
 
   #xdg.configFile."awesome".source = ./config/awesome;
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
+  #xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
