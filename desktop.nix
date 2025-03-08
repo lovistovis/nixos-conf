@@ -293,7 +293,7 @@ in {
     sonobus
     # transmission-gtk
     steam-run
-    dotnetCorePackages.sdk_8_0
+    # dotnetCorePackages.sdk_8_0
     # dotnetCorePackages.runtime_8_0
     jetbrains.rider
     tmux-sessionizer

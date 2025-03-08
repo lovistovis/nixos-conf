@@ -52,7 +52,9 @@
     };
   };
 
-  location.provider = "geoclue2";
+  location.provider = "manual";
+  location.latitude = 59.33;
+  location.longitude = 18.06;
 
   services.compton.enable = true;
 
