@@ -251,19 +251,19 @@ in {
     dbus
     unzip
     tree
-    parted
+    # parted
     # dolphin
     tmux
     pavucontrol
-    neofetch
-    gimp
+    # neofetch
+    # gimp
     # opentoonz
-    discord
+    # discord
     vesktop
     # discordo
     # neovim
     # chromium
-    ffmpeg
+    # ffmpeg
     st
     qdirstat
     # steam
@@ -274,7 +274,7 @@ in {
     # tor-browser-bundle-bin
     git-credential-oauth
     xsel
-    spotdl
+    # spotdl
     brightnessctl
     # xorg.xev
     # stable.renpy
@@ -289,7 +289,7 @@ in {
     # jetbrains-toolbox
     # ryujinx
     # blender
-    yt-dlp
+    # yt-dlp
     sonobus
     # transmission-gtk
     steam-run
