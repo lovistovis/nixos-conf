@@ -36,6 +36,17 @@ in {
     extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
 
+  systemd.user.services.logger = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ]; # starts after login
+    description = "Logger for keystrokes";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "logger";
+    };
+    #serviceConfig.PassEnvironment = "DISPLAY";
+  };
+
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "back";
   home-manager.users.mogos = {

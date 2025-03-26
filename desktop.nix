@@ -5,6 +5,7 @@ let
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
+  logger = import ./scripts/logger.nix { inherit pkgs; };
   stable = import <nixos-stable> { config = { allowUnfree = true; }; };
   nixvim = import (builtins.fetchGit {
       url = "https://github.com/nix-community/nixvim";
@@ -256,7 +257,7 @@ in {
     tmux
     pavucontrol
     # neofetch
-    # gimp
+    gimp
     # opentoonz
     # discord
     vesktop
@@ -300,6 +301,7 @@ in {
     tmux-create
     tmux-delete
     rebuild
+    logger
   ];
 
   # nixpkgs.overlays = [ (final: prev: {
