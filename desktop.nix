@@ -39,6 +39,7 @@ in {
           enable = true;
           servers = {
             gopls.enable = true;
+            pyright.enable = true;
           };
         };
       };
