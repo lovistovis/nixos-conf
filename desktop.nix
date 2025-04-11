@@ -158,6 +158,7 @@ in {
         "**/nixos-switch.log"
         "**/shell.nix"
         "**/Session.vim"
+        "**/Session.vim.meta"
       ];
       extraConfig = {
         core = {
@@ -253,6 +254,7 @@ in {
     dbus
     unzip
     tree
+    qbittorrent
     # parted
     # dolphin
     tmux
@@ -272,7 +274,7 @@ in {
     # stable.davinci-resolve
     unityhub
     vlc
-    nur.repos.nltch.spotify-adblock
+    # nur.repos.nltch.spotify-adblock
     # tor-browser-bundle-bin
     git-credential-oauth
     xsel
@@ -297,7 +299,7 @@ in {
     steam-run
     # dotnetCorePackages.sdk_8_0
     # dotnetCorePackages.runtime_8_0
-    jetbrains.rider
+    # jetbrains.rider
     tmux-sessionizer
     tmux-create
     tmux-delete
