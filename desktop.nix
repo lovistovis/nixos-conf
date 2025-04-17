@@ -297,6 +297,11 @@ in {
     sonobus
     # transmission-gtk
     steam-run
+    jetbrains.rider
+    dotnetCorePackages.dotnet_8.sdk
+    dotnetCorePackages.dotnet_8.aspnetcore
+    dotnetCorePackages.dotnet_8.runtime
+    powershell
     # dotnetCorePackages.sdk_8_0
     # dotnetCorePackages.runtime_8_0
     # jetbrains.rider
