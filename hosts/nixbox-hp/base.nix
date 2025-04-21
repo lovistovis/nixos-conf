@@ -12,7 +12,7 @@
       timeoutStyle = "hidden";
       extraEntries = ''
         menuentry "UbuntuManual" {
-	  insmod search_fs_uuid
+          insmod search_fs_uuid
           search --set=root --fs-uuid 48d5e96d-cd77-476b-8aa3-4eb0218caa25
           configfile "/boot/grub/grub.cfg"
         }
@@ -70,10 +70,10 @@
       prime = {
         # sync.enable = true;
 
-	offload = {
-	  enable = true;
-          enableOffloadCmd = true;
-	};
+        # offload = {
+        #   enable = true;
+        #   enableOffloadCmd = true;
+        # };
 
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
