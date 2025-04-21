@@ -276,7 +276,7 @@ in {
     # stable.davinci-resolve
     unityhub
     vlc
-    # nur.repos.nltch.spotify-adblock
+    nur.repos.nltch.spotify-adblock
     # tor-browser-bundle-bin
     git-credential-oauth
     xsel
