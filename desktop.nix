@@ -250,6 +250,7 @@ in {
   };
 
   home.packages = with pkgs; [
+    xorg.libxcvt
     go
     dbus
     unzip
@@ -266,7 +267,7 @@ in {
     vesktop
     # discordo
     # neovim
-    # chromium
+    chromium
     # ffmpeg
     st
     qdirstat
