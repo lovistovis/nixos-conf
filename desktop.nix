@@ -251,6 +251,7 @@ in {
 
   home.packages = with pkgs; [
     xorg.libxcvt
+    wineWowPackages.stable
     go
     dbus
     unzip

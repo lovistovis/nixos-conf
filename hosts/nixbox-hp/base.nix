@@ -51,12 +51,12 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
-      #powerManagement.finegrained = true;
+      powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
 
       prime = {
-        #sync.enable = true;
+        # sync.enable = true;
 
 	offload = {
 	  enable = true;
@@ -78,7 +78,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "intel" ];
+      videoDrivers = [ "intel" "nvidia" ];
       deviceSection = ''
         Option "DRI" "2"
         Option "TearFree" "true"
@@ -92,7 +92,7 @@
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
-	HandleLidSwitch=ignore
+        HandleLidSwitch=ignore
         HandleLidSwitchExternalPower=ignore
         IdleAction=suspend-then-hibernate
         IdleActionSec=1m
