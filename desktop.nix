@@ -249,40 +249,43 @@ in {
   };
 
   home.packages = with pkgs; [
+    # Scripts
     tmux-sessionizer
     tmux-create
     tmux-delete
     rebuild
     logger
 
+    # System
+    go
     gcc
     dbus
-    unzip
     tree
     tmux
+    unzip
     ripgrep
-    pavucontrol
     brightnessctl
     git-credential-oauth
+
+    # GUI
+    pavucontrol
     qdirstat
     sonobus
-    # wineWowPackages.stable
-    # go
-    # qbittorrent
-    # gimp
-    # opentoonz
-    # vesktop
+    wineWowPackages.stable
+    qbittorrent
+    gimp
+    vlc
+    vesktop
+    unityhub
+    spotdl
+    nur.repos.nltch.spotify-adblock
     # chromium
+    # opentoonz
     # steam
-    # unityhub
-    # vlc
-    # nur.repos.nltch.spotify-adblock
-    # xsel
-    # spotdl
     # jetbrains.rider
-    # dotnetCorePackages.dotnet_8.sdk
-    # dotnetCorePackages.dotnet_8.aspnetcore
-    # dotnetCorePackages.dotnet_8.runtime
+    # dotnetCorePackages.dotnet_9.sdk
+    # dotnetCorePackages.dotnet_9.aspnetcore
+    # dotnetCorePackages.dotnet_9.runtime
     # powershell
   ];
 

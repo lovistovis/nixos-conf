@@ -12,10 +12,6 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [
-      # "libtiff-4.0.3-opentoonz"
-      "qbittorrent-4.6.4"
-    ];
     packageOverrides = pkgs: {
       nur = import (
         builtins.fetchTarball {
