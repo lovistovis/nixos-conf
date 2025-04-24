@@ -88,7 +88,7 @@ in {
           };
         }
       ];
-      dotDir = ".zsh"; 
+      dotDir = ".zsh";
       # initExtra = ''
       #   function shellExit {
       #     tmux-store save
@@ -121,25 +121,25 @@ in {
           plugin = tmuxPlugins.resurrect;
           extraConfig = ''
             set -g @resurrect-capture-pane-contents 'on'
-            set -g @resurrect-strategy-nvim 'session'
-            set -g @resurrect-processes '"~nvim->nvim *"'
+            # set -g @resurrect-strategy-nvim 'session'
+            # set -g @resurrect-processes '"~nvim->nvim *"'
 
             run '${auto-restore}/bin/auto-restore'
 
             set-hook -g 'client-detached' "run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh" # auto save
 
-            #resurrect_dir="$(show resurrect-dir)"
-            #resurrect_dir="$HOME/.tmux/resurrect"
-            #set -g @resurrect-dir $resurrect_dir
-            #set -g @resurrect-hook-post-save-all 'sed -i "s/*nvim/nvim/" $resurrect_dir/last'
-            #show -g @resurrect-dir
+            # resurrect_dir="$(show resurrect-dir)"
+            # resurrect_dir="$HOME/.tmux/resurrect"
+            # set -g @resurrect-dir $resurrect_dir
+            # set -g @resurrect-hook-post-save-all 'sed -i "s/*nvim/nvim/" $resurrect_dir/last'
+            # show -g @resurrect-dir
           '';
         }
         {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
-            #set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '20' # minutes
+            # set -g @continuum-restore 'on'
+            # set -g @continuum-save-interval '20' # minutes
           '';
         }
       ];
