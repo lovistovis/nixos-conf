@@ -6,7 +6,7 @@ let
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
-  stable = import <nixos-stable> { config = { allowUnfree = true; }; };
+  # stable = import <nixos-stable> { config = { allowUnfree = true; }; };
   nixvim = import (builtins.fetchGit {
       url = "https://github.com/nix-community/nixvim";
       ref = "nixos-24.05";
@@ -273,7 +273,6 @@ in {
     st
     qdirstat
     # steam
-    # stable.davinci-resolve
     unityhub
     vlc
     nur.repos.nltch.spotify-adblock
@@ -283,7 +282,6 @@ in {
     # spotdl
     brightnessctl
     # xorg.xev
-    # stable.renpy
     ripgrep
     # pipenv
     # python3
