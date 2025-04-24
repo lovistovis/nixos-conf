@@ -263,8 +263,8 @@ in {
     ripgrep
     pavucontrol
     brightnessctl
-    qdirstat
     git-credential-oauth
+    qdirstat
     sonobus
     # wineWowPackages.stable
     # go
