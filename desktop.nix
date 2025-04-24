@@ -304,9 +304,6 @@ in {
     dotnetCorePackages.dotnet_8.aspnetcore
     dotnetCorePackages.dotnet_8.runtime
     powershell
-    # dotnetCorePackages.sdk_8_0
-    # dotnetCorePackages.runtime_8_0
-    # jetbrains.rider
     tmux-sessionizer
     tmux-create
     tmux-delete
