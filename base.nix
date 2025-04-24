@@ -1,11 +1,10 @@
 { pkgs, config, username, hostname, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   path = builtins.toString ./.;
 in {
   imports = [
     ./global.nix
-    ("${home-manager}/nixos")
+    <home-manager/nixos>
     ("${path}/hosts/${hostname}/base.nix")
   ];
 

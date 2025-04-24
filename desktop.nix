@@ -9,7 +9,7 @@ let
   # stable = import <nixos-stable> { config = { allowUnfree = true; }; };
   nixvim = import (builtins.fetchGit {
       url = "https://github.com/nix-community/nixvim";
-      ref = "nixos-24.05";
+      ref = "nixos-${import ./version.nix}";
   });
 in {
   imports = [
@@ -48,7 +48,6 @@ in {
     zsh = {
       enable = true;
       enableCompletion = true;
-      #autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
         update = "sudo nixos-rebuild switch";
@@ -77,7 +76,7 @@ in {
         # python.virtualenvAutoSwitch = true;
         # python.virtualenvInitialize = true;
       };
-      plugins = [ # currenly not working out rust
+      plugins = [
         {
           name = "zsh-nix-shell";
           file = "nix-shell.plugin.zsh";
@@ -90,22 +89,22 @@ in {
         }
       ];
       dotDir = ".zsh"; 
-      #initExtra = ''
-      #  function shellExit {
-      #    tmux-store save
-      #  }
-      #  trap shellExit EXIT
-      #'';
+      # initExtra = ''
+      #   function shellExit {
+      #     tmux-store save
+      #   }
+      #   trap shellExit EXIT
+      # '';
     };
     alacritty = {
       enable = true;
       settings = {
-        #window.opacity = 0.95;
+        # window.opacity = 0.95;
         font.size = 8.0;
         colors.primary = {
           background = "#000000";
         };
-        #shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
+        # shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
     tmux = let
@@ -201,7 +200,7 @@ in {
         SearchBar = "unified";
 
         ExtensionSettings = {
-          #"*".installation_mode = "blocked";
+          # "*".installation_mode = "blocked";
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
@@ -250,90 +249,42 @@ in {
   };
 
   home.packages = with pkgs; [
-    xorg.libxcvt
-    wineWowPackages.stable
-    go
-    dbus
-    unzip
-    tree
-    qbittorrent
-    # parted
-    # dolphin
-    tmux
-    pavucontrol
-    # neofetch
-    gimp
-    # opentoonz
-    # discord
-    vesktop
-    # discordo
-    # neovim
-    # chromium
-    # ffmpeg
-    st
-    qdirstat
-    # steam
-    unityhub
-    vlc
-    nur.repos.nltch.spotify-adblock
-    # tor-browser-bundle-bin
-    git-credential-oauth
-    xsel
-    # spotdl
-    brightnessctl
-    # xorg.xev
-    ripgrep
-    # pipenv
-    # python3
-    # nodejs
-    # gcc
-    # llvm
-    # vscodium
-    # audacity
-    # jetbrains-toolbox
-    # ryujinx
-    # blender
-    # yt-dlp
-    sonobus
-    # transmission-gtk
-    steam-run
-    jetbrains.rider
-    dotnetCorePackages.dotnet_8.sdk
-    dotnetCorePackages.dotnet_8.aspnetcore
-    dotnetCorePackages.dotnet_8.runtime
-    powershell
     tmux-sessionizer
     tmux-create
     tmux-delete
     rebuild
     logger
+
+    gcc
+    dbus
+    unzip
+    tree
+    tmux
+    ripgrep
+    pavucontrol
+    brightnessctl
+    qdirstat
+    git-credential-oauth
+    sonobus
+    # wineWowPackages.stable
+    # go
+    # qbittorrent
+    # gimp
+    # opentoonz
+    # vesktop
+    # chromium
+    # steam
+    # unityhub
+    # vlc
+    # nur.repos.nltch.spotify-adblock
+    # xsel
+    # spotdl
+    # jetbrains.rider
+    # dotnetCorePackages.dotnet_8.sdk
+    # dotnetCorePackages.dotnet_8.aspnetcore
+    # dotnetCorePackages.dotnet_8.runtime
+    # powershell
   ];
-
-  # nixpkgs.overlays = [ (final: prev: {
-  #     neovim = prev.neovim.override {
-  #       configure = {
-  #         customRC = ''
-  #           if filereadable($HOME . "/.vimrc")
-  #             source ~/.vimrc
-  #           endif
-  #           let $RUST_SRC_PATH = '${stdenv.mkDerivation {
-  #             inherit (rustc) src;
-  #             inherit (rustc.src) name;
-  #             phases = ["unpackPhase" "installPhase"];
-  #             installPhase = ''cp -r library $out'';
-  #           }}'
-  #         '';
-  #       };
-  #     };
-  #   })
-  # ];
-
-  # dconf.settings = {
-  #   "org/virt-manager/virt-manager/connections" = {
-  #     autoconnect = ["qemu:///system"];
-  #     uris = ["qemu:///system"];
-  #   };
-  # };
 
   home.sessionVariables = rec {
     EDITOR = "nvim";
@@ -344,7 +295,7 @@ in {
 
   gtk = {
     enable = true;
-    #gtk3.extraConfig.gtk-decoration-layout = "menu:";
+    gtk3.extraConfig.gtk-decoration-layout = "menu:";
     theme = {
       name = "Tokyonight-Dark-B";
       package = pkgs.tokyo-night-gtk;
@@ -352,10 +303,10 @@ in {
     iconTheme = {
       name = "Tokyonight-Dark";
     };
-    #cursorTheme = {
-    #  name = gtkCursorTheme;
-    #  package = pkgs.bibata-cursors;
-    #};
+    # cursorTheme = {
+    #   name = gtkCursorTheme;
+    #   package = pkgs.bibata-cursors;
+    # };
   };
 
   xsession = {
@@ -363,7 +314,7 @@ in {
       enable = true;
       config = {
         modifier = mod;
-        terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; # ugly fix but ok
+        terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
         menu = "i3-dmenu-desktop";
       };
       extraConfig = ''
@@ -384,8 +335,8 @@ in {
     };
   };
 
-  #xdg.configFile."awesome".source = ./config/awesome;
-  #xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
+  # xdg.configFile."awesome".source = ./config/awesome;
+  # xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor

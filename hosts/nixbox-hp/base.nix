@@ -31,7 +31,7 @@
   programs = {
     light.enable = true;
     dconf.enable = true;
-    #xss-lock.enable = true;
+    # xss-lock.enable = true;
     zsh.shellAliases = {
       mount-windows = "if [ ! -d /mnt/windows ]; then sudo mkdir /mnt/windows; fi; sudo mount -t ntfs3 /dev/nvme0n1p3 /mnt/windows";
       mount-sd = "if [ ! -d /mnt/sd ]; then sudo mkdir /mnt/sd; fi; sudo mount -t exfat /dev/mmcblk0 /mnt/sd";
@@ -51,10 +51,10 @@
   };
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
       # driSupport = true;
-      driSupport32Bit = true;
+      # driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
         mesa.drivers
@@ -90,7 +90,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "intel" "nvidia" ];
+      videoDrivers = [ "intel" ]; #"nvidia" ];
       deviceSection = ''
         Option "DRI" "2"
         Option "TearFree" "true"

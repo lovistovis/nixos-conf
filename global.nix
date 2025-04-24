@@ -71,6 +71,7 @@
   };
 
   programs.nix-ld.enable = true;
+
   # Sets up all the libraries to load
   programs.nix-ld.libraries = (with pkgs; [
     stdenv.cc.cc
@@ -160,8 +161,9 @@
     fontconfig
     freetype
     dbus
-    alsaLib
+    alsa-lib
     expat
+
     # Needed for electron
     libdrm
     mesa
@@ -191,7 +193,6 @@
     wget       # Retrive guides
     efibootmgr # Change boot order
     exfat      # Exfat fs support
-    # nautilus
   ];
 
   virtualisation.libvirtd.enable = true;
