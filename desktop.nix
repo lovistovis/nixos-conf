@@ -268,7 +268,7 @@ in {
     vesktop
     # discordo
     # neovim
-    chromium
+    # chromium
     # ffmpeg
     st
     qdirstat
