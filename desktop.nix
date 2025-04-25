@@ -323,6 +323,11 @@ in {
           "*" = {
             xkb_layout = "se";
           };
+          "type:touchpad" = {
+            dwt = "enabled";
+            tap = "enabled";
+            middle_emulation = "enabled";
+          };
         };
       };
       extraConfig = ''
