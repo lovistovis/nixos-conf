@@ -23,7 +23,7 @@ in {
 
   stylix = {
     enable = true;
-    image = ./wallpapers/nixos.png;
+    image = ./wallpapers/nixos2.png;
   };
 
   programs = {
