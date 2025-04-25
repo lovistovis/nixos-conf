@@ -11,14 +11,25 @@ let
       url = "https://github.com/nix-community/nixvim";
       ref = "nixos-${import ./version.nix}";
   });
+  stylix = import (builtins.fetchGit {
+      url = "https://github.com/danth/stylix";
+      ref = "release-${import ./version.nix}";
+  });
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
+    (import stylix).homeManagerModules.stylix
   ];
+
+  stylix = {
+    enable = true;
+    image = ./wallpapers/nixos.png;
+  };
+
   programs = {
     nixvim = {
       enable = true;
-      colorschemes.tokyonight.enable = true;
+      # colorschemes.tokyonight.enable = true;
       globals = {
         mapleader = " ";
         maplocalleader = " ";
@@ -71,11 +82,11 @@ in {
         plugins = [ "git" ];
         theme = "robbyrussell";
       };
-      prezto = {
-        # enable = true;
-        # python.virtualenvAutoSwitch = true;
-        # python.virtualenvInitialize = true;
-      };
+      # prezto = {
+      #   enable = true;
+      #   python.virtualenvAutoSwitch = true;
+      #   python.virtualenvInitialize = true;
+      # };
       plugins = [
         {
           name = "zsh-nix-shell";
@@ -100,10 +111,10 @@ in {
       enable = true;
       settings = {
         # window.opacity = 0.95;
-        font.size = 8.0;
-        colors.primary = {
-          background = "#000000";
-        };
+        # font.size = 8.0;
+        # colors.primary = {
+        #   background = "#000000";
+        # };
         # shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
@@ -299,13 +310,13 @@ in {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
-    theme = {
-      name = "Tokyonight-Dark-B";
-      package = pkgs.tokyo-night-gtk;
-    };
-    iconTheme = {
-      name = "Tokyonight-Dark";
-    };
+    # theme = {
+    #   name = "Tokyonight-Dark-B";
+    #   package = pkgs.tokyo-night-gtk;
+    # };
+    # iconTheme = {
+    #   name = "Tokyonight-Dark";
+    # };
     # cursorTheme = {
     #   name = gtkCursorTheme;
     #   package = pkgs.bibata-cursors;
@@ -350,7 +361,7 @@ in {
 
   # xdg.configFile."awesome".source = ./config/awesome;
   # xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
-  xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
+  # TODO: xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
