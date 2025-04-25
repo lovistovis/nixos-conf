@@ -278,10 +278,10 @@ in {
     vesktop
     unityhub
     spotdl
+    steam
     nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
-    # steam
     # jetbrains.rider
     # dotnetCorePackages.dotnet_9.sdk
     # dotnetCorePackages.dotnet_9.aspnetcore
