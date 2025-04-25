@@ -346,6 +346,17 @@ in {
 
         bindsym ${mod}+Shift+w sticky toggle
 
+        bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
+
+        # Brightness
+        bindsym XF86MonBrightnessDown exec 'light -U 10'
+        bindsym XF86MonBrightnessUp exec 'light -A 10'
+
+        # Volume
+        bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+        bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+        bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+
         assign [class="Pavucontrol"] 10
         assign [class="blueman-manager"] 10
         # assign [class="Discord"] 4
