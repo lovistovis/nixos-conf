@@ -312,13 +312,18 @@ in {
     # };
   };
 
-  xsession = {
-    windowManager.i3 = with { mod = "Mod4"; }; {
+  wayland = {
+    windowManager.sway = with { mod = "Mod4"; }; {
       enable = true;
       config = {
         modifier = mod;
         terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
-        menu = "i3-dmenu-desktop";
+        menu = "j4-dmenu-desktop";
+        input = {
+          "*" = {
+            xkb_layout = "se";
+          };
+        };
       };
       extraConfig = ''
         workspace "1" output primary
@@ -326,14 +331,14 @@ in {
         bindsym ${mod}+Shift+w sticky toggle
 
         assign [class="Pavucontrol"] 10
-        assign [class=".blueman-manager-wrapped"] 10
-        #assign [class="Discord"] 4
-        #assign [class="vesktop"] 4
+        assign [class="blueman-manager"] 10
+        # assign [class="Discord"] 4
+        # assign [class="vesktop"] 4
 
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
         exec pavucontrol
         exec blueman-manager
-        #exec vesktop
+        # exec vesktop
       '';
     };
   };

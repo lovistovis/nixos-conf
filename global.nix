@@ -12,7 +12,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # security.polkit.enable = true;
+  security.polkit.enable = true;
 
   # Select internationalisation properties.
   i18n = {
@@ -35,21 +35,24 @@
     # Configure keymap in X11
     xkb.layout = "se";
     # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-    windowManager.i3.enable = true;
   };
 
   services.displayManager = {
-    sddm = {
-      enable = true;
-    };
-    defaultSession = "none+i3";
+    sddm.enable = true;
+    defaultSession = "sway";
   };
 
   fonts = {
     fontconfig = {
       antialias = true;
     };
+  };
+
+  services.gnome.gnome-keyring.enable = true;
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
   };
 
   location.provider = "manual";
@@ -193,6 +196,10 @@
     wget       # Retrive guides
     efibootmgr # Change boot order
     exfat      # Exfat fs support
+    slurp
+    wl-clipboard
+    mako
+    j4-dmenu-desktop
   ];
 
   virtualisation.libvirtd.enable = true;

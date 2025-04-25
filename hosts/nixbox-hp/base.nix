@@ -53,8 +53,6 @@
   hardware = {
     graphics = {
       enable = true;
-      # driSupport = true;
-      # driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
         mesa.drivers
@@ -64,16 +62,16 @@
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
-      open = false;
+      open = true;
       nvidiaSettings = true;
 
       prime = {
         # sync.enable = true;
 
-        # offload = {
-        #   enable = true;
-        #   enableOffloadCmd = true;
-        # };
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
 
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -90,11 +88,31 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "intel" ]; #"nvidia" ];
+      videoDrivers = [ "nvidia" ];
       deviceSection = ''
-        Option "DRI" "2"
         Option "TearFree" "true"
+        Option "SwapbuffersWait" "true"
+        Option "DPI" "2"
       '';
+      # config = ''
+      #   Section "Device"
+      #     Identifier  "Intel Graphics"
+      #     Driver      "intel"
+      #     BusID       "PCI:0:2:0"
+      #   EndSection
+
+      #   Section "Device"
+      #     Identifier  "nvidia"
+      #     Driver      "nvidia"
+      #     BusID       "PCI:1:0:0"
+      #     Option      "AllowEmptyInitialConfiguration"
+      #   EndSection
+      # '';
+      # screenSection = ''
+      #   Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      #   Option         "AllowIndirectGLXProtocol" "off"
+      #   Option         "TripleBuffer" "on"
+      # '';
       dpi = 80;
     };
     thermald.enable = true;
