@@ -10,6 +10,8 @@
       efiSupport = true;
       useOSProber = true;
       timeoutStyle = "hidden";
+      default = "2";
+      splashImage = null;
       extraEntries = ''
         menuentry "UbuntuManual" {
           insmod search_fs_uuid
