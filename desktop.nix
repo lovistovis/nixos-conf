@@ -335,7 +335,7 @@ in {
             xkb_layout = "se";
           };
           "type:touchpad" = {
-            dwt = "enabled";
+            dwt = "disabled";
             tap = "enabled";
             middle_emulation = "enabled";
           };
