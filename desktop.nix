@@ -357,15 +357,23 @@ in {
         bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
         bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
 
-        assign [class="Pavucontrol"] 10
-        assign [class="blueman-manager"] 10
-        # assign [class="Discord"] 4
-        # assign [class="vesktop"] 4
+        # To find window class ids use either
+        # swaymsg -t get_tree | grep app_id
+        # for wayland or
+        # wmctrl -lx
+        # for xwayland apps. Use "app_id" for
+        # wayland apps and "class" for xwayland apps
+
+        assign [app_id="firefox"] 2
+        assign [class="vesktop"] 3
+        assign [app_id="org.pulseaudio.pavucontrol"] 10
+        assign [app_id=".blueman-manager-wrapped"] 10
 
         exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+        exec firefox
+        exec vesktop
         exec pavucontrol
         exec blueman-manager
-        # exec vesktop
       '';
     };
   };
