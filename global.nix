@@ -198,6 +198,7 @@
     exfat      # Exfat fs support
     grim
     slurp
+    htop-vim
     wl-clipboard
     mako
     j4-dmenu-desktop
