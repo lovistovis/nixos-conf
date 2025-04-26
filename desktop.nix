@@ -64,7 +64,8 @@ in {
         update = "sudo nixos-rebuild switch";
         fupdate = "sudo nixos-rebuild switch --fast";
         upgrade = "sudo nix-channel --update; update";
-        clean = "nix-collect-garbage --delete-old; sudo nix-collect-garbage --delete-old";
+        clean = "nix-collect-garbage --delete-older-than 1d; sudo nix-collect-garbage --delete-older-than 1d";
+        clean-hard = "nix-collect-garbage --delete-old; sudo nix-collect-garbage --delete-old";
         reload-systemd = "systemctl reload systemd-logind.service";
         n = "if [[ -f \"Session.vim\" ]]; then nvim -S; else nvim .; fi";
         rustshell = "nix-shell ${path}/shell/rust.nix";
