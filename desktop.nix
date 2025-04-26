@@ -15,6 +15,7 @@ let
       url = "https://github.com/danth/stylix";
       ref = "release-${import ./version.nix}";
   });
+  wallpaper = ./wallpapers/nixos2.png;
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
@@ -23,7 +24,7 @@ in {
 
   stylix = {
     enable = true;
-    image = ./wallpapers/nixos2.png;
+    image = wallpaper;
   };
 
   programs = {
@@ -356,7 +357,7 @@ in {
 
         bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
 
-        bindsym ${mod}+Control+l exec 'swaylock'
+        bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
 
         # Brightness
         bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
