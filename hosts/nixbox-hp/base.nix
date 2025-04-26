@@ -10,7 +10,7 @@
       efiSupport = true;
       useOSProber = true;
       timeoutStyle = "hidden";
-      default = "2";
+      # default = "2";
       splashImage = null;
       extraEntries = ''
         menuentry "UbuntuManual" {
