@@ -361,7 +361,9 @@ in {
 
         # Brightness
         bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
+        bindsym ${mod}+F3 exec 'brightnessctl set 1'
         bindsym XF86MonBrightnessUp exec 'brightnessctl set +1%'
+        bindsym ${mod}+F4 exec 'brightnessctl set 100%'
 
         # Volume
         bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
