@@ -356,6 +356,8 @@ in {
 
         bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
 
+        bindsym ${mod}+Control+l exec 'swaylock'
+
         # Brightness
         bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
         bindsym XF86MonBrightnessUp exec 'brightnessctl set +1%'
