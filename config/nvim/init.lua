@@ -139,7 +139,7 @@ local save_session_on_exit_group = augroup("SaveSessionOnExit", {})
 -- Save the neovim session on exit
 autocmd({ "VimLeave" }, {
 	group = save_session_on_exit_group,
-	pattern = "*",
+	pattern = [[{*}{*/.git/COMMIT_EDITMSG}\@<!]],
 	command = [[mksession!]],
 })
 
