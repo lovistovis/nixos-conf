@@ -1,4 +1,4 @@
-{ config, pkgs, stdenv, ... }:
+{ lib, config, pkgs, stdenv, ... }:
 let
   path = builtins.toString ./.;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
@@ -265,6 +265,78 @@ in {
         wlrobs
         obs-pipewire-audio-capture
       ];
+    };
+    waybar = {
+      enable = true;
+      style = lib.mkAfter ''
+        * {
+          border: none;
+          border-radius: 0;
+          min-height: 0;
+          font-size: 9px;
+        }
+
+        #workspaces button {
+          background: transparent;
+          min-width: 9px;
+        }
+
+        #workspaces button.focused {
+          background: @base0E;
+        }
+
+        #workspaces button.urgent {
+          background: @base0D;
+        }
+      '';
+      settings = {
+        mainBar = {
+          layer = "top";
+          position = "bottom";
+          height = 10;
+          modules-left = [ "sway/workspaces" ];
+          # modules-center = [ "sway/window" ];
+          modules-right = [ "network" "disk" "memory" "battery" "clock" "tray" ];
+
+          "sway/workspaces" = {
+            disable-scroll = true;
+            disable-mouse = true;
+            all-outputs = true;
+          };
+
+          "network" = {
+            interval = 1;
+            format = "{ifname}";
+            format-wifi = "{essid} ({signalStrength}%)";
+            format-ethernet = "{ipaddr}/{cidr}";
+            format-disconnected = "";
+          };
+
+          "disk" = {
+            interval = 5;
+            format = "{free}";
+          };
+
+          "memory" = {
+            interval = 5;
+            format = "{avail}GiB";
+          };
+
+          "battery" = {
+            interval = 5;
+            format-charging = "{capacity}% {time} chr";
+            format-discharging = "{capacity}% {time} bat";
+            format-full = "{capacity}% max";
+          };
+
+          "clock" = {
+            interval = 1;
+            tooltip = true;
+            format = "{:%H:%M:%S}";
+            tooltip-format = "{:%Y-%m-%d}";
+          };
+        };
+      };
     };
   };
 
