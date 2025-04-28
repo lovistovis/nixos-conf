@@ -296,7 +296,7 @@ in {
           height = 10;
           modules-left = [ "sway/workspaces" "sway/mode" ];
           # modules-center = [ "sway/window" ];
-          modules-right = [ "network" "disk" "memory" "battery" "clock" "tray" ];
+          modules-right = [ "network" "disk" "memory" "temperature" "battery" "clock" "tray" ];
 
           "sway/workspaces" = {
             disable-scroll = true;
@@ -320,6 +320,11 @@ in {
           "memory" = {
             interval = 5;
             format = "{avail}GiB";
+          };
+
+          "temperature" = {
+            thermal-zone = 1;
+            interval = 5;
           };
 
           "battery" = {
