@@ -404,63 +404,61 @@ in {
     # };
   };
 
-  wayland = {
-    windowManager.sway = with { mod = "Mod4"; }; {
-      enable = true;
-      config = {
-        modifier = mod;
-        terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
-        menu = "j4-dmenu-desktop";
-        input = {
-          "*" = {
-            xkb_layout = "se";
-          };
-          "type:touchpad" = {
-            dwt = "disabled";
-            tap = "enabled";
-            middle_emulation = "enabled";
-          };
+  wayland.windowManager.sway = with { mod = "Mod4"; }; {
+    enable = true;
+    config = {
+      modifier = mod;
+      terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
+      menu = "j4-dmenu-desktop";
+      input = {
+        "*" = {
+          xkb_layout = "se";
+        };
+        "type:touchpad" = {
+          dwt = "disabled";
+          tap = "enabled";
+          middle_emulation = "enabled";
         };
       };
-      extraConfig = ''
-        workspace "1" output primary
-
-        bindsym ${mod}+Shift+w sticky toggle
-
-        bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
-
-        bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
-
-        # Brightness
-        bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
-        bindsym ${mod}+F3 exec 'brightnessctl set 1'
-        bindsym XF86MonBrightnessUp exec 'brightnessctl set +1%'
-        bindsym ${mod}+F4 exec 'brightnessctl set 100%'
-
-        # Volume
-        bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
-        bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
-        bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
-
-        # To find window class ids use either
-        # swaymsg -t get_tree | grep app_id
-        # for wayland or
-        # wmctrl -lx
-        # for xwayland apps. Use "app_id" for
-        # wayland apps and "class" for xwayland apps
-
-        assign [app_id="firefox"] 2
-        assign [class="vesktop"] 3
-        assign [app_id="org.pulseaudio.pavucontrol"] 10
-        assign [app_id=".blueman-manager-wrapped"] 10
-
-        exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-        exec firefox
-        exec vesktop
-        exec pavucontrol
-        exec blueman-manager
-      '';
     };
+    extraConfig = ''
+      workspace "1" output primary
+
+      bindsym ${mod}+Shift+w sticky toggle
+
+      bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
+
+      bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
+
+      # Brightness
+      bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
+      bindsym ${mod}+F3 exec 'brightnessctl set 1'
+      bindsym XF86MonBrightnessUp exec 'brightnessctl set +1%'
+      bindsym ${mod}+F4 exec 'brightnessctl set 100%'
+
+      # Volume
+      bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+      bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+      bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+
+      # To find window class ids use either
+      # swaymsg -t get_tree | grep app_id
+      # for wayland or
+      # wmctrl -lx
+      # for xwayland apps. Use "app_id" for
+      # wayland apps and "class" for xwayland apps
+
+      assign [app_id="firefox"] 2
+      assign [class="vesktop"] 3
+      assign [app_id="org.pulseaudio.pavucontrol"] 10
+      assign [app_id=".blueman-manager-wrapped"] 10
+
+      exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+      exec firefox
+      exec vesktop
+      exec pavucontrol
+      exec blueman-manager
+    '';
   };
 
   # xdg.configFile."awesome".source = ./config/awesome;
