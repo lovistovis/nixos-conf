@@ -43,6 +43,9 @@
   };
 
   fonts = {
+    packages = with pkgs; [
+      font-awesome
+    ];
     fontconfig = {
       antialias = true;
     };

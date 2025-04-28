@@ -294,7 +294,7 @@ in {
           layer = "top";
           position = "bottom";
           height = 10;
-          modules-left = [ "sway/workspaces" ];
+          modules-left = [ "sway/workspaces" "sway/mode" ];
           # modules-center = [ "sway/window" ];
           modules-right = [ "network" "disk" "memory" "battery" "clock" "tray" ];
 
@@ -429,6 +429,8 @@ in {
       bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
 
       bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
+
+      bar swaybar_command waybar
 
       # Brightness
       bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
