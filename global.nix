@@ -58,8 +58,6 @@
     wrapperFeatures.gtk = true;
   };
 
-  programs.waybar.enable = true;
-
   location.provider = "manual";
   location.latitude = 59.33;
   location.longitude = 18.06;

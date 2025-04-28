@@ -114,7 +114,7 @@
       '';
     };
     dbus = {
-      implementation = "dbus";
+      implementation = "broker";
     };
     pipewire = {
       enable = false;
