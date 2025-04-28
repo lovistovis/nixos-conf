@@ -420,6 +420,11 @@ in {
           middle_emulation = "enabled";
         };
       };
+      bars = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+        }
+      ];
     };
     extraConfig = ''
       workspace "1" output primary
@@ -429,8 +434,6 @@ in {
       bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
 
       bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
-
-      bar swaybar_command waybar
 
       # Brightness
       bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
