@@ -273,7 +273,7 @@ in {
           border: none;
           border-radius: 0;
           min-height: 0;
-          font-size: 9px;
+          font-size: 10px;
         }
 
         #workspaces button {
