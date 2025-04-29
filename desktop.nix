@@ -15,7 +15,7 @@ let
       url = "https://github.com/danth/stylix";
       ref = "release-${import ./version.nix}";
   });
-  wallpaper = ./wallpapers/nixos2.png;
+  wallpaper = ./wallpapers/landscape.jpg;
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
@@ -25,6 +25,16 @@ in {
   stylix = {
     enable = true;
     image = wallpaper;
+    polarity = "dark";
+    targets = {
+      firefox = {
+        enable = true;
+        profileNames = [ "mogos" ];
+      };
+      nixvim = {
+        enable = true;
+      };
+    };
   };
 
   programs = {
@@ -112,11 +122,7 @@ in {
     alacritty = {
       enable = true;
       settings = {
-        # window.opacity = 0.95;
-        # font.size = 8.0;
-        # colors.primary = {
-        #   background = "#000000";
-        # };
+        window.opacity = lib.mkForce 0.97;
         # shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
@@ -218,7 +224,7 @@ in {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
           };
-          "jid1-MnnxcxisPBnSXQ@jetpack" = {
+          "jid1-MnnxcxisBPnSXQ@jetpack" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
             installation_mode = "force_installed";
           };
@@ -273,7 +279,7 @@ in {
           border: none;
           border-radius: 0;
           min-height: 0;
-          font-size: 10px;
+          font-size: 12px;
         }
 
         #workspaces button {
@@ -282,11 +288,11 @@ in {
         }
 
         #workspaces button.focused {
-          background: @base0E;
+          background: @base0D;
         }
 
         #workspaces button.urgent {
-          background: @base0D;
+          background: @base0E;
         }
       '';
       settings = {
@@ -430,9 +436,18 @@ in {
           command = "${pkgs.waybar}/bin/waybar";
         }
       ];
+      # How to override colors:
+      # colors = {
+      #   unfocused = with config.lib.stylix.colors.withHashtag; {
+      #     border = lib.mkForce base0A;
+      #     childBorder = lib.mkForce base0A;
+      #   };
+      # };
     };
     extraConfig = ''
       workspace "1" output primary
+
+      gaps inner 5
 
       bindsym ${mod}+Shift+w sticky toggle
 

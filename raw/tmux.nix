@@ -4,7 +4,7 @@
 
 #set -g default-terminal "screen-256color"
 
-set -g status-bg colour0
+set-option -g status-style bg=default
 set -g status-fg white
 
 unbind C-b
