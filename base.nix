@@ -45,7 +45,7 @@ in {
 
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "back";
-  home-manager.users.mogos = {
+  home-manager.users.${username} = {
     home.stateVersion = import ./version.nix;
 
     imports = [

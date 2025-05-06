@@ -29,7 +29,7 @@ in {
     targets = {
       firefox = {
         enable = true;
-        profileNames = [ "mogos" ];
+        profileNames = [ "nixos" ];
       };
       nixvim = {
         enable = true;
@@ -255,7 +255,7 @@ in {
         };
       };
       profiles = {
-        "mogos" = {
+        "nixos" = {
           id = 0;
           isDefault = true;
 

@@ -2,16 +2,20 @@
 
 { pkgs, config, lib, ... }:
 let
-  username = "mogos";     # TODO: Customize
-  hostname = "nixbox-hp"; # Mapped to a dir in ./hosts
+  username = "nixos";     # TODO: Customize
+  hostname = "wsl"; # Mapped to a dir in ./hosts
 in
 {
   imports =
     [
-      ./hardware-configuration.nix
+      # ./hardware-configuration.nix
       (import "/home/${username}/nixos-conf/base.nix" {
         inherit pkgs config username hostname;
       })
-      ./cachix.nix
+      # ./cachix.nix
+      <nixos-wsl/modules>
     ];
+
+  wsl.enable = true;
+  wsl.defaultUser = "nixos";
 }
