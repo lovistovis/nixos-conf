@@ -383,7 +383,7 @@ in {
     spotdl
     steam
     nur.repos.nltch.spotify-adblock
-    # chromium
+    chromium
     # opentoonz
     # jetbrains.rider
     # dotnetCorePackages.dotnet_9.sdk
