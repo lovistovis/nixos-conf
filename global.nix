@@ -160,7 +160,7 @@
     librsvg
     xorg.libXft
     libvdpau
-    gnome2.pango
+    pango
     cairo
     atk
     gdk-pixbuf
@@ -181,7 +181,7 @@
 
   # Enable sound.
   # sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  services.pulseaudio.enable = true;
   hardware.bluetooth.settings = {
     General = {
       Experimental = true;

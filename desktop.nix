@@ -382,8 +382,8 @@ in {
     unityhub
     spotdl
     steam
-    nur.repos.nltch.spotify-adblock
     chromium
+    # nur.repos.nltch.spotify-adblock
     # opentoonz
     # jetbrains.rider
     # dotnetCorePackages.dotnet_9.sdk

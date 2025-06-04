@@ -2,32 +2,33 @@
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+      # efiSysMountPoint = "/boot";
     };
-    grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiSupport = true;
-      useOSProber = true;
-      timeoutStyle = "hidden";
-      default = "2";
-      splashImage = null;
-      extraEntries = ''
-        menuentry "UbuntuManual" {
-          insmod search_fs_uuid
-          search --set=root --fs-uuid 48d5e96d-cd77-476b-8aa3-4eb0218caa25
-          configfile "/boot/grub/grub.cfg"
-        }
-        menuentry "WindowsManual" {
-          insmod part_gpt
-          insmod fat
-          insmod search_fs_uuid
-          insmod chain
-          search --set=root --fs-uuid 0CB0-93CB 
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '';
-    };
+    systemd-boot.enable = true;
+    # grub = {
+    #   enable = true;
+    #   devices = [ "nodev" ];
+    #   efiSupport = true;
+    #   useOSProber = true;
+    #   timeoutStyle = "hidden";
+    #   default = "2";
+    #   splashImage = null;
+    #   extraEntries = ''
+    #     menuentry "UbuntuManual" {
+    #       insmod search_fs_uuid
+    #       search --set=root --fs-uuid 48d5e96d-cd77-476b-8aa3-4eb0218caa25
+    #       configfile "/boot/grub/grub.cfg"
+    #     }
+    #     menuentry "WindowsManual" {
+    #       insmod part_gpt
+    #       insmod fat
+    #       insmod search_fs_uuid
+    #       insmod chain
+    #       search --set=root --fs-uuid 0CB0-93CB 
+    #       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+    #     }
+    #   '';
+    # };
   };
 
   programs = {
@@ -58,7 +59,7 @@
       enable32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
-        mesa.drivers
+        mesa
       ];
     };
     nvidia = {

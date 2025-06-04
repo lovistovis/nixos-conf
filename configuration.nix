@@ -12,6 +12,6 @@ in
       (import "/home/${username}/nixos-conf/base.nix" {
         inherit pkgs config username hostname;
       })
-      ./cachix.nix
+      # ./cachix.nix
     ];
 }
