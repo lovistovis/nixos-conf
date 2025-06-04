@@ -18,8 +18,8 @@ let
   wallpaper = ./wallpapers/landscape.jpg;
 in {
   imports = [
-    nixvim.homeManagerModules.nixvim
-    (import stylix).homeManagerModules.stylix
+    nixvim.homeModules.nixvim
+    (import stylix).homeModules.stylix
   ];
 
   stylix = {
@@ -382,7 +382,7 @@ in {
     unityhub
     spotdl
     steam
-    chromium
+    # chromium
     # nur.repos.nltch.spotify-adblock
     # opentoonz
     # jetbrains.rider

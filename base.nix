@@ -10,21 +10,7 @@ in {
 
   networking.hostName = hostname;
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      nur = import (
-        builtins.fetchTarball {
-          # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
-          url = "https://github.com/nix-community/NUR/archive/d46254dd3f4953aede636c8938ded8b27b791730.tar.gz";
-          # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
-          sha256 = "0s1vik0kawm33njw72x6nz072mymg93dwsjq9aq1rrar9k4wddsx";
-        }
-      ) {
-        inherit pkgs;
-      };
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
