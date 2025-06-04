@@ -34,6 +34,9 @@ in {
       nixvim = {
         enable = true;
       };
+      vesktop = {
+        enable = true;
+      };
     };
   };
 
