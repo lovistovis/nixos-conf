@@ -385,6 +385,7 @@ in {
     unityhub
     spotdl
     steam
+    tor-browser
     # chromium
     # nur.repos.nltch.spotify-adblock
     # opentoonz
