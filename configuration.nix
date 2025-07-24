@@ -2,16 +2,13 @@
 
 { pkgs, config, lib, ... }:
 let
-  username = "mogos";     # TODO: Customize
-  hostname = "nixbox-hp"; # Mapped to a dir in ./hosts
+  username = (import "/home/mogos/nixos-conf/username.nix");
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      (import "/home/${username}/nixos-conf/base.nix" {
-        inherit pkgs config username hostname;
-      })
-      # ./cachix.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    (import "/home/${username}/nixos-conf/base.nix" {
+      inherit pkgs lib config;
+    })
+  ];
 }

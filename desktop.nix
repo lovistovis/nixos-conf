@@ -1,6 +1,8 @@
-{ lib, config, pkgs, stdenv, ... }:
+{ lib, config, pkgs, ... }:
 let
   path = builtins.toString ./.;
+  username = import ./username.nix;
+  hostname = import ./hostname.nix;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
@@ -29,7 +31,7 @@ in {
     targets = {
       firefox = {
         enable = true;
-        profileNames = [ "mogos" ];
+        profileNames = [ "${username}" ];
       };
       nixvim = {
         enable = true;
@@ -258,7 +260,7 @@ in {
         };
       };
       profiles = {
-        "mogos" = {
+        "${username}" = {
           id = 0;
           isDefault = true;
 

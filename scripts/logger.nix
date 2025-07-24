@@ -1,4 +1,7 @@
 { pkgs }:
+let
+  username = import ../username.nix;
+in
 pkgs.writeShellScriptBin "logger" ''
 nohup ${
   (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
@@ -8,5 +11,5 @@ nohup ${
     pyperclip
     keyboard
   ]))
-}/bin/python /home/mogos/projects/logger/main.py
+}/bin/python /home/${username}/projects/logger/main.py
 ''

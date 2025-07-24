@@ -1,6 +1,8 @@
-{ pkgs, config, username, hostname, ... }:
+{ pkgs, lib, config, ... }:
 let
   path = builtins.toString ./.;
+  username = import ./username.nix;
+  hostname = import ./hostname.nix;
 in {
   imports = [
     ./global.nix
@@ -9,8 +11,6 @@ in {
   ];
 
   networking.hostName = hostname;
-
-  nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
@@ -26,13 +26,16 @@ in {
       Type = "simple";
       ExecStart = "logger";
     };
-    #serviceConfig.PassEnvironment = "DISPLAY";
+    # serviceConfig.PassEnvironment = "DISPLAY";
   };
 
-  home-manager.useGlobalPkgs = true;
+  nixpkgs.config.allowUnfree = true;
+
   home-manager.backupFileExtension = "back";
-  home-manager.users.mogos = {
+  home-manager.users.${username} = {
     home.stateVersion = import ./version.nix;
+
+    nixpkgs.config.allowUnfree = true;
 
     imports = [
       ./desktop.nix
