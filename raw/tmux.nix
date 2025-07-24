@@ -13,6 +13,8 @@ set -as terminal-features ",alacritty*:RGB"
 
 set -g base-index 1
 set -g exit-empty off
+set -g status-left-length 100
+set -g status-right-length 100
 
 CONFIG="${config.home.homeDirectory}/.config/tmux/tmux.conf"
 bind-key r source-file $CONFIG
