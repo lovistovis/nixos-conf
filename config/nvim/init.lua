@@ -69,9 +69,6 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- Colorscheme
-vim.cmd([[colorscheme retrobox]])
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -123,10 +120,13 @@ vim.keymap.set("n", "]{", "/\\n\\n\\n<CR><cmd>nohlsearch<CR>", { silent = true }
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
   callback = function()
@@ -134,8 +134,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
+autocmd("ColorScheme", {
+  desc = "Make statusline transparent",
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "StatusLine", { ctermbg = None, cterm = None, ctermfg = None })
+    vim.api.nvim_set_hl(0, "StatusLineNC", { ctermbg = None, cterm = None, ctermfg = None })
+  end,
+})
 
 local save_session_on_exit_group = augroup("SaveSessionOnExit", {})
 
@@ -145,6 +151,9 @@ autocmd({ "VimLeave" }, {
   pattern = [[{*}{*/.git/COMMIT_EDITMSG}\@<!]],
   command = [[mksession!]],
 })
+
+-- Colorscheme
+vim.cmd([[colorscheme retrobox]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -292,8 +301,8 @@ require("lazy").setup({
           "SignColumn",
           -- "CursorLine",
           "CursorLineNr",
-          "StatusLine",
-          "StatusLineNC",
+          -- "StatusLine",
+          -- "StatusLineNC",
           "EndOfBuffer",
           "TelescopePromptTitle",
           "TelescopePromptPrefix",
