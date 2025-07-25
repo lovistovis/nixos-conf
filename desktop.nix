@@ -421,11 +421,13 @@ in {
     # };
   };
 
-  wayland.windowManager.sway = with { mod = "Mod4"; }; {
+  wayland.windowManager.sway = with {
+      mod = "Mod4";
+      term = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; }; {
     enable = true;
     config = {
       modifier = mod;
-      terminal = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
+      terminal = term;
       menu = "j4-dmenu-desktop";
       input = {
         "*" = {
@@ -484,11 +486,12 @@ in {
       assign [app_id="org.pulseaudio.pavucontrol"] 10
       assign [app_id=".blueman-manager-wrapped"] 10
 
-      exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-      exec firefox
-      exec vesktop
-      exec pavucontrol
-      exec blueman-manager
+      # exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+      exec --no-startup-id swaymsg 'workspace 1; exec --no-startup-id ${term}'
+      exec --no-startup-id firefox
+      exec --no-startup-id vesktop
+      exec --no-startup-id pavucontrol
+      exec --no-startup-id blueman-manager
     '';
   };
 
