@@ -394,8 +394,8 @@ in {
     spotdl
     steam
     tor-browser
-    # chromium
     nur.repos.nltch.spotify-adblock
+    # chromium
     # opentoonz
     # jetbrains.rider
     # dotnetCorePackages.dotnet_9.sdk
