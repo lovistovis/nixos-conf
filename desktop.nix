@@ -356,6 +356,12 @@ in {
     };
   };
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
+      inherit pkgs;
+    };
+  };
+
   home.packages = with pkgs; [
     # Scripts
     tmux-sessionizer
@@ -389,7 +395,7 @@ in {
     steam
     tor-browser
     # chromium
-    # nur.repos.nltch.spotify-adblock
+    nur.repos.nltch.spotify-adblock
     # opentoonz
     # jetbrains.rider
     # dotnetCorePackages.dotnet_9.sdk
