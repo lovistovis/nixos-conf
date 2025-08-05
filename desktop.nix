@@ -451,12 +451,12 @@ in {
         }
       ];
       # How to override colors:
-      # colors = {
-      #   unfocused = with config.lib.stylix.colors.withHashtag; {
-      #     border = lib.mkForce base0A;
-      #     childBorder = lib.mkForce base0A;
-      #   };
-      # };
+      colors = {
+        unfocused = with config.lib.stylix.colors.withHashtag; {
+          border = lib.mkForce base01;
+          childBorder = lib.mkForce base01;
+        };
+      };
     };
     extraConfig = ''
       workspace "1" output primary
