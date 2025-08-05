@@ -450,7 +450,6 @@ in {
           command = "${pkgs.waybar}/bin/waybar";
         }
       ];
-      # How to override colors:
       colors = {
         unfocused = with config.lib.stylix.colors.withHashtag; {
           border = lib.mkForce base01;
