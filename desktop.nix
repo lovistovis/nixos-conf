@@ -395,6 +395,7 @@ in {
     steam
     tor-browser
     nur.repos.nltch.spotify-adblock
+    ardour
     # chromium
     # opentoonz
     # jetbrains.rider
