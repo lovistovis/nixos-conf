@@ -146,10 +146,16 @@ autocmd("ColorScheme", {
 local save_session_on_exit_group = augroup("SaveSessionOnExit", {})
 
 -- Save the neovim session on exit
-autocmd({ "VimLeave" }, {
+vim.api.nvim_create_autocmd("VimLeave", {
   group = save_session_on_exit_group,
-  pattern = [[{*}{*/.git/COMMIT_EDITMSG}\@<!]],
-  command = [[mksession!]],
+  pattern = "*",
+  callback = function()
+    local fname = vim.fn.expand("%:t")
+    local skip = { "COMMIT_EDITMSG", "MERGE_MSG", "REBASE_MSG" }
+    if not vim.tbl_contains(skip, fname) then
+      vim.cmd("mksession!")
+    end
+  end,
 })
 
 -- Colorscheme
