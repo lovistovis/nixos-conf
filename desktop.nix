@@ -396,6 +396,7 @@ in {
     tor-browser
     nur.repos.nltch.spotify-adblock
     ardour
+    prismlauncher
     # chromium
     # opentoonz
     # jetbrains.rider
