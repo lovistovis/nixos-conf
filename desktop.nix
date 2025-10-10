@@ -14,7 +14,7 @@ let
       ref = "nixos-${import ./version.nix}";
   });
   stylix = import (builtins.fetchGit {
-      url = "https://github.com/danth/stylix";
+      url = "https://github.com/nix-community/stylix";
       ref = "release-${import ./version.nix}";
   });
   wallpaper = ./wallpapers/landscape.jpg;
