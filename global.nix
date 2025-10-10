@@ -35,7 +35,7 @@
   services = {
     displayManager = {
       sddm.enable = true;
-      defaultSession = "sway";
+      defaultSession = "hyprland";
     };
     automatic-timezoned.enable = true;
     compton.enable = true;
@@ -68,9 +68,9 @@
 
   programs = {
     virt-manager.enable = true;
-    sway = {
+    hyprland = {
       enable = true;
-      wrapperFeatures.gtk = true;
+      xwayland.enable = true;
     };
     mtr.enable = true;
     gnupg.agent = {
