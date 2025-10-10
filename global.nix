@@ -6,6 +6,8 @@
 
   virtualisation.docker.enable = true;
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
   services.automatic-timezoned.enable = true;
