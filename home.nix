@@ -32,12 +32,9 @@ in {
         enable = true;
         profileNames = [ "${username}" ];
       };
-      nixvim = {
-        enable = true;
-      };
-      vesktop = {
-        enable = true;
-      };
+      nixvim.enable = true;
+      vesktop.enable = true;
+      waybar.enable = true;
     };
   };
 
@@ -193,7 +190,6 @@ in {
       };
     in {
       enable = true;
-      # languagePacks = [ "en-US" ];
 
       policies = {
         DisableTelemetry = true;
@@ -297,11 +293,11 @@ in {
           layer = "top";
           position = "bottom";
           height = 10;
-          modules-left = [ "sway/workspaces" "sway/mode" ];
-          # modules-center = [ "sway/window" ];
-          modules-right = [ "network" "disk" "memory" "temperature" "battery" "clock" "tray" ];
+          modules-left = [ "hyprland/workspaces" "hyprland/mode" ];
+          modules-center = [ "hyprland/window" ];
+          modules-right = [ "pulseaudio" "network" "temperature" "disk" "memory" "battery" "clock" "tray" ];
 
-          "sway/workspaces" = {
+          "hyprland/workspaces" = {
             disable-scroll = true;
             disable-mouse = true;
             all-outputs = true;
@@ -315,26 +311,46 @@ in {
             format-disconnected = "";
           };
 
-          "disk" = {
-            interval = 5;
-            format = "{free}";
-          };
-
-          "memory" = {
-            interval = 5;
-            format = "{avail}GiB";
-          };
-
           "temperature" = {
             thermal-zone = 1;
             interval = 5;
           };
 
+          "disk" = {
+            interval = 5;
+            format = "{free} 🖴";
+          };
+
+          "memory" = {
+            interval = 5;
+            format = "{avail}GiB 🎟";
+          };
+
           "battery" = {
             interval = 5;
+            format-full = "{capacity}%";
             format-charging = "{capacity}% {time} chr";
             format-discharging = "{capacity}% {time} bat";
-            format-full = "{capacity}% max";
+            format-icons = ["" "" "" "" ""];
+          };
+
+          "pulseaudio" = {
+            format = "{volume}% {icon} {format_source}";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-muted = " {format_source}";
+            format-source = "{volume}% ";
+            format-source-muted = "";
+            format-icons = {
+                headphone = "";
+                hands-free = "";
+                headset = "";
+                phone = "";
+                portable = "";
+                car = "";
+                default = ["" "" ""];
+            };
+            on-click = "pavucontrol";
           };
 
           "clock" = {
@@ -410,81 +426,127 @@ in {
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
   };
 
-  wayland.windowManager.sway = with {
-      mod = "Mod4";
-      term = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"; }; {
+  wayland.windowManager.hyprland = {
     enable = true;
-    config = {
-      modifier = mod;
-      terminal = term;
-      menu = "j4-dmenu-desktop";
-      input = {
-        "*" = {
-          xkb_layout = "se";
-        };
-        "type:touchpad" = {
-          dwt = "disabled";
-          tap = "enabled";
-          middle_emulation = "enabled";
-        };
-      };
-      bars = [
-        {
-          command = "${pkgs.waybar}/bin/waybar";
-        }
+    package = null;
+    portalPackage = null;
+    settings = {
+      "$mod" = "SUPER";
+      "$term" = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
+      "$menu" = "j4-dmenu-desktop";
+      bind = [
+        "$mod, D, exec, $menu"
+        "$mod, Return, exec, $term"
+        "$mod, F, fullscreen"
+        "$mod Shift, S, exec, grim -g \'$(slurp)\' - | wl-copy"
+        "$mod Shift, Q, killactive"
+        "$mod Shift, Space, togglefloating"
+        "$mod Shift, W, pin"
+        "$mod Shift, E, exit"
+        # TODO: "$mod Ctrl, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
+
+        "$mod, F3, exec, brightnessctl set 1"
+        "$mod, F4, exec, brightnessctl set 100%"
+      ]
+      ++ (
+        builtins.concatLists (builtins.genList (i:
+            let ws = i + 1;
+            in [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
+            ]
+          )
+          9)
+       );
+      bindel = [
+        ", XF86MonBrightnessDown, exec, brightnessctl set 1%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 1%+"
+
+        ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +1%"
+        ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -1%"
+        ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ];
-      colors = {
-        unfocused = with config.lib.stylix.colors.withHashtag; {
-          border = lib.mkForce base01;
-          childBorder = lib.mkForce base01;
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
+      general = with config.lib.stylix.colors; let
+          rgb = color: "rgb(${color})";
+        in {
+        gaps_out = 10;
+        gaps_in = 5;
+        "col.active_border" = lib.mkForce (rgb base03);
+        "col.inactive_border" = lib.mkForce (rgb base01);
+      };
+      input = {
+        kb_layout = "se";
+        touchpad = {
+          disable_while_typing = false;
+          tap-to-click = true;
+          middle_button_emulation = false;
         };
       };
-    };
-    extraConfig = ''
-      workspace "1" output primary
-
-      gaps inner 5
-
-      bindsym ${mod}+Shift+w sticky toggle
-
-      bindsym ${mod}+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
-
-      bindsym ${mod}+Control+l exec 'swaylock --image ${wallpaper}'
-
-      # Brightness
-      bindsym XF86MonBrightnessDown exec 'brightnessctl set 1%-'
-      bindsym ${mod}+F3 exec 'brightnessctl set 1'
-      bindsym XF86MonBrightnessUp exec 'brightnessctl set +1%'
-      bindsym ${mod}+F4 exec 'brightnessctl set 100%'
-
-      # Volume
-      bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
-      bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
-      bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
-
+      animations.enabled = false;
+      xwayland = {
+        force_zero_scaling = true;
+      };
+      monitor = ", highres, auto, 1";
+      env = [
+        "GDK_SCALE,1"
+        "XCURSOR_SIZE,32"
+      ];
+      exec-once = [
+        "${pkgs.waybar}/bin/waybar"
+        "${pkgs.tmux}/bin/tmux start-server"
+        # "hyprctl dispatch workspace 1"
+        # "$term"
+        "firefox"
+        "vesktop"
+        "pavucontrol"
+        "blueman-manager"
+      ];
       # To find window class ids use either
       # swaymsg -t get_tree | grep app_id
       # for wayland or
       # wmctrl -lx
       # for xwayland apps. Use "app_id" for
       # wayland apps and "class" for xwayland apps
+      windowrule = [
+        "workspace:2, class:firefox"
+        "workspace:3, class:vesktop"
+        "workspace:9, class:org.pulseaudio.pavucontrol"
+        "workspace:9, class:.blueman-manager-wrapped"
+      ];
+    };
+    #   # To find window class ids use either
+    #   # swaymsg -t get_tree | grep app_id
+    #   # for wayland or
+    #   # wmctrl -lx
+    #   # for xwayland apps. Use "app_id" for
+    #   # wayland apps and "class" for xwayland apps
 
-      assign [app_id="firefox"] 2
-      assign [class="vesktop"] 3
-      assign [app_id="org.pulseaudio.pavucontrol"] 10
-      assign [app_id=".blueman-manager-wrapped"] 10
+    #   assign [app_id="firefox"] 2
+    #   assign [class="vesktop"] 3
+    #   assign [app_id="org.pulseaudio.pavucontrol"] 10
+    #   assign [app_id=".blueman-manager-wrapped"] 10
 
-      # exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-      exec --no-startup-id swaymsg 'workspace 1; exec --no-startup-id ${term}'
-      exec --no-startup-id firefox
-      exec --no-startup-id vesktop
-      exec --no-startup-id pavucontrol
-      exec --no-startup-id blueman-manager
-    '';
+    #   # exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
+    #   exec --no-startup-id swaymsg 'workspace 1; exec --no-startup-id ${term}'
+    #   exec --no-startup-id firefox
+    #   exec --no-startup-id vesktop
+    #   exec --no-startup-id pavucontrol
+    #   exec --no-startup-id blueman-manager
+    # '';
   };
 
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
-  # DMZ white cursor
+  # dMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 }
