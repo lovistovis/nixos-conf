@@ -116,18 +116,11 @@ in {
         }
       ];
       dotDir = ".zsh";
-      # initExtra = ''
-      #   function shellExit {
-      #     tmux-store save
-      #   }
-      #   trap shellExit EXIT
-      # '';
     };
     alacritty = {
       enable = true;
       settings = {
         window.opacity = lib.mkForce 0.97;
-        # shell = { program = "${pkgs.zsh}/bin/zsh"; args = [ "-c tmux" ]; };
       };
     };
     tmux = let
@@ -415,17 +408,6 @@ in {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
-    # theme = {
-    #   name = "Tokyonight-Dark-B";
-    #   package = pkgs.tokyo-night-gtk;
-    # };
-    # iconTheme = {
-    #   name = "Tokyonight-Dark";
-    # };
-    # cursorTheme = {
-    #   name = gtkCursorTheme;
-    #   package = pkgs.bibata-cursors;
-    # };
   };
 
   wayland.windowManager.sway = with {
@@ -501,12 +483,8 @@ in {
     '';
   };
 
-  # xdg.configFile."awesome".source = ./config/awesome;
-  # xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${path}/config/nvim";
-  # TODO: xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
+  xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
 
   # DMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
-
-  # home.file.".background-image".source = ./wallpapers;
 }
