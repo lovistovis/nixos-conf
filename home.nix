@@ -8,7 +8,6 @@ let
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
-  # stable = import <nixos-stable> { config = { allowUnfree = true; }; };
   nixvim = import (builtins.fetchGit {
       url = "https://github.com/nix-community/nixvim";
       ref = "nixos-${import ./version.nix}";

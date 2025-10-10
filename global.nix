@@ -1,49 +1,22 @@
 { config, lib, pkgs, ... }:
 {
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-  services.automatic-timezoned.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
+  networking.networkmanager.enable = true;
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   security.polkit.enable = true;
 
-  # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    # extraLocaleSettings = {
-    #   LC_ALL = "en_US.UTF-8";
-    # };
   };
 
   console = {
     font = "Lat2-Terminus16";
-    # keyMap = "sv";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-
-    # Configure keymap in X11
-    xkb.layout = "se";
-    # services.xserver.xkb.options = "eurosign:e,caps:escape";
-  };
-
-  services.displayManager = {
-    sddm.enable = true;
-    defaultSession = "sway";
+    useXkbConfig = true;
   };
 
   fonts = {
@@ -55,34 +28,75 @@
     };
   };
 
-  services.gnome.gnome-keyring.enable = true;
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-
   location.provider = "manual";
   location.latitude = 59.33;
   location.longitude = 18.06;
 
-  services.compton.enable = true;
-
-  services.redshift = {
-    enable = true;
-    brightness = {
-      day = "1";
-      night = "1";
+  services = {
+    displayManager = {
+      sddm.enable = true;
+      defaultSession = "sway";
     };
-    temperature = {
-      day = 5500;
-      night = 2700;
+    automatic-timezoned.enable = true;
+    compton.enable = true;
+    gnome.gnome-keyring.enable = true;
+    xserver = {
+      enable = true;
+      xkb.layout = "se";
+    };
+    redshift = {
+      enable = true;
+      brightness = {
+        day = "1";
+        night = "1";
+      };
+      temperature = {
+        day = 5500;
+        night = 2700;
+      };
+    };
+    printing.enable = true;
+    pulseaudio.enable = true;
+  };
+
+  hardware.bluetooth.settings = {
+    General = {
+      Experimental = true;
+      Disable = "Handsfree";
     };
   };
 
-  programs.nix-ld.enable = true;
+  programs = {
+    virt-manager.enable = true;
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+    };
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    zsh.enable = true;
+  };
 
-  # Sets up all the libraries to load
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = with pkgs; [ zsh ];
+
+  environment.systemPackages = with pkgs; [
+    vim        # Emergency editor
+    wget       # Retrive guides
+    efibootmgr # Change boot order
+    exfat
+    grim
+    slurp
+    htop-vim
+    wl-clipboard
+    mako
+    j4-dmenu-desktop
+  ];
+
+  programs.nix-ld.enable = true;
   programs.nix-ld.libraries = (with pkgs; [
     stdenv.cc.cc
     openssl
@@ -179,50 +193,4 @@
     mesa
     libxkbcommon
   ]);
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  services.pulseaudio.enable = true;
-  hardware.bluetooth.settings = {
-    General = {
-      Experimental = true;
-      Disable = "Handsfree";
-    };
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim        # Emergency editor
-    wget       # Retrive guides
-    efibootmgr # Change boot order
-    exfat      # Exfat fs support
-    grim
-    slurp
-    htop-vim
-    wl-clipboard
-    mako
-    j4-dmenu-desktop
-  ];
-
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  programs.zsh.enable = true;
-
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
 }

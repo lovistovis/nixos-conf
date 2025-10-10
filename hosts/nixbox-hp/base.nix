@@ -24,7 +24,7 @@
     #       insmod fat
     #       insmod search_fs_uuid
     #       insmod chain
-    #       search --set=root --fs-uuid 0CB0-93CB 
+    #       search --set=root --fs-uuid 0CB0-93CB
     #       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
     #     }
     #   '';
@@ -34,7 +34,6 @@
   programs = {
     light.enable = true;
     dconf.enable = true;
-    # xss-lock.enable = true;
     zsh.shellAliases = {
       mount-windows = "if [ ! -d /mnt/windows ]; then sudo mkdir /mnt/windows; fi; sudo mount -t ntfs3 /dev/nvme0n1p3 /mnt/windows";
       mount-sd = "if [ ! -d /mnt/sd ]; then sudo mkdir /mnt/sd; fi; sudo mount -t exfat /dev/mmcblk0 /mnt/sd";
@@ -70,8 +69,6 @@
       nvidiaSettings = true;
 
       prime = {
-        # sync.enable = true;
-
         offload = {
           enable = true;
           enableOffloadCmd = true;

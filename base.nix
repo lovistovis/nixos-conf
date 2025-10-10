@@ -12,36 +12,25 @@ in {
 
   networking.hostName = hostname;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with "passwd".
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "libvirtd" ];
   };
 
-  systemd.user.services.logger = {
-    enable = true;
-    wantedBy = [ "multi-user.target" ]; # starts after login
-    description = "Logger for keystrokes";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "logger";
-    };
-    # serviceConfig.PassEnvironment = "DISPLAY";
-  };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  system.stateVersion = import ./version.nix;
   nixpkgs.config.allowUnfree = true;
 
   home-manager.backupFileExtension = "back";
   home-manager.users.${username} = {
     home.stateVersion = import ./version.nix;
-
     nixpkgs.config.allowUnfree = true;
 
     imports = [
-      ./desktop.nix
-      ("${path}/hosts/${hostname}/desktop.nix")
+      ./home.nix
+      ("${path}/hosts/${hostname}/home.nix")
     ];
   };
-
-  system.stateVersion = import ./version.nix;
 }
