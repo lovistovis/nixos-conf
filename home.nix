@@ -518,10 +518,10 @@ in {
       # for xwayland apps. Use "app_id" for
       # wayland apps and "class" for xwayland apps
       windowrule = [
-        "workspace:2, class:firefox"
-        "workspace:3, class:vesktop"
-        "workspace:9, class:org.pulseaudio.pavucontrol"
-        "workspace:9, class:.blueman-manager-wrapped"
+        "workspace 2 silent, class:firefox"
+        "workspace 3 silent, class:vesktop"
+        "workspace 10 silent, class:org.pulseaudio.pavucontrol"
+        "workspace 10 silent, class:.blueman-manager-wrapped"
       ];
     };
     #   # To find window class ids use either
