@@ -515,8 +515,7 @@ in {
       # hyprctl clients | grep class
       # for wayland or
       # wmctrl -lx
-      # for xwayland apps. Use "app_id" for
-      # wayland apps and "class" for xwayland apps
+      # for xwayland apps.
       windowrule = [
         "workspace 2 silent, class:firefox"
         "workspace 3 silent, class:vesktop"
