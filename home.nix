@@ -461,7 +461,7 @@ in {
               "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
             ]
           )
-          9)
+          10)
        );
       bindel = [
         ", XF86MonBrightnessDown, exec, brightnessctl set 1%-"
