@@ -297,11 +297,7 @@ in {
           modules-center = [ "hyprland/window" ];
           modules-right = [ "pulseaudio" "network" "temperature" "disk" "memory" "battery" "clock" "tray" ];
 
-          "hyprland/workspaces" = {
-            disable-scroll = true;
-            disable-mouse = true;
-            all-outputs = true;
-          };
+          "hyprland/workspaces" = { };
 
           "network" = {
             interval = 1;
