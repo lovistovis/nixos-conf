@@ -509,9 +509,9 @@ in {
       ];
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.tmux}/bin/tmux start-server"
-        # "hyprctl dispatch workspace 1"
-        # "$term"
+        # "${pkgs.tmux}/bin/tmux start-server"
+        "hyprctl dispatch workspace 1"
+        "$term"
         "firefox"
         "vesktop"
         "pavucontrol"
