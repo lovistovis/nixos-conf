@@ -511,8 +511,8 @@ in {
         "pavucontrol"
         "blueman-manager"
       ];
-      # To find window class ids use either
-      # swaymsg -t get_tree | grep app_id
+      # To find window classes use either
+      # hyprctl clients | grep class
       # for wayland or
       # wmctrl -lx
       # for xwayland apps. Use "app_id" for
