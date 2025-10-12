@@ -309,6 +309,7 @@ in {
             format-wifi = "{essid} ({signalStrength}%)";
             format-ethernet = "{ipaddr}/{cidr}";
             format-disconnected = "";
+            on-click = "alacritty -e zsh -c 'sudo nmtui'";
           };
 
           "temperature" = {
@@ -319,11 +320,13 @@ in {
           "disk" = {
             interval = 5;
             format = "{free} 🖴";
+            on-click = "qdirstat";
           };
 
           "memory" = {
             interval = 5;
             format = "{avail}GiB 🎟";
+            on-click = "alacritty -e zsh -c htop";
           };
 
           "battery" = {
