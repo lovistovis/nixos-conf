@@ -293,11 +293,18 @@ in {
           layer = "top";
           position = "bottom";
           height = 10;
-          modules-left = [ "hyprland/workspaces" "hyprland/mode" ];
+          modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "hyprland/window" ];
           modules-right = [ "pulseaudio" "network" "temperature" "disk" "memory" "battery" "clock" "tray" ];
 
           "hyprland/workspaces" = { };
+
+          "hyprland/window" = {
+            format = "{title:.100}";
+            rewrite = {
+              "(.*) — Mozilla Firefox" = "$1";
+            };
+          };
 
           "network" = {
             interval = 1;
