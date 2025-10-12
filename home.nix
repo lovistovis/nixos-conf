@@ -395,6 +395,9 @@ in {
     brightnessctl
     git-credential-oauth
 
+    # Dev
+    python314
+
     # GUI
     pavucontrol
     qdirstat
