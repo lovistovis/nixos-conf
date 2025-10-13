@@ -444,7 +444,7 @@ in {
         "$mod, D, exec, $menu"
         "$mod, Return, exec, $term"
         "$mod, F, fullscreen"
-        "$mod Shift, S, exec, grim -g \'$(slurp)\' - | wl-copy"
+        "$mod Shift, S, exec, grim -g \"$(slurp)\" - | wl-copy"
         "$mod Shift, Q, killactive"
         "$mod Shift, Space, togglefloating"
         "$mod Shift, W, pin"
@@ -498,6 +498,11 @@ in {
           middle_button_emulation = false;
         };
       };
+      decoration = {
+        blur = {
+          passes = 2;
+        };
+      };
       animations.enabled = false;
       xwayland = {
         force_zero_scaling = true;
@@ -527,6 +532,8 @@ in {
         "workspace 3 silent, class:vesktop"
         "workspace 10 silent, class:org.pulseaudio.pavucontrol"
         "workspace 10 silent, class:.blueman-manager-wrapped"
+
+        "noblur, floating:1"
       ];
     };
     #   # To find window class ids use either
