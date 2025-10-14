@@ -303,6 +303,7 @@ in {
             format = "{title:.100}";
             rewrite = {
               "(.*) — Mozilla Firefox" = "$1";
+              "(.*) — Mozilla Firefox Private Browsing" = "$1";
             };
           };
 
@@ -411,6 +412,7 @@ in {
     nur.repos.nltch.spotify-adblock
     ardour
     prismlauncher
+    davinci-resolve
     # chromium
     # opentoonz
     # jetbrains.rider
@@ -500,7 +502,7 @@ in {
       };
       decoration = {
         blur = {
-          passes = 2;
+          passes = 1;
         };
       };
       animations.enabled = false;
