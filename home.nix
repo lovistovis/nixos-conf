@@ -35,13 +35,32 @@ in {
       nixvim.enable = true;
       vesktop.enable = true;
       waybar.enable = true;
+      tofi.enable = true;
     };
   };
 
   programs = {
+    tofi = {
+      enable = true;
+      settings = with config.lib.stylix.colors.withHashtag; {
+        horizontal = lib.mkForce true;
+        anchor = lib.mkForce "top";
+        width = lib.mkForce "100%";
+        height = lib.mkForce 34;
+
+        outline-width = lib.mkForce 0;
+        border-width = lib.mkForce 1;
+        min-input-width = lib.mkForce 120;
+        result-spacing = lib.mkForce 10;
+
+        padding-top = lib.mkForce 8;
+        padding-bottom = lib.mkForce 8;
+
+        border-color = lib.mkForce base03;
+      };
+    };
     nixvim = {
       enable = true;
-      # colorschemes.tokyonight.enable = true;
       globals = {
         mapleader = " ";
         maplocalleader = " ";
@@ -409,10 +428,10 @@ in {
     spotdl
     steam
     tor-browser
-    nur.repos.nltch.spotify-adblock
     ardour
     prismlauncher
     davinci-resolve
+    # nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
     # jetbrains.rider
@@ -441,7 +460,7 @@ in {
     settings = {
       "$mod" = "SUPER";
       "$term" = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
-      "$menu" = "j4-dmenu-desktop";
+      "$menu" = "j4-dmenu-desktop --dmenu=${pkgs.tofi}/bin/tofi";
       bind = [
         "$mod, D, exec, $menu"
         "$mod, Return, exec, $term"
