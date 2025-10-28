@@ -431,6 +431,7 @@ in {
     ardour
     prismlauncher
     davinci-resolve
+    kdePackages.dolphin
     # nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
