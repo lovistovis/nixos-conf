@@ -16,7 +16,7 @@ let
       url = "https://github.com/nix-community/stylix";
       ref = "release-${import ./version.nix}";
   });
-  wallpaper = ./wallpapers/landscape.jpg;
+  wallpaper = ./wallpapers/galaxy.png;
 in {
   imports = [
     nixvim.homeModules.nixvim
