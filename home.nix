@@ -273,7 +273,7 @@ in {
 
           # TODO: add nix search engines defined at nixos wiki firefox
 
-          userChrome = import ./user-chrome.nix;
+          # userChrome = import ./user-chrome.nix;
         };
       };
     };
