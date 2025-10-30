@@ -32,7 +32,7 @@ in {
         enable = true;
         profileNames = [ "${username}" ];
       };
-      nixvim.enable = true;
+      nixvim.enable = false;
       vesktop.enable = true;
       waybar.enable = true;
       tofi.enable = true;
@@ -522,7 +522,7 @@ in {
       };
       decoration = {
         blur = {
-          passes = 1;
+          passes = 0;
         };
       };
       animations.enabled = false;
