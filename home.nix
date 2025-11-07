@@ -136,7 +136,8 @@ in {
     alacritty = {
       enable = true;
       settings = {
-        window.opacity = lib.mkForce 0.60;
+        window.opacity = lib.mkForce 0.50;
+        colors.primary.background = lib.mkForce "#000000";
       };
     };
     tmux = let

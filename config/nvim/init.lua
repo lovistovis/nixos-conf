@@ -326,7 +326,7 @@ require("lazy").setup({
         -- function: code to be executed after highlight groups are cleared
         -- Also the user event "TransparentClear" will be triggered
         on_clear = function()
-          vim.cmd([[hi CursorLine guibg=#16190b]])
+          -- vim.cmd([[hi CursorLine guibg=#16190b]])
         end,
       })
 
@@ -791,7 +791,8 @@ require("lazy").setup({
     	-- Load the colorscheme here.
     	-- Like many other themes, this one has different styles, and you could load
     	-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    	vgm.cmd.colorscheme("tokyonight-night")
+    	-- vim.cmd.colorscheme("tokyonight-night")
+      -- vim.cmd.hi("CursorLine cterm=NONE ctermbg=Black guibg=#2e2f4e")
 
     	-- You can configure highlights by doing something like:
     	-- vim.cmd.hi 'Comment gui=none'
@@ -917,7 +918,8 @@ require("lazy").setup({
 
 
 -- Colorscheme
-vim.cmd([[colorscheme tokyonight-night]])
+vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.hi("CursorLine cterm=NONE ctermbg=Black guibg=#2e2f4e")
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et:linebreak
