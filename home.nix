@@ -233,19 +233,7 @@ in {
         SearchBar = "unified";
 
         ExtensionSettings = {
-          # "*".installation_mode = "blocked";
-          "uBlock0@raymondhill.net" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-            installation_mode = "force_installed";
-          };
-          "jid1-MnnxcxisBPnSXQ@jetpack" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-            installation_mode = "force_installed";
-          };
-          "malito:darkreaderapp@gmail.com" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-            installation_mode = "force_installed";
-          };
+          "*".installation_mode = "blocked";
         };
 
         Preferences = {
@@ -272,8 +260,14 @@ in {
         "${username}" = {
           id = 0;
           isDefault = true;
-
           userChrome = import ./user-chrome.nix;
+          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            ublock-origin
+            privacy-badger
+            darkreader
+            sponsorblock
+            youtube-shorts-block
+          ];
         };
       };
     };
