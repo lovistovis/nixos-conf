@@ -233,7 +233,7 @@ in {
         SearchBar = "unified";
 
         ExtensionSettings = {
-          "*".installation_mode = "blocked";
+          # "*".installation_mode = "blocked";
         };
 
         Preferences = {
@@ -539,6 +539,7 @@ in {
         "vesktop"
         "pavucontrol"
         "blueman-manager"
+        "steam -silent"
       ];
       # To find window classes use either
       # hyprctl clients | grep class
