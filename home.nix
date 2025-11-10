@@ -40,6 +40,7 @@ in {
   };
 
   programs = {
+    hyprlock.enable = true;
     tofi = {
       enable = true;
       settings = with config.lib.stylix.colors.withHashtag; {
@@ -474,7 +475,7 @@ in {
         "$mod Shift, Space, togglefloating"
         "$mod Shift, W, pin"
         "$mod Shift, E, exit"
-        # TODO: "$mod Ctrl, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+        "$mod Ctrl, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
 
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
