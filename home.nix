@@ -10,11 +10,11 @@ let
   logger = import ./scripts/logger.nix { inherit pkgs; };
   nixvim = import (fetchGit {
       url = "https://github.com/nix-community/nixvim";
-      ref = "nixos-${import ./version.nix}";
+      ref = "main";
   });
   stylix = import (fetchGit {
       url = "https://github.com/nix-community/stylix";
-      ref = "release-${import ./version.nix}";
+      ref = "master";
   });
   wallpaper = /etc/nixos/wallpaper.png;
 in {
@@ -131,7 +131,7 @@ in {
           };
         }
       ];
-      dotDir = ".zsh";
+      dotDir = "${config.home.homeDirectory}/.zsh";
     };
     alacritty = {
       enable = true;
@@ -184,20 +184,20 @@ in {
       enable = true;
       lfs.enable = true;
       package = pkgs.gitFull;
-      userName = "Love Lysell Berglund";
-      userEmail = "lovistovis0@gmail.com";
+      settings = {
+        user.name = "Love Lysell Berglund";
+        user.email = "lovistovis0@gmail.com";
+        core = {
+          editor = "nvim";
+        };
+        credential.helper = "oauth";
+      };
       ignores = [
         "**/nixos-switch.log"
         "**/shell.nix"
         "**/Session.vim"
         "**/Session.vim.meta"
       ];
-      extraConfig = {
-        core = {
-          editor = "nvim";
-        };
-        credential.helper = "oauth";
-      };
     };
     firefox = let
       lock-false = {
@@ -523,7 +523,7 @@ in {
       };
       decoration = {
         blur = {
-          passes = 0;
+          enabled = false;
         };
       };
       animations.enabled = false;

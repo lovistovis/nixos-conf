@@ -101,15 +101,13 @@
     blueman = {
       enable = true;
     };
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-        HandleLidSwitch=ignore
-        HandleLidSwitchExternalPower=ignore
-        IdleAction=suspend-then-hibernate
-        IdleActionSec=1m
-        HibernateDelaySec=5m
-      '';
+    logind.settings.Login = {
+      HandlePowerKey = "suspend";
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      # idleAction = "suspend-then-hibernate";
+      # idleActionSec = "1m";
+      # hibernateDelaySec = "5m";
     };
     dbus = {
       implementation = "broker";
