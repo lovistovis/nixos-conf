@@ -138,7 +138,6 @@ in
     wl-clipboard
     mako
     j4-dmenu-desktop
-    kdePackages.qtmultimedia
     my-sddm-astronaut
   ];
 
