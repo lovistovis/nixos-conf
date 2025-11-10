@@ -3,6 +3,7 @@ let
   path = toString ./.;
   username = import ./username.nix;
   hostname = import ./hostname.nix;
+  stateVersion = "25.05";
 in {
   imports = [
     ./global.nix
@@ -20,12 +21,12 @@ in {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  system.stateVersion = import ./version.nix;
+  system.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
 
   home-manager.backupFileExtension = "back";
   home-manager.users.${username} = {
-    home.stateVersion = import ./version.nix;
+    home.stateVersion = stateVersion;
     nixpkgs.config.allowUnfree = true;
 
     imports = [
