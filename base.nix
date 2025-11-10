@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 let
-  path = builtins.toString ./.;
+  path = toString ./.;
   username = import ./username.nix;
   hostname = import ./hostname.nix;
 in {

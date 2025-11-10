@@ -1,4 +1,12 @@
 { config, lib, pkgs, ... }:
+let
+  my-sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "hyprland_kath";
+    themeConfig = {
+      Background = toString /etc/nixos/wallpaper.png; # This theme also accepts videos
+    };
+  };
+in
 {
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
@@ -34,7 +42,20 @@
 
   services = {
     displayManager = {
-      sddm.enable = true;
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        package = pkgs.kdePackages.sddm;
+        extraPackages = with pkgs; [
+          kdePackages.qtmultimedia
+        ];
+        theme = "sddm-astronaut-theme";
+        settings = {
+          Theme = {
+            Current = "sddm-astronaut-theme";
+          };
+        };
+      };
       defaultSession = "hyprland";
     };
     automatic-timezoned.enable = true;
@@ -94,6 +115,8 @@
     wl-clipboard
     mako
     j4-dmenu-desktop
+    kdePackages.qtmultimedia
+    my-sddm-astronaut
   ];
 
   programs.nix-ld.enable = true;

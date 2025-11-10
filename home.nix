@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  path = builtins.toString ./.;
+  path = toString ./.;
   username = import ./username.nix;
   hostname = import ./hostname.nix;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
@@ -8,15 +8,15 @@ let
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
-  nixvim = import (builtins.fetchGit {
+  nixvim = import (fetchGit {
       url = "https://github.com/nix-community/nixvim";
       ref = "nixos-${import ./version.nix}";
   });
-  stylix = import (builtins.fetchGit {
+  stylix = import (fetchGit {
       url = "https://github.com/nix-community/stylix";
       ref = "release-${import ./version.nix}";
   });
-  wallpaper = ./wallpapers/galaxy.png;
+  wallpaper = /etc/nixos/wallpaper.png;
 in {
   imports = [
     nixvim.homeModules.nixvim
@@ -392,7 +392,7 @@ in {
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
+    nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
       inherit pkgs;
     };
   };
