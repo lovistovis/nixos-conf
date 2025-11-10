@@ -415,6 +415,7 @@ in {
     ripgrep
     brightnessctl
     git-credential-oauth
+    python3
 
     # GUI
     pavucontrol
@@ -433,6 +434,7 @@ in {
     prismlauncher
     davinci-resolve
     kdePackages.dolphin
+    blender
     # nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
