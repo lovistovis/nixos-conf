@@ -16,8 +16,11 @@ in
   networking.networkmanager.enable = true;
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  security.polkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security = {
+    rtkit.enable = true;
+    polkit.enable = true;
+    pam.services.hyprlock = {};
+  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -41,7 +44,27 @@ in
   location.latitude = 59.33;
   location.longitude = 18.06;
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = [ "gtk" ];
+      hyprland.default = [ "gtk" "hyprland" ];
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+  };
+
   services = {
+    dbus = {
+      implementation = "broker";
+    };
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
     displayManager = {
       sddm = {
         enable = true;
@@ -78,7 +101,6 @@ in
       };
     };
     printing.enable = true;
-    pulseaudio.enable = true;
   };
 
   hardware.bluetooth.settings = {

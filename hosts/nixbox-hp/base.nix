@@ -109,28 +109,19 @@
       # idleActionSec = "1m";
       # hibernateDelaySec = "5m";
     };
-    dbus = {
-      implementation = "broker";
-    };
-    pipewire = {
-      enable = false;
-    };
   };
 
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = [ "gtk" ];
+      hyprland.default = [ "gtk" "hyprland" ];
+    };
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
-    config = {
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [
-          "gnome"
-        ];
-      };
-    };
   };
 
   time.hardwareClockInLocalTime = true;
