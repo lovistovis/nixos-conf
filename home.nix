@@ -115,11 +115,6 @@ in {
         plugins = [ "git" ];
         theme = "robbyrussell";
       };
-      # prezto = {
-      #   enable = true;
-      #   python.virtualenvAutoSwitch = true;
-      #   python.virtualenvInitialize = true;
-      # };
       plugins = [
         {
           name = "zsh-nix-shell";
