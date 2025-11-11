@@ -426,6 +426,19 @@ require("lazy").setup({
       -- used for completion, annotations and signatures of Neovim apis
       { "folke/neodev.nvim", opts = {} },
     },
+    opts = {
+      servers = {
+        ["*"] = {
+          -- stylua: ignore
+          keys = {
+            { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
+            { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References", nowait = true },
+            { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
+            { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
+          },
+        },
+      },
+    },
     config = function()
       -- vim.lsp.config.clangd.setup({
       --   cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
@@ -485,14 +498,14 @@ require("lazy").setup({
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+          -- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
-          -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          -- -- Find references for the word under your cursor.
+          -- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+          -- -- Jump to the implementation of the word under your cursor.
+          -- --  Useful when your language has ways of declaring types without an actual implementation.
+          -- map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
