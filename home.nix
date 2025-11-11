@@ -199,6 +199,7 @@ in {
         "**/nixos-switch.log"
         "**/shell.nix"
         "**/.envrc"
+        "**/.direnv"
         "**/Session.vim"
         "**/Session.vim.meta"
       ];
