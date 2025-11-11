@@ -10,6 +10,15 @@
 /* IMPORT CSS */
 @import url("https://clearvision.github.io/ClearVision-v7/main.css");
 @import url("https://clearvision.github.io/ClearVision-v7/betterdiscord.css");
+
+/* HIDE CLEARVISION LOGO */
+.leading_c38106::after {
+  display: none;
+}
+.leading_c38106::before {
+  display: none;
+}
+
 /* SETTINGS */
 :root {
   /* ACCENT COLORS */
