@@ -40,6 +40,11 @@ in {
   };
 
   programs = {
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     hyprlock.enable = true;
     tofi = {
       enable = true;
@@ -112,7 +117,9 @@ in {
       history.size = 10000;
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = [
+          "git"
+        ];
         theme = "robbyrussell";
       };
       plugins = [
@@ -191,6 +198,7 @@ in {
       ignores = [
         "**/nixos-switch.log"
         "**/shell.nix"
+        "**/.envrc"
         "**/Session.vim"
         "**/Session.vim.meta"
       ];
