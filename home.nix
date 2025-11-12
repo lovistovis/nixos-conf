@@ -91,7 +91,7 @@ in {
           };
         };
       };
-      extraConfigLua = (builtins.readFile ./config/nvim/init.lua);
+      extraConfigLua = builtins.readFile ./config/nvim/init.lua;
     };
     zsh = {
       enable = true;
