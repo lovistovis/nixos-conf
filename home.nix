@@ -8,10 +8,6 @@ let
   tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
-  nixvim = import (fetchGit {
-      url = "https://github.com/nix-community/nixvim";
-      ref = "main";
-  });
   stylix = import (fetchGit {
       url = "https://github.com/nix-community/stylix";
       ref = "master";
@@ -19,7 +15,6 @@ let
   wallpaper = /etc/nixos/wallpaper.png;
 in {
   imports = [
-    nixvim.homeModules.nixvim
     (import stylix).homeModules.stylix
   ];
 
@@ -32,7 +27,6 @@ in {
         enable = true;
         profileNames = [ "${username}" ];
       };
-      nixvim.enable = false;
       vesktop.enable = true;
       waybar.enable = true;
       tofi.enable = true;
@@ -65,38 +59,15 @@ in {
         border-color = lib.mkForce base03;
       };
     };
-    nixvim = {
+    neovim = {
       enable = true;
-      globals = {
-        mapleader = " ";
-        maplocalleader = " ";
-        have_nerd_font = false;
-      };
-      plugins = {
-        none-ls = {
-          sources = {
-            diagnostics = {
-              golangci_lint.enable = true;
-            };
-            formatting = {
-              gofmt.enable = true;
-            };
-          };
-        };
-        lsp = {
-          enable = true;
-          servers = {
-            gopls.enable = true;
-            pyright.enable = true;
-          };
-        };
-      };
-      extraConfigLua = (builtins.readFile ./config/nvim/init.lua);
+      defaultEditor = true;
     };
     zsh = {
       enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      history.size = 10000;
       shellAliases = {
         update = "sudo nixos-rebuild switch";
         fupdate = "sudo nixos-rebuild switch --fast";
@@ -114,7 +85,6 @@ in {
         hib = "systemctl hibernate";
         ryujinx-portable = "ryujinx -r ~/ryujinx-data";
       };
-      history.size = 10000;
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -581,6 +551,12 @@ in {
   };
 
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
+
+  xdg.configFile."nvim".source = ./config/nvim;
+  #   recursive = true;
+  #   force = true;
+  #   source = ./config/nvim;
+  # };
 
   # dMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
