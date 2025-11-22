@@ -17,6 +17,9 @@ let
       ref = "master";
   });
   wallpaper = /etc/nixos/wallpaper.png;
+  # nixpkgs-master = import
+  #   (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
+  #   { config = config.nixpkgs.config; };
 in {
   imports = [
     nixvim.homeModules.nixvim
@@ -431,7 +434,6 @@ in {
     prismlauncher
     davinci-resolve
     kdePackages.dolphin
-    blender
     nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
