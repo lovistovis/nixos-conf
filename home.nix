@@ -432,7 +432,7 @@ in {
     davinci-resolve
     kdePackages.dolphin
     blender
-    # nur.repos.nltch.spotify-adblock
+    nur.repos.nltch.spotify-adblock
     # chromium
     # opentoonz
     # jetbrains.rider
