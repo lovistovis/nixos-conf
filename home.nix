@@ -435,6 +435,7 @@ in {
     davinci-resolve
     kdePackages.dolphin
     nur.repos.nltch.spotify-adblock
+    protonup-qt
     # chromium
     # opentoonz
     # jetbrains.rider
