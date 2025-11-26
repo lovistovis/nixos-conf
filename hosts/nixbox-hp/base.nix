@@ -65,7 +65,7 @@
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
-      open = false;
+      open = true;
       nvidiaSettings = true;
 
       prime = {
@@ -89,7 +89,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "modesetting" "nvidia" ];
       deviceSection = ''
         Option "TearFree" "true"
         Option "SwapbuffersWait" "true"
