@@ -415,7 +415,10 @@ in {
     ripgrep
     brightnessctl
     git-credential-oauth
-    python3
+
+    (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
+      dbus-python
+    ]))
 
     # GUI
     pavucontrol
