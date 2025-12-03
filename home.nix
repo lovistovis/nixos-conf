@@ -439,6 +439,7 @@ in {
     kdePackages.dolphin
     nur.repos.nltch.spotify-adblock
     protonup-qt
+    feh
     # chromium
     # opentoonz
     # jetbrains.rider
