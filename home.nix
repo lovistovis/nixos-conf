@@ -89,6 +89,7 @@ in {
         lsp = {
           enable = true;
           servers = {
+            clangd.enable = true;
             gopls.enable = true;
             pyright.enable = true;
           };
@@ -565,6 +566,7 @@ in {
 
         "noblur, floating:1"
       ];
+      ecosystem.no_update_news = true;
     };
     #   # To find window class ids use either
     #   # swaymsg -t get_tree | grep app_id
