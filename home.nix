@@ -546,7 +546,7 @@ in {
         "${pkgs.waybar}/bin/waybar"
         # "${pkgs.tmux}/bin/tmux start-server"
         "hyprctl dispatch workspace 1"
-        "$term"
+        # "${pkgs.tmux}/bin/tmux | ${pkgs.tmux}/bin/tmux neww tmux-sessionizer ~"
         "firefox"
         "vesktop"
         "pavucontrol"
