@@ -436,11 +436,11 @@ in {
     tor-browser
     ardour
     prismlauncher
-    davinci-resolve
     kdePackages.dolphin
     nur.repos.nltch.spotify-adblock
     protonup-qt
     feh
+    # davinci-resolve
     # chromium
     # opentoonz
     # jetbrains.rider
