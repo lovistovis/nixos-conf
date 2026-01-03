@@ -1,34 +1,18 @@
 { config, pkgs, ... }: {
   boot.loader = {
+    timeout = 1;
     efi = {
       canTouchEfiVariables = true;
-      # efiSysMountPoint = "/boot";
     };
-    systemd-boot.enable = true;
-    # grub = {
-    #   enable = true;
-    #   devices = [ "nodev" ];
-    #   efiSupport = true;
-    #   useOSProber = true;
-    #   timeoutStyle = "hidden";
-    #   default = "2";
-    #   splashImage = null;
-    #   extraEntries = ''
-    #     menuentry "UbuntuManual" {
-    #       insmod search_fs_uuid
-    #       search --set=root --fs-uuid 48d5e96d-cd77-476b-8aa3-4eb0218caa25
-    #       configfile "/boot/grub/grub.cfg"
-    #     }
-    #     menuentry "WindowsManual" {
-    #       insmod part_gpt
-    #       insmod fat
-    #       insmod search_fs_uuid
-    #       insmod chain
-    #       search --set=root --fs-uuid 0CB0-93CB
-    #       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-    #     }
-    #   '';
-    # };
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+      timeoutStyle = "countdown";
+      default = "saved";
+      splashImage = null;
+    };
   };
 
   programs = {
@@ -77,7 +61,6 @@
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
-      # package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     bluetooth = {
       enable = true;
@@ -105,9 +88,6 @@
       HandlePowerKey = "suspend";
       HandleLidSwitch = "ignore";
       HandleLidSwitchExternalPower = "ignore";
-      # idleAction = "suspend-then-hibernate";
-      # idleActionSec = "1m";
-      # hibernateDelaySec = "5m";
     };
   };
 
