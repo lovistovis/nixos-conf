@@ -19,7 +19,10 @@ in {
     extraGroups = [ "wheel" "libvirtd" ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  };
 
   system.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;

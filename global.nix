@@ -11,8 +11,6 @@ in
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   networking.networkmanager.enable = true;
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
