@@ -18,7 +18,7 @@ set -g status-right-length 100
 
 CONFIG="${config.home.homeDirectory}/.config/tmux/tmux.conf"
 bind-key r source-file $CONFIG
-set-hook -g 'session-created' 'source-file $CONFIG' # Fixes C-a+a not working
+# set-hook -g 'session-created' 'source-file $CONFIG' # Fixes C-a+a not working
 
 bind-key C-a last-window
 bind-key C-k kill-session

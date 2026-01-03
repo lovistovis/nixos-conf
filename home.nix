@@ -543,10 +543,8 @@ in {
         "XCURSOR_SIZE,32"
       ];
       exec-once = [
-        "${pkgs.waybar}/bin/waybar"
-        # "${pkgs.tmux}/bin/tmux start-server"
-        "hyprctl dispatch workspace 1"
-        # "${pkgs.tmux}/bin/tmux | ${pkgs.tmux}/bin/tmux neww tmux-sessionizer ~"
+        "waybar"
+        "alacritty -e zsh -c \"tmux a -t ${username}\""
         "firefox"
         "vesktop"
         "pavucontrol"
@@ -559,34 +557,15 @@ in {
       # wmctrl -lx
       # for xwayland apps.
       windowrule = [
-        "workspace 2 silent, class:firefox"
-        "workspace 3 silent, class:vesktop"
-        "workspace 10 silent, class:org.pulseaudio.pavucontrol"
-        "workspace 10 silent, class:.blueman-manager-wrapped"
+        "match:class firefox, workspace 2 silent"
+        "match:class vesktop, workspace 3 silent"
+        "match:class org.pulseaudio.pavucontrol, workspace 10 silent"
+        "match:class .blueman-manager-wrapped, workspace 10 silent"
 
-        "noblur, floating:1"
+        "match:float true, no_blur on"
       ];
       ecosystem.no_update_news = true;
     };
-    #   # To find window class ids use either
-    #   # swaymsg -t get_tree | grep app_id
-    #   # for wayland or
-    #   # wmctrl -lx
-    #   # for xwayland apps. Use "app_id" for
-    #   # wayland apps and "class" for xwayland apps
-
-    #   assign [app_id="firefox"] 2
-    #   assign [class="vesktop"] 3
-    #   assign [app_id="org.pulseaudio.pavucontrol"] 10
-    #   assign [app_id=".blueman-manager-wrapped"] 10
-
-    #   # exec ${pkgs.tmux}/bin/tmux start-server # avoid the wait for restoring sessions
-    #   exec --no-startup-id swaymsg 'workspace 1; exec --no-startup-id ${term}'
-    #   exec --no-startup-id firefox
-    #   exec --no-startup-id vesktop
-    #   exec --no-startup-id pavucontrol
-    #   exec --no-startup-id blueman-manager
-    # '';
   };
 
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
