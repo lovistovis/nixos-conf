@@ -435,7 +435,6 @@ in {
     spotdl
     steam
     tor-browser
-    ardour
     prismlauncher
     kdePackages.dolphin
     nur.repos.nltch.spotify-adblock
