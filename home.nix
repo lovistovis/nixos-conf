@@ -393,6 +393,8 @@ in {
     };
   };
 
+  services.hyprpaper.settings.splash = false;
+
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
       inherit pkgs;
