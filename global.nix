@@ -56,6 +56,7 @@ in
   };
 
   services = {
+    flatpak.enable = true;
     dbus = {
       implementation = "broker";
     };
