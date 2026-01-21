@@ -93,6 +93,7 @@ in {
             clangd.enable = true;
             gopls.enable = true;
             pyright.enable = true;
+            jdtls.enable = true;
           };
         };
       };
