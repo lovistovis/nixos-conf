@@ -8,11 +8,28 @@ let
   };
 in
 {
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
-  networking.networkmanager.enable = true;
-  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking = {
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        Network = {
+          EnableIPv6 = true;
+        };
+        Settings = {
+          AutoConnect = true;
+        };
+        General = {
+          EnableNetworkConfiguration = true;
+        };
+      };
+    };
+    proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  };
 
   security = {
     rtkit.enable = true;
@@ -192,7 +209,7 @@ in
     libvorbis
     SDL
     SDL2_image
-    glew110
+    glew_1_10
     libidn
     tbb
 
