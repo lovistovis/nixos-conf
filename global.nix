@@ -147,6 +147,7 @@ in
     vim        # Emergency editor
     wget       # Retrive guides
     efibootmgr # Change boot order
+    iwgtk
     exfat
     grim
     slurp
