@@ -77,6 +77,7 @@ in {
         have_nerd_font = false;
       };
       plugins = {
+        lspconfig.enable = true;
         none-ls = {
           sources = {
             diagnostics = {
@@ -94,6 +95,7 @@ in {
             gopls.enable = true;
             pyright.enable = true;
             jdtls.enable = true;
+            roslyn.enable = true;
           };
         };
       };
@@ -553,7 +555,7 @@ in {
         "pavucontrol"
         "blueman-manager"
         "iwgtk"
-        "steam -silent"
+        # "steam -silent"
       ];
       # To find window classes use either
       # hyprctl clients | grep class
