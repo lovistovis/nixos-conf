@@ -43,6 +43,13 @@ in {
   };
 
   programs = {
+    mpv = {
+      enable = true;
+
+      scripts = with pkgs.mpvScripts; [
+        uosc
+      ];
+    };
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -77,7 +84,6 @@ in {
         have_nerd_font = false;
       };
       plugins = {
-        lspconfig.enable = true;
         none-ls = {
           sources = {
             diagnostics = {
@@ -434,7 +440,6 @@ in {
     wineWowPackages.stable
     qbittorrent
     gimp
-    vlc
     vesktop
     unityhub
     spotdl
