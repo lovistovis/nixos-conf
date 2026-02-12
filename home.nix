@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, buildLua, ... }:
 let
   path = toString ./.;
   username = import ./username.nix;
@@ -45,10 +45,23 @@ in {
   programs = {
     mpv = {
       enable = true;
-
       scripts = with pkgs.mpvScripts; [
         uosc
+        chapterskip
+        # mpv-sub-select
+        (callPackage ./pkgs/mpv/mpv-sub-select.nix {})
       ];
+      scriptOpts = {
+        chapterskip = {
+          skip = "Prologue;Opening;Preview";
+        };
+        sub_select = {
+          config = toString ./config/mpv;
+        };
+      };
+      config = {
+        alang = "jpn,eng";
+      };
     };
     direnv = {
       enable = true;
@@ -202,12 +215,18 @@ in {
       lfs.enable = true;
       package = pkgs.gitFull;
       settings = {
-        user.name = "Love Lysell Berglund";
-        user.email = "lovistovis0@gmail.com";
+        user = {
+          name = "Love Lysell Berglund";
+          email = "love.lysell.berglund@gmail.com";
+          signingkey = "7B54D564D46D9880";
+        };
         core = {
           editor = "nvim";
         };
+        push.autoSetupRemote = true;
         credential.helper = "oauth";
+        commit.gpgsign = true;
+        tag.gpgSign = true;
       };
       ignores = [
         "**/nixos-switch.log"
@@ -424,6 +443,7 @@ in {
     dbus
     tree
     tmux
+    gnupg
     unzip
     ripgrep
     brightnessctl
@@ -437,7 +457,7 @@ in {
     pavucontrol
     qdirstat
     sonobus
-    wineWowPackages.stable
+    # wineWowPackages.stable
     qbittorrent
     gimp
     vesktop
