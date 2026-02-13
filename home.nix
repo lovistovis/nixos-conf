@@ -48,8 +48,8 @@ in {
       scripts = with pkgs.mpvScripts; [
         uosc
         chapterskip
-        # mpv-sub-select
-        (callPackage ./pkgs/mpv/mpv-sub-select.nix {})
+        mpv-sub-select
+        # (callPackage ./pkgs/mpv/mpv-sub-select.nix {})
       ];
       scriptOpts = {
         chapterskip = {
