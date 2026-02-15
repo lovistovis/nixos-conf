@@ -421,7 +421,22 @@ in {
     };
   };
 
-  services.hyprpaper.settings.splash = false;
+  services = {
+    hyprpaper.settings.splash = false;
+    mako = {
+      enable = true;
+      settings = {
+        "actionable=true" = {
+          anchor = "top-left";
+        };
+        actions = true;
+        anchor = "top-right";
+        default-timeout = 2000;
+        ignore-timeout = true;
+        icons = true;
+      };
+    };
+  };
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {

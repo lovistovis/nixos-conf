@@ -153,7 +153,6 @@ in
     slurp
     htop-vim
     wl-clipboard
-    mako
     j4-dmenu-desktop
     my-sddm-astronaut
   ];
