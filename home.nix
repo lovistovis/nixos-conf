@@ -138,7 +138,7 @@ in {
         hdmi1-off = "xrandr --output HDMI1 --off";
         shu = "shutdown now";
         reb = "sudo reboot now";
-        hib = "systemctl hibernate";
+        hib = "nohup ${pkgs.hyprlock}/bin/hyprlock > /dev/null 2>&1 & systemctl hibernate";
         ryujinx-portable = "ryujinx -r ~/ryujinx-data";
       };
       history.size = 10000;
