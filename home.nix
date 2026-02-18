@@ -591,10 +591,10 @@ in {
         "waybar"
         "alacritty -e zsh -c \"tmux a -t ${username}\""
         "firefox"
-        "vesktop"
         "pavucontrol"
         "blueman-manager"
         "iwgtk"
+        # "vesktop"
         # "steam -silent"
       ];
       # To find window classes use either
