@@ -53,7 +53,7 @@ in {
       ];
       scriptOpts = {
         chapterskip = {
-          skip = "Prologue;Opening;Preview";
+          skip = "Opening;Preview";
         };
         sub_select = {
           config = toString ./config/mpv;
