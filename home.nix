@@ -115,6 +115,11 @@ in {
             pyright.enable = true;
             jdtls.enable = true;
             roslyn.enable = true;
+            rust_analyzer = {
+              enable = true;
+              installRustc = false;
+              installCargo = false;
+            };
           };
         };
       };
@@ -227,6 +232,7 @@ in {
         credential.helper = "oauth";
         commit.gpgsign = true;
         tag.gpgSign = true;
+        init.defaultBranch = "master";
       };
       ignores = [
         "**/nixos-switch.log"
