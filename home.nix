@@ -511,6 +511,7 @@ in {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
+    gtk4.theme = null;
   };
 
   wayland.windowManager.hyprland = {
