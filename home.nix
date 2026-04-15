@@ -421,6 +421,7 @@ in {
             tooltip = true;
             format = "{:%H:%M:%S}";
             tooltip-format = "{:%Y-%m-%d}";
+            on-click = "firefox https://youtube.com/@GLITCH";
           };
         };
       };
