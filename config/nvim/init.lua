@@ -942,7 +942,7 @@ require("lazy").setup({
 
 -- Colorscheme
 vim.cmd.colorscheme("tokyonight-night")
-vim.cmd.hi("CursorLine cterm=NONE ctermbg=Black guibg=#894c51")
+vim.cmd.hi("CursorLine cterm=NONE ctermbg=Black guibg=#2e2f4e")
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et:linebreak
