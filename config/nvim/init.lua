@@ -941,7 +941,7 @@ require("lazy").setup({
 })
 
 -- Colorscheme
-vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("retrobox")
 vim.cmd.hi("CursorLine cterm=NONE ctermbg=Black guibg=#582c28") -- Match to background
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
