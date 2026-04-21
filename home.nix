@@ -144,7 +144,7 @@ in {
         shu = "shutdown now";
         reb = "sudo reboot now";
         hib = "nohup ${pkgs.hyprlock}/bin/hyprlock > /dev/null 2>&1 & systemctl hibernate";
-        ryujinx-portable = "ryujinx -r ~/ryujinx-data";
+        clean-tmux = "rm -rf ~/.tmux/resurrect/";
       };
       history.size = 10000;
       oh-my-zsh = {
