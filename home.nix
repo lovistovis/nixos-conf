@@ -255,6 +255,8 @@ in {
     in {
       enable = true;
 
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
+
       policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
@@ -479,7 +481,7 @@ in {
     pavucontrol
     qdirstat
     sonobus
-    # wineWowPackages.stable
+    wineWow64Packages.stable
     qbittorrent
     gimp
     vesktop
