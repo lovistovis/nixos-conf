@@ -521,6 +521,7 @@ in {
     enable = true;
     package = null;
     portalPackage = null;
+    configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       "$term" = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
