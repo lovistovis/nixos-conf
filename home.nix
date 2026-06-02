@@ -5,7 +5,7 @@ let
   hostname = import ./hostname.nix;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
-  tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
+  # tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
   nixvim = import (fetchGit {
@@ -455,9 +455,9 @@ in {
 
   home.packages = with pkgs; [
     # Scripts
+    # tmux-delete
     tmux-sessionizer
     tmux-create
-    tmux-delete
     rebuild
     logger
 
