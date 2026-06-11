@@ -21,6 +21,10 @@
       mount-windows = "if [ ! -d /mnt/windows ]; then sudo mkdir /mnt/windows; fi; sudo mount -t ntfs3 /dev/nvme0n1p2 /mnt/windows";
       mount-sd = "if [ ! -d /mnt/sd ]; then sudo mkdir /mnt/sd; fi; sudo mount -t exfat /dev/mmcblk0 /mnt/sd";
     };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   services.auto-cpufreq.enable = true;
@@ -88,6 +92,7 @@
       HandleLidSwitch = "ignore";
       HandleLidSwitchExternalPower = "ignore";
     };
+    displayManager.defaultSession = "hyprland";
   };
 
   time.hardwareClockInLocalTime = true;

@@ -1,1 +1,1 @@
-"nixbox-hp"
+"nixbox-pc"

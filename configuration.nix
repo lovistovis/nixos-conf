@@ -2,7 +2,7 @@
 
 { pkgs, config, lib, ... }:
 let
-  username = (import "/home/mogos/nixos-conf/username.nix");
+  username = (import "/etc/nixos/username.nix");
 in
 {
   imports = [

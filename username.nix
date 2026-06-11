@@ -1,1 +1,1 @@
-"mogos"
+"love"
