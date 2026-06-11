@@ -85,7 +85,7 @@ in
       sddm = {
         enable = true;
         wayland.enable = true;
-        # package = pkgs.kdePackages.sddm;
+        package = pkgs.kdePackages.sddm;
         extraPackages = with pkgs; [
           kdePackages.qtmultimedia
         ];
@@ -96,6 +96,7 @@ in
           };
         };
       };
+      defaultSession = "hyprland";
     };
     automatic-timezoned.enable = true;
     compton.enable = true;
@@ -127,6 +128,10 @@ in
 
   programs = {
     virt-manager.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
     mtr.enable = true;
     gnupg.agent = {
       enable = true;

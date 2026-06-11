@@ -59,7 +59,6 @@
   powerManagement.enable = true;
 
   services = {
-    desktopManager.plasma6.enable = true;
     # xserver = {
     #   videoDrivers = [ "modesetting" "nvidia" ];
     #   deviceSection = ''
