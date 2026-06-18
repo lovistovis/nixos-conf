@@ -114,7 +114,6 @@ in {
             gopls.enable = true;
             pyright.enable = true;
             jdtls.enable = true;
-            roslyn.enable = true;
             rust_analyzer = {
               enable = true;
               installRustc = false;
@@ -514,7 +513,6 @@ in {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
-    gtk4.theme = null;
   };
 
   wayland.windowManager.hyprland = {
