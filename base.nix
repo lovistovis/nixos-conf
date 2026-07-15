@@ -25,7 +25,12 @@ in {
   };
 
   system.stateVersion = stateVersion;
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "nodejs-20.20.2"
+    ];
+  };
 
   home-manager.backupFileExtension = "back";
   home-manager.users.${username} = {
