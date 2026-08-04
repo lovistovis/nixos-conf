@@ -615,7 +615,7 @@ in {
         "match:class firefox, workspace 2 silent"
         "match:class vesktop, workspace 3 silent"
         "match:class org.pulseaudio.pavucontrol, workspace 10 silent"
-        "match:class .blueman-manager-wrapped, workspace 10 silent"
+        "match:class blueman-manager, workspace 10 silent"
         "match:class org.twosheds.iwgtk, workspace 10 silent"
 
         "match:float true, no_blur on"
