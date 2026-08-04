@@ -519,109 +519,123 @@ in {
     enable = true;
     package = null;
     portalPackage = null;
-    configType = "hyprlang";
-    settings = {
-      "$mod" = "SUPER";
-      "$term" = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux";
-      "$menu" = "j4-dmenu-desktop --dmenu=${pkgs.tofi}/bin/tofi";
-      bind = [
-        "$mod, D, exec, $menu"
-        "$mod, Return, exec, $term"
-        "$mod, F, fullscreen"
-        "$mod Shift, S, exec, grim -g \"$(slurp)\" - | wl-copy"
-        "$mod Shift, Q, killactive"
-        "$mod Shift, Space, togglefloating"
-        "$mod Shift, W, pin"
-        "$mod Shift, E, exit"
-        "$mod Ctrl, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+    configType = "lua";
+    extraConfig = with config.lib.stylix.colors; let
+      rgb = color: "rgb(${color})";
+    in ''
+      mod = "SUPER"
+      term = "alacritty -e zsh -c ${pkgs.tmux}/bin/tmux"
+      menu = "j4-dmenu-desktop --dmenu=${pkgs.tofi}/bin/tofi"
 
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
+      hl.monitor({
+        output = "",
+        mode = "highres",
+        position = "auto",
+        scale = 1,
+      })
 
-        "$mod, F3, exec, brightnessctl set 1"
-        "$mod, F4, exec, brightnessctl set 100%"
-      ]
-      ++ (
-        builtins.concatLists (builtins.genList (i:
-            let ws = i + 1;
-            in [
-              "$mod, code:1${toString i}, workspace, ${toString ws}"
-              "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
-            ]
-          )
-          10)
-       );
-      bindel = [
-        ", XF86MonBrightnessDown, exec, brightnessctl set 1%-"
-        ", XF86MonBrightnessUp, exec, brightnessctl set 1%+"
+      hl.config({
+        general = {
+          gaps_out = 10,
+          gaps_in = 5,
+          col = {
+            active_border = "${rgb base03}",
+            inactive_border = "${rgb base01}",
+          }
+        },
+        input = {
+          kb_layout = "se",
+          touchpad = {
+            disable_while_typing = false,
+            tap_to_click = true,
+            middle_button_emulation = false,
+          }
+        },
+        xwayland = {
+          force_zero_scaling = true
+        },
+        decoration = {
+          blur = {
+            enabled = false
+          }
+        },
+        animations = {
+          enabled = false
+        },
+      })
 
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 1%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 1%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_SOURCE@ toggle"
-      ];
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
-      general = with config.lib.stylix.colors; let
-          rgb = color: "rgb(${color})";
-        in {
-        gaps_out = 10;
-        gaps_in = 5;
-        "col.active_border" = lib.mkForce (rgb base03);
-        "col.inactive_border" = lib.mkForce (rgb base01);
-      };
-      input = {
-        kb_layout = "se";
-        touchpad = {
-          disable_while_typing = false;
-          tap-to-click = true;
-          middle_button_emulation = false;
-        };
-      };
-      decoration = {
-        blur = {
-          enabled = false;
-        };
-      };
-      animations.enabled = false;
-      xwayland = {
-        force_zero_scaling = true;
-      };
-      monitor = ", highres, auto, 1";
-      env = [
-        "GDK_SCALE,1"
-        "XCURSOR_SIZE,32"
-      ];
-      exec-once = [
-        "waybar"
-        "alacritty -e zsh -c \"tmux a -t ${username}\""
-        "firefox"
-        "pavucontrol"
-        "blueman-manager"
-        "iwgtk"
-        # "vesktop"
-        # "steam -silent"
-      ];
-      # To find window classes use either
-      # hyprctl clients | grep class
-      # for wayland or
-      # wmctrl -lx
-      # for xwayland apps.
-      windowrule = [
-        "match:class firefox, workspace 2 silent"
-        "match:class vesktop, workspace 3 silent"
-        "match:class org.pulseaudio.pavucontrol, workspace 10 silent"
-        "match:class blueman-manager, workspace 10 silent"
-        "match:class org.twosheds.iwgtk, workspace 10 silent"
+      hl.env("GDK_SCALE", "1")
+      hl.env("XCURSOR_SIZE", "32")
 
-        "match:float true, no_blur on"
-      ];
-      ecosystem.no_update_news = true;
-    };
+      hl.bind(mod .. "+ Return", hl.dsp.exec_cmd(term))
+      hl.bind(mod .. "+ D", hl.dsp.exec_cmd(menu))
+      hl.bind(mod .. "+ F", hl.dsp.window.fullscreen())
+      hl.bind(mod .. "+ SHIFT + Space", hl.dsp.window.float())
+      hl.bind(mod .. "+ SHIFT + S", hl.dsp.exec_cmd("grim -g '$(slurp)' - | wl-copy"))
+      hl.bind(mod .. "+ SHIFT + Q", hl.dsp.window.close())
+      hl.bind(mod .. "+ SHIFT + W", hl.dsp.window.pin())
+      hl.bind(mod .. "+ SHIFT + E", hl.dsp.exit())
+      hl.bind(mod .. "+ SHIFT + L", hl.dsp.exec_cmd("${pkgs.hyprlock}/bin/hyprlock"))
+
+      hl.bind(mod .. "+ left", hl.dsp.focus({ direction = "l" }))
+      hl.bind(mod .. "+ right", hl.dsp.focus({ direction = "r" }))
+      hl.bind(mod .. "+ up", hl.dsp.focus({ direction = "u" }))
+      hl.bind(mod .. "+ down", hl.dsp.focus({ direction = "d" }))
+
+      hl.bind(mod .. "+ F3", hl.dsp.exec_cmd("brightnessctl set 1"))
+      hl.bind(mod .. "+ F4", hl.dsp.exec_cmd("brightnessctl set 100%"))
+
+      hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+"), { locked = true, repeating = true, description = "Raise volume" })
+      hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"),      { locked = true, repeating = true, description = "Lower volume" })
+      hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true, description = "Mute audio" })
+      hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true, description = "Mute microphone" })
+      hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%+"),                  { locked = true, repeating = true, description = "Increase brightness" })
+      hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"),                  { locked = true, repeating = true, description = "Decrease brightness" })
+
+      hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true, description = "Move window with the mouse" })
+      hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window with the mouse" })
+
+      for i = 1, 10 do
+          local key = i % 10 -- 10 maps to key 0
+          hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i}), { description = "Focus workspace " .. i })
+          hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace " .. i })
+      end
+
+      -- exec-once = [
+      --   "waybar"
+      --   "alacritty -e zsh -c \"tmux a -t ${username}\""
+      --   "firefox"
+      --   "pavucontrol"
+      --   "blueman-manager"
+      --   "iwgtk"
+      --   # "vesktop"
+      --   # "steam -silent"
+      -- ];
+
+      -- To find window classes use either
+      -- hyprctl clients | grep class
+      -- for wayland or
+      -- wmctrl -lx
+      -- for xwayland apps.
+      hl.window_rule({ match = { class = "firefox" }, workspace = "2 silent" })
+      hl.window_rule({ match = { class = "vesktop" }, workspace = "3 silent" })
+      hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, workspace = "10 silent" })
+      hl.window_rule({ match = { class = "blueman-manager" }, workspace = "10 silent" })
+      hl.window_rule({ match = { class = "org.twosheds.iwgtk" }, workspace = "10 silent" })
+
+      hl.window_rule({ match = { float = true }, no_blur = true })
+
+      hl.on("hyprland.start", function () 
+        hl.exec_cmd("waybar")
+        hl.exec_cmd("alacritty -e zsh -c \"tmux a -t ${username}\"")
+        hl.exec_cmd("firefox")
+        hl.exec_cmd("pavucontrol")
+        hl.exec_cmd("blueman-manager")
+        hl.exec_cmd("iwgtk")
+        -- hl.exec_cmd("vesktop")
+        -- hl.exec_cmd("steam -silent")
+      end)
+    '';
   };
 
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
