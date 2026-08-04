@@ -16,7 +16,7 @@ in {
   # Define a user account. Don't forget to set a password with "passwd".
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" "docker" ];
   };
 
   nix.settings = {
@@ -27,15 +27,14 @@ in {
   system.stateVersion = stateVersion;
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [
-      "nodejs-20.20.2"
-    ];
   };
 
   home-manager.backupFileExtension = "back";
   home-manager.users.${username} = {
     home.stateVersion = stateVersion;
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
 
     imports = [
       ./home.nix
