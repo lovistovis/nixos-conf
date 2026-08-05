@@ -30,15 +30,17 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, stylix, nixvim, ... }:
     let
-      my = {
-        username = import ./username.nix;
-      };
-
       system = "x86_64-linux";
 
       # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
       # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
       mkHost = hostname: extraModules:
+      let 
+        my = {
+          username = import ./username.nix;
+          hostname = hostname;
+        };
+      in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs my; };

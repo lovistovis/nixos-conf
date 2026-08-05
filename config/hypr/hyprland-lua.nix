@@ -49,7 +49,7 @@ hl.bind(mod .. "+ Return", hl.dsp.exec_cmd(term))
 hl.bind(mod .. "+ D", hl.dsp.exec_cmd(menu))
 hl.bind(mod .. "+ F", hl.dsp.window.fullscreen())
 hl.bind(mod .. "+ SHIFT + Space", hl.dsp.window.float())
-hl.bind(mod .. "+ SHIFT + S", hl.dsp.exec_cmd("grim -g '$(slurp)' - | wl-copy"))
+hl.bind(mod .. "+ SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
 hl.bind(mod .. "+ SHIFT + Q", hl.dsp.window.close())
 hl.bind(mod .. "+ SHIFT + W", hl.dsp.window.pin())
 hl.bind(mod .. "+ SHIFT + E", hl.dsp.exit())
@@ -78,17 +78,6 @@ for i = 1, 10 do
     hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i}), { description = "Focus workspace " .. i })
     hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace " .. i })
 end
-
--- exec-once = [
---   "waybar"
---   "alacritty -e zsh -c \"tmux a -t ${my.username}\""
---   "firefox"
---   "pavucontrol"
---   "blueman-manager"
---   "iwgtk"
---   # "vesktop"
---   # "steam -silent"
--- ];
 
 -- To find window classes use either
 -- hyprctl clients | grep class

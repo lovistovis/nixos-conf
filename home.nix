@@ -111,9 +111,8 @@ in {
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        update = "sudo nixos-rebuild switch";
-        fupdate = "sudo nixos-rebuild switch --fast";
-        upgrade = "sudo nix-channel --update; update";
+        update = "sudo nixos-rebuild switch --flake ~/nixos-conf#${my.hostname}";
+        upgrade = "cd ~/nixos-conf && nix flake update; update";
         clean = "nix-collect-garbage --delete-older-than 1d; sudo nix-collect-garbage --delete-older-than 1d";
         clean-hard = "nix-collect-garbage --delete-old; sudo nix-collect-garbage --delete-old";
         reload-systemd = "systemctl reload systemd-logind.service";
