@@ -8,11 +8,24 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, stylix, nixvim, ... }:
     let
       username = import ./username.nix;
+
+      my = {
+        username = username;
+      };
 
       system = "x86_64-linux";
 
@@ -21,7 +34,7 @@
       mkHost = hostname: extraModules:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs my; };
           modules = [
             ./hosts/${hostname}/configuration.nix
             ./hosts/${hostname}/hardware-configuration.nix
@@ -29,9 +42,16 @@
             home-manager.nixosModules.home-manager
             {
               networking.hostName = hostname;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${username} = import ./home.nix;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs my; };
+                sharedModules = [
+                  stylix.homeModules.stylix
+                  nixvim.homeModules.nixvim
+                ];
+                users.${username} = import ./home.nix;
+              };
             }
           ] ++ extraModules;
         };
@@ -46,7 +66,11 @@
     # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
     homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-      modules = [ ./home.nix ];
+      modules = [
+        stylix.homeModules.stylix
+        nixvim.homeModules.nixvim
+        ./home.nix
+      ];
     };
 
     # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);

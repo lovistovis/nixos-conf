@@ -1,4 +1,4 @@
-{ pkgs, config, username }: with config.lib.stylix.colors; let
+{ pkgs, config, my }: with config.lib.stylix.colors; let
   rgb = color: "rgb(${color})";
 in ''
 mod = "SUPER"
@@ -81,7 +81,7 @@ end
 
 -- exec-once = [
 --   "waybar"
---   "alacritty -e zsh -c \"tmux a -t ${username}\""
+--   "alacritty -e zsh -c \"tmux a -t ${my.username}\""
 --   "firefox"
 --   "pavucontrol"
 --   "blueman-manager"
@@ -105,7 +105,7 @@ hl.window_rule({ match = { float = true }, no_blur = true })
 
 hl.on("hyprland.start", function () 
   hl.exec_cmd("waybar")
-  hl.exec_cmd("alacritty -e zsh -c \"tmux a -t ${username}\"")
+  hl.exec_cmd("alacritty -e zsh -c \"tmux a -t ${my.username}\"")
   hl.exec_cmd("firefox")
   hl.exec_cmd("pavucontrol")
   hl.exec_cmd("blueman-manager")

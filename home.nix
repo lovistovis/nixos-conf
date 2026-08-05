@@ -1,30 +1,13 @@
-{ lib, config, pkgs, buildLua, ... }:
+{ lib, config, pkgs, my, ... }:
 let
   path = toString ./.;
-  username = import ./username.nix;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   # tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
   logger = import ./scripts/logger.nix { inherit pkgs; };
-  nixvim = import (fetchGit {
-      url = "https://github.com/nix-community/nixvim";
-      ref = "main";
-  });
-  stylix = import (fetchGit {
-      url = "https://github.com/nix-community/stylix";
-      ref = "master";
-  });
-  wallpaper = /etc/nixos/wallpaper.png;
-  # nixpkgs-master = import
-  #   (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
-  #   { config = config.nixpkgs.config; };
+  wallpaper = ./wallpapers/galaxy-red.png;
 in {
-  imports = [
-    nixvim.homeModules.nixvim
-    (import stylix).homeModules.stylix
-  ];
-
   stylix = {
     enable = true;
     image = wallpaper;
@@ -32,7 +15,7 @@ in {
     targets = {
       firefox = {
         enable = true;
-        profileNames = [ "${username}" ];
+        profileNames = [ "${my.username}" ];
       };
       nixvim.enable = false;
       vesktop.enable = true;
@@ -300,7 +283,7 @@ in {
         };
       };
       profiles = {
-        "${username}" = {
+        "${my.username}" = {
           id = 0;
           isDefault = true;
           userChrome = import ./user-chrome.nix;
@@ -519,7 +502,7 @@ in {
     package = null;
     portalPackage = null;
     configType = "lua";
-    extraConfig = import ./config/hypr/hyprland-lua.nix { inherit pkgs config username; };
+    extraConfig = import ./config/hypr/hyprland-lua.nix { inherit pkgs config my; };
   };
 
   xdg.configFile."vesktop/themes".source = ./config/vencord-themes;
