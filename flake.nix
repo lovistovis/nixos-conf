@@ -22,9 +22,13 @@
     nixvim = {
       url = "github:nix-community/nixvim";
     };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nur, stylix, nixvim, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, stylix, nixvim, ... }:
     let
       my = {
         username = import ./username.nix;
