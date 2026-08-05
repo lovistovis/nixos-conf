@@ -16,6 +16,13 @@ in
     my-sddm-astronaut
   ];
 
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+  };
+
   security = {
     pam.services.hyprlock = {};
   };

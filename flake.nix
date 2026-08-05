@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +24,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, stylix, nixvim, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nur, stylix, nixvim, ... }:
     let
       username = import ./username.nix;
 
@@ -65,7 +70,7 @@
 
     # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
     homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+      pkgs = import nixpkgs { inherit system; };
       modules = [
         stylix.homeModules.stylix
         nixvim.homeModules.nixvim

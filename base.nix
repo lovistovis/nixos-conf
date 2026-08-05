@@ -32,9 +32,6 @@ in {
   home-manager.backupFileExtension = "back";
   home-manager.users.${username} = {
     home.stateVersion = stateVersion;
-    nixpkgs.config = {
-      allowUnfree = true;
-    };
 
     imports = [
       ./home.nix

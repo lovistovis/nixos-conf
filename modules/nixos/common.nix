@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      inputs.nur.overlays.default
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     git
@@ -15,6 +20,7 @@
   ];
 
   programs = {
+    git.enable = true;
     dconf.enable = true;
     gnupg.agent = {
       enable = true;

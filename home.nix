@@ -428,12 +428,6 @@ in {
     };
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
-      inherit pkgs;
-    };
-  };
-
   home.packages = with pkgs; [
     # Scripts
     # tmux-delete
@@ -509,4 +503,6 @@ in {
 
   # dMZ white cursor
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+
+  home.stateVersion = "25.05";
 }
