@@ -2,7 +2,6 @@
 let
   path = toString ./.;
   username = import ./username.nix;
-  hostname = import ./hostname.nix;
   tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
   tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
   # tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };

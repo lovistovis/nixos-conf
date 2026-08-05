@@ -23,6 +23,10 @@
     };
   };
 
+  time.hardwareClockInLocalTime = true;
+
+  powerManagement.enable = true;
+
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
     battery = {
@@ -67,8 +71,6 @@
     };
   };
 
-  powerManagement.enable = true;
-
   services = {
     xserver = {
       videoDrivers = [ "modesetting" "nvidia" ];
@@ -89,6 +91,4 @@
       HandleLidSwitchExternalPower = "ignore";
     };
   };
-
-  time.hardwareClockInLocalTime = true;
 }

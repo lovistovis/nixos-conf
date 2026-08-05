@@ -1,12 +1,4 @@
-{ config, lib, pkgs, ... }:
-let
-  my-sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "hyprland_kath";
-    themeConfig = {
-      Background = toString /etc/nixos/wallpaper.png; # This theme also accepts videos
-    };
-  };
-in
+{ pkgs, ... }:
 {
   virtualisation = {
     docker.enable = true;
@@ -256,3 +248,5 @@ in
     libxkbcommon
   ]);
 }
+
+    pam.services.hyprlock = {};
