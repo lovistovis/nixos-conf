@@ -2,7 +2,7 @@
   description = "A minimal hyprland desktop.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -10,36 +10,31 @@
     };
   };
 
-  outputs = { nixpkgs, ... }: let
-    username = import ./username.nix;
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
+    let
+      username = import ./username.nix;
 
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
+      system = "x86_64-linux";
 
-    # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
-    # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
-    mkHost = hostname: extraModules:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/${hostname}/configuration.nix
-          ./hosts/${hostname}/hardware-configuration.nix
-          ./modules/common.nix
-          home-manager.nixosModules.home-manager
-          {
-            networking.hostName = hostName;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./home.nix;
-          }
-        ] ++ extraModules;
-      };
+      # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
+      # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
+      mkHost = hostname: extraModules:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/${hostname}/configuration.nix
+            ./hosts/${hostname}/hardware-configuration.nix
+            ./modules/nixos/common.nix
+            home-manager.nixosModules.home-manager
+            {
+              networking.hostName = hostname;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./home.nix;
+            }
+          ] ++ extraModules;
+        };
   in {
     nixosConfigurations = {
       nixbox-hp = mkHost "nixbox-hp" [
