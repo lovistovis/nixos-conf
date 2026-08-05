@@ -15,18 +15,15 @@
     htop
     iwgtk
     exfat
-    grim
-    slurp
   ];
 
   programs = {
-    git.enable = true;
+    zsh.enable = true;
     dconf.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-    zsh.enable = true;
   };
 
   users.defaultUserShell = pkgs.zsh;

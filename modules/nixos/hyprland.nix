@@ -8,13 +8,13 @@ let
   };
 in
 {
-  environment.systemPackages = with pkgs; [
-    grim
-    slurp
-    wl-clipboard
-    j4-dmenu-desktop
-    my-sddm-astronaut
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   grim
+  #   slurp
+  #   wl-clipboard
+  #   j4-dmenu-desktop
+  #   my-sddm-astronaut
+  # ];
 
   programs = {
     hyprland = {
@@ -53,14 +53,14 @@ in
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [ "gtk" "hyprland" ];
-    };
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-    ];
+    # xdgOpenUsePortal = true;
+    # config = {
+    #   common.default = [ "gtk" ];
+    #   hyprland.default = [ "gtk" "hyprland" ];
+    # };
+    # extraPortals = with pkgs; [
+    #   xdg-desktop-portal-hyprland
+    #   xdg-desktop-portal-gtk
+    # ];
   };
 }

@@ -26,10 +26,8 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, nur, stylix, nixvim, ... }:
     let
-      username = import ./username.nix;
-
       my = {
-        username = username;
+        username = import ./username.nix;
       };
 
       system = "x86_64-linux";
@@ -55,7 +53,7 @@
                   stylix.homeModules.stylix
                   nixvim.homeModules.nixvim
                 ];
-                users.${username} = import ./home.nix;
+                users.${my.username} = import ./home.nix;
               };
             }
           ] ++ extraModules;
@@ -68,15 +66,15 @@
       ];
     };
 
-    # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
-    homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
-      modules = [
-        stylix.homeModules.stylix
-        nixvim.homeModules.nixvim
-        ./home.nix
-      ];
-    };
+    # # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
+    # homeConfigurations."${my.username}" = home-manager.lib.homeManagerConfiguration {
+    #   pkgs = import nixpkgs { inherit system; };
+    #   modules = [
+    #     stylix.homeModules.stylix
+    #     nixvim.homeModules.nixvim
+    #     ./home.nix
+    #   ];
+    # };
 
     # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
