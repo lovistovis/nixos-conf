@@ -8,13 +8,13 @@ let
   };
 in
 {
-  # environment.systemPackages = with pkgs; [
-  #   grim
-  #   slurp
-  #   wl-clipboard
-  #   j4-dmenu-desktop
-  #   my-sddm-astronaut
-  # ];
+  environment.systemPackages = with pkgs; [
+    grim
+    slurp
+    wl-clipboard
+    j4-dmenu-desktop
+    my-sddm-astronaut
+  ];
 
   programs = {
     hyprland = {
