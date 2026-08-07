@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, my, ... }: {
   boot.loader = {
     timeout = 1;
     efi = {
@@ -15,13 +15,21 @@
     };
   };
 
+  users.users.${my.username} = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "libvirtd" "docker" ];
+  };
+
   programs = {
-    dconf.enable = true;
     zsh.shellAliases = {
       mount-windows = "if [ ! -d /mnt/windows ]; then sudo mkdir /mnt/windows; fi; sudo mount -t ntfs3 /dev/nvme0n1p2 /mnt/windows";
       mount-sd = "if [ ! -d /mnt/sd ]; then sudo mkdir /mnt/sd; fi; sudo mount -t exfat /dev/mmcblk0 /mnt/sd";
     };
   };
+
+  time.hardwareClockInLocalTime = true;
+
+  powerManagement.enable = true;
 
   hardware = {
     # graphics = {
@@ -56,8 +64,6 @@
     };
   };
 
-  powerManagement.enable = true;
-
   services = {
     desktopManager.plasma6.enable = true;
     # xserver = {
@@ -79,6 +85,4 @@
       HandleLidSwitchExternalPower = "ignore";
     };
   };
-
-  time.hardwareClockInLocalTime = true;
 }
