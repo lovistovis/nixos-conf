@@ -465,13 +465,13 @@ in {
     tor-browser
     prismlauncher
     kdePackages.dolphin
-    nur.repos.nltch.spotify-adblock
     protonup-qt
     feh
     # davinci-resolve
     # chromium
     # opentoonz
     # jetbrains.rider
+    # nur.repos.nltch.spotify-adblock
     # dotnetCorePackages.dotnet_9.sdk
     # dotnetCorePackages.dotnet_9.aspnetcore
     # dotnetCorePackages.dotnet_9.runtime
