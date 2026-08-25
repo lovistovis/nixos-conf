@@ -15,6 +15,7 @@
     htop
     iwgtk
     exfat
+    pulseaudio # for pactl
   ];
 
   programs = {
@@ -100,7 +101,6 @@
     automatic-timezoned.enable = true;
     printing.enable = true;
     flatpak.enable = true;
-    # compton.enable = true;
 
     pipewire = {
       enable = true;
@@ -110,18 +110,6 @@
     xserver = {
       enable = true;
       xkb.layout = "se";
-    };
-
-    redshift = {
-      enable = true;
-      brightness = {
-        day = "1";
-        night = "1";
-      };
-      temperature = {
-        day = 5500;
-        night = 2700;
-      };
     };
   };
 

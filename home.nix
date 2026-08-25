@@ -125,6 +125,7 @@ in {
         reb = "sudo reboot now";
         hib = "nohup ${pkgs.hyprlock}/bin/hyprlock > /dev/null 2>&1 & systemctl hibernate";
         clean-tmux = "rm -rf ~/.tmux/resurrect/";
+        combined-audio = "pactl load-module module-combine-sink";
       };
       history.size = 10000;
       oh-my-zsh = {

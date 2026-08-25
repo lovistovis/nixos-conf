@@ -111,23 +111,6 @@ in
     };
   };
 
-  services = {
-    hyprpaper.settings.splash = false;
-    mako = {
-      enable = true;
-      settings = {
-        "actionable=true" = {
-          anchor = "top-left";
-        };
-        actions = true;
-        anchor = "top-right";
-        default-timeout = 2000;
-        ignore-timeout = true;
-        icons = true;
-      };
-    };
-  };
-
   gtk = {
     gtk4.theme = null;
   };
@@ -246,8 +229,23 @@ in
     };
   };
 
-
   services = {
+    hyprpaper.settings.splash = false;
+
+    mako = {
+      enable = true;
+      settings = {
+        "actionable=true" = {
+          anchor = "top-left";
+        };
+        actions = true;
+        anchor = "top-right";
+        default-timeout = 2000;
+        ignore-timeout = true;
+        icons = true;
+      };
+    };
+
     xidlehook = {
       enable = true;
       environment = {
