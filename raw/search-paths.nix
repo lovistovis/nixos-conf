@@ -2,5 +2,6 @@
 ~
 ~/projects
 ~/experiments
+~/assignments/*
 /mnt
 ''
