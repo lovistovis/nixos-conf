@@ -34,7 +34,7 @@
 
       # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
       # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
-      mkHost = hostname: extraModules:
+      mkHost = hostname: extraModules: extraHomeManagerModules:
       let 
         my = {
           username = import ./username.nix;
@@ -58,7 +58,7 @@
                 sharedModules = [
                   stylix.homeModules.stylix
                   nixvim.homeModules.nixvim
-                ];
+                ] ++ extraHomeManagerModules;
                 users.${my.username} = import ./home.nix;
               };
             }
@@ -67,8 +67,12 @@
   in {
     nixosConfigurations = {
       nixbox-hp = mkHost "nixbox-hp" [
+        ./modules/nixos/wayland.nix
         ./modules/nixos/hyprland.nix
+        # ./modules/nixos/kde-plasma.nix
         ./modules/nixos/nix-ld.nix
+      ] [
+        ./modules/home-manager/hyprland.nix
       ];
     };
 
