@@ -25,7 +25,6 @@ in
       sddm = {
         enable = true;
         wayland.enable = true;
-        # package = pkgs.kdePackages.sddm;
         extraPackages = with pkgs; [
           kdePackages.qtmultimedia
         ];
