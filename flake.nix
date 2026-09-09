@@ -86,6 +86,6 @@
       ];
     };
 
-    formatter = nixpkgs.nixfmt;
+    formatter = nixpkgs.legacyPackages.${system}.alejandra;
   };
 }
