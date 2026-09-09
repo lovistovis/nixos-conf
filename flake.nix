@@ -28,23 +28,29 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, stylix, nixvim, ... }:
-    let
-      system = "x86_64-linux";
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    stylix,
+    nixvim,
+    ...
+  }: let
+    system = "x86_64-linux";
 
-      # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
-      # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
-      mkHost = hostname: extraModules: extraHomeManagerModules:
-      let
-        my = {
-          username = import ./username.nix;
-          hostname = hostname;
-        };
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs my; };
-          modules = [
+    # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
+    # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
+    mkHost = hostname: extraModules: extraHomeManagerModules: let
+      my = {
+        username = import ./username.nix;
+        hostname = hostname;
+      };
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs my;};
+        modules =
+          [
             ./hosts/${hostname}/configuration.nix
             ./hosts/${hostname}/hardware-configuration.nix
             ./modules/nixos/common.nix
@@ -54,31 +60,35 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit inputs my; };
-                sharedModules = [
-                  stylix.homeModules.stylix
-                  nixvim.homeModules.nixvim
-                ] ++ extraHomeManagerModules;
+                extraSpecialArgs = {inherit inputs my;};
+                sharedModules =
+                  [
+                    stylix.homeModules.stylix
+                    nixvim.homeModules.nixvim
+                  ]
+                  ++ extraHomeManagerModules;
                 users.${my.username} = import ./home.nix;
               };
             }
-          ] ++ extraModules;
-        };
+          ]
+          ++ extraModules;
+      };
   in {
     nixosConfigurations = {
-      nixbox-hp = mkHost "nixbox-hp" [
-        ./modules/nixos/wayland.nix
-        ./modules/nixos/hyprland.nix
-        # ./modules/nixos/kde-plasma.nix
-        ./modules/nixos/nix-ld.nix
-      ] [
-        ./modules/home-manager/hyprland.nix
-      ];
+      nixbox-hp =
+        mkHost "nixbox-hp" [
+          ./modules/nixos/wayland.nix
+          ./modules/nixos/hyprland.nix
+          # ./modules/nixos/kde-plasma.nix
+          ./modules/nixos/nix-ld.nix
+        ] [
+          ./modules/home-manager/hyprland.nix
+        ];
     };
 
     # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
     homeConfigurations."${./username.nix}" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {inherit system;};
       modules = [
         stylix.homeModules.stylix
         nixvim.homeModules.nixvim

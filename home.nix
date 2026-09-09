@@ -1,11 +1,16 @@
-{ lib, config, pkgs, my, ... }:
-let
+{
+  lib,
+  config,
+  pkgs,
+  my,
+  ...
+}: let
   path = toString ./.;
-  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix { inherit pkgs; };
-  tmux-create = import ./scripts/tmux-create.nix { inherit pkgs; };
+  tmux-sessionizer = import ./scripts/tmux-sessionizer.nix {inherit pkgs;};
+  tmux-create = import ./scripts/tmux-create.nix {inherit pkgs;};
   # tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
-  rebuild = import ./scripts/rebuild.nix { inherit pkgs path; };
-  logger = import ./scripts/logger.nix { inherit pkgs; };
+  rebuild = import ./scripts/rebuild.nix {inherit pkgs path;};
+  logger = import ./scripts/logger.nix {inherit pkgs;};
   wallpaper = ./wallpapers/galaxy-red.png;
 in {
   stylix = {
@@ -15,7 +20,7 @@ in {
     targets = {
       firefox = {
         enable = true;
-        profileNames = [ "${my.username}" ];
+        profileNames = ["${my.username}"];
       };
       nixvim.enable = false;
       vesktop.enable = true;
@@ -326,9 +331,10 @@ in {
     brightnessctl
     git-credential-oauth
 
-    (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
-      dbus-python
-    ]))
+    (pkgs.python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        dbus-python
+      ]))
 
     # GUI
     pavucontrol

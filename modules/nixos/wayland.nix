@@ -1,13 +1,15 @@
-{ inputs, pkgs, ... }:
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   my-sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "hyprland_kath";
     themeConfig = {
       Background = toString /etc/nixos/wallpaper.png; # This theme also accepts videos
     };
   };
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     grim
     slurp

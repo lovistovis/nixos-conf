@@ -1,4 +1,9 @@
-{ config, pkgs, my, ... }: {
+{
+  config,
+  pkgs,
+  my,
+  ...
+}: {
   boot.loader = {
     timeout = 1;
     efi = {
@@ -6,7 +11,7 @@
     };
     grub = {
       enable = true;
-      devices = [ "nodev" ];
+      devices = ["nodev"];
       efiSupport = true;
       useOSProber = true;
       timeoutStyle = "countdown";
@@ -17,7 +22,7 @@
 
   users.users.${my.username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" "docker" ];
+    extraGroups = ["wheel" "libvirtd" "docker"];
   };
 
   programs = {
@@ -77,7 +82,7 @@
 
   services = {
     xserver = {
-      videoDrivers = [ "modesetting" "nvidia" ];
+      videoDrivers = ["modesetting" "nvidia"];
       deviceSection = ''
         Option "TearFree" "true"
         Option "SwapbuffersWait" "true"

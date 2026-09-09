@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
@@ -28,12 +31,12 @@
   };
 
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
 
   location.provider = "geoclue2";
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
     auto-optimise-store = true;
   };
 

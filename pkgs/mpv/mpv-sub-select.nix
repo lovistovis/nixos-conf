@@ -4,7 +4,6 @@
   lib,
   gitUpdater,
 }:
-
 buildLua (finalAttrs: {
   pname = "mpv-sub-select";
   version = "0-unstable-2025-04-04";
@@ -17,7 +16,7 @@ buildLua (finalAttrs: {
     hash = "sha256-+eVga4b7KIBnfrtmlgq/0HNjQVS3SK6YWVXCPvOeOOc=";
   };
 
-  passthru.updateScript = gitUpdater { };
+  passthru.updateScript = gitUpdater {};
 
   meta = {
     description = "An advanced conditional subtitle track selector for mpv player";

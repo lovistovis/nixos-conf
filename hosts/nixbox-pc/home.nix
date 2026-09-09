@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  programs = { };
+{pkgs, ...}: {
+  programs = {};
 
   home.packages = with pkgs; [
   ];

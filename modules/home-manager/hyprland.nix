@@ -1,11 +1,17 @@
-{ inputs, lib, config, pkgs, my, ... }:
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  my,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;
     configType = "lua";
-    extraConfig = import ../../config/hypr/hyprland-lua.nix { inherit pkgs config my; };
+    extraConfig = import ../../config/hypr/hyprland-lua.nix {inherit pkgs config my;};
   };
 
   programs = {
@@ -37,11 +43,11 @@
           layer = "top";
           position = "bottom";
           height = 10;
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "hyprland/window" ];
-          modules-right = [ "pulseaudio" "network" "temperature" "disk" "memory" "battery" "clock" "tray" ];
+          modules-left = ["hyprland/workspaces"];
+          modules-center = ["hyprland/window"];
+          modules-right = ["pulseaudio" "network" "temperature" "disk" "memory" "battery" "clock" "tray"];
 
-          "hyprland/workspaces" = { };
+          "hyprland/workspaces" = {};
 
           "hyprland/window" = {
             format = "{title:.100}";
@@ -93,13 +99,13 @@
             format-source = "{volume}% ";
             format-source-muted = "";
             format-icons = {
-                headphone = "";
-                hands-free = "";
-                headset = "";
-                phone = "";
-                portable = "";
-                car = "";
-                default = ["" "" ""];
+              headphone = "";
+              hands-free = "";
+              headset = "";
+              phone = "";
+              portable = "";
+              car = "";
+              default = ["" "" ""];
             };
             on-click = "pavucontrol";
           };

@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
-  offload = import ./scripts/offload.nix { inherit pkgs; };
-in
-{
+{pkgs, ...}: let
+  offload = import ./scripts/offload.nix {inherit pkgs;};
+in {
   home.packages = with pkgs; [
     offload
   ];
@@ -14,19 +12,23 @@ in
         "sink_count" = "${pkgs.pulseaudio}/bin/pacmd list-sink-inputs | grep -c 'state: RUNNING'";
       };
       timers = [
-        { # quiet-suspend-quick
+        {
+          # quiet-suspend-quick
           delay = 600;
           command = "if [ $sink_count -eq 0 ]; then ${pkgs.systemd}/bin/systemctl suspend; fi";
         }
-        { # quiet-hibernate-quick
+        {
+          # quiet-hibernate-quick
           delay = 600;
           command = "if [ $sink_count -eq 0 ]; then ${pkgs.systemd}/bin/systemctl hibernate; fi";
         }
-        { # always-suspend-slow
+        {
+          # always-suspend-slow
           delay = 1800;
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
-        { # always-hibernate-slow
+        {
+          # always-hibernate-slow
           delay = 3600;
           command = "${pkgs.systemd}/bin/systemctl hibernate";
         }

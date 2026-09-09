@@ -1,7 +1,7 @@
 ''
-~
-~/projects
-~/experiments
-~/assignments/*
-/mnt
+  ~
+  ~/projects
+  ~/experiments
+  ~/assignments/*
+  /mnt
 ''

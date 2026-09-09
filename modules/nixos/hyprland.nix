@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     j4-dmenu-desktop
   ];
