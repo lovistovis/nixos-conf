@@ -35,7 +35,7 @@
       # Taken from https://dsestu.github.io/knowledge/docs/nixos/multi-host-flake.html
       # Factor out the common bits of a nixosSystem invocation so each host is a one-liner.
       mkHost = hostname: extraModules: extraHomeManagerModules:
-      let 
+      let
         my = {
           username = import ./username.nix;
           hostname = hostname;
@@ -76,16 +76,16 @@
       ];
     };
 
-    # # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
-    # homeConfigurations."${my.username}" = home-manager.lib.homeManagerConfiguration {
-    #   pkgs = import nixpkgs { inherit system; };
-    #   modules = [
-    #     stylix.homeModules.stylix
-    #     nixvim.homeModules.nixvim
-    #     ./home.nix
-    #   ];
-    # };
+    # Also expose a standalone home-manager config, for hosts that aren't NixOS (Kali, WSL2-Debian).
+    homeConfigurations."${./username.nix}" = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { inherit system; };
+      modules = [
+        stylix.homeModules.stylix
+        nixvim.homeModules.nixvim
+        ./home.nix
+      ];
+    };
 
-    # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    formatter = nixpkgs.nixfmt;
   };
 }
