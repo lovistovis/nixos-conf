@@ -78,11 +78,13 @@
       nixbox-hp =
         mkHost "nixbox-hp" [
           ./modules/nixos/wayland.nix
-          ./modules/nixos/hyprland.nix
+          # ./modules/nixos/hyprland.nix
+          ./modules/nixos/sway.nix
           # ./modules/nixos/kde-plasma.nix
           ./modules/nixos/nix-ld.nix
         ] [
-          ./modules/home-manager/hyprland.nix
+          # ./modules/home-manager/hyprland.nix
+          ./modules/home-manager/sway.nix
         ];
     };
 
