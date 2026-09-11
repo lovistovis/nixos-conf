@@ -26,7 +26,7 @@ in {
     displayManager = {
       sddm = {
         enable = true;
-        wayland.enable = true;
+        # wayland.enable = true;
         extraPackages = with pkgs; [
           kdePackages.qtmultimedia
         ];
