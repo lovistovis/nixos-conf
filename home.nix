@@ -299,6 +299,7 @@ in {
             darkreader
             sponsorblock
             youtube-shorts-block
+            bitwarden
           ];
         };
       };
