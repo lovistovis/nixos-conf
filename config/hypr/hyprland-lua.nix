@@ -100,7 +100,7 @@ in ''
   hl.on("hyprland.start", function ()
     hl.exec_cmd("waybar")
     hl.exec_cmd("alacritty -e zsh -c \"tmux a -t ${my.username}\"")
-    hl.exec_cmd("firefox")
+    -- hl.exec_cmd("firefox")
     hl.exec_cmd("pavucontrol")
     hl.exec_cmd("blueman-manager")
     hl.exec_cmd("iwgtk")

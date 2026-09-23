@@ -20,7 +20,7 @@ in {
     targets = {
       firefox = {
         enable = true;
-        profileNames = ["${my.username}"];
+        profileNames = ["default"];
       };
       nixvim.enable = false;
       vesktop.enable = true;
@@ -35,8 +35,8 @@ in {
       scripts = with pkgs.mpvScripts; [
         uosc
         chapterskip
-        # mpv-sub-select
-        (callPackage ./pkgs/mpv/mpv-sub-select.nix {})
+        mpv-sub-select
+        # (callPackage ./pkgs/mpv/mpv-sub-select.nix {})
       ];
       scriptOpts = {
         chapterskip = {
@@ -288,8 +288,9 @@ in {
         };
       };
       profiles = {
-        "${my.username}" = {
+        default = {
           id = 0;
+          name = "${my.username}";
           isDefault = true;
           userChrome = import ./user-chrome.nix;
           extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
