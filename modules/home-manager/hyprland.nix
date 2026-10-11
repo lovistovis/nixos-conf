@@ -14,6 +14,8 @@
     extraConfig = import ../../config/hypr/hyprland-lua.nix {inherit pkgs config my;};
   };
 
+  xdg.configFile."hypr/xdph.conf".source = import ./config/hypr/xdph.nix {inherit pkgs;};
+
   programs = {
     waybar = {
       enable = true;
