@@ -12,9 +12,9 @@ pkgs.writeShellScriptBin "share-picker-cached" ''
   # [SELECTION]<flags>/<screen:NAME|window:HANDLE|region:OUT@X,Y,W,H> and xdph
   # passes --allow-token when screencopy:allow_token_by_default is set.
   set -u
-  CACHE="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/xdph-share-picker.cache"
+  CACHE="$${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/xdph-share-picker.cache"
   TTL=15
-  PICKER="${XDPH_PICKER:-hyprland-share-picker}"
+  PICKER="$${XDPH_PICKER:-hyprland-share-picker}"
   
   exec 9>"$CACHE.lock"
   flock 9 # a concurrent prompt waits here, then reads the fresh cache

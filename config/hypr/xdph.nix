@@ -1,9 +1,9 @@
 {pkgs}:
-with {
+let
   share-picker-cached = import ../../scripts/share-picker-cached.nix {
     inherit pkgs;
   };
-} in ''
+in ''
   screencopy {
       # Keep OFF — see Failure 3.
       allow_token_by_default = false

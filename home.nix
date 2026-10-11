@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   pkgs,
@@ -12,6 +13,10 @@
   rebuild = import ./scripts/rebuild.nix {inherit pkgs path;};
   logger = import ./scripts/logger.nix {inherit pkgs;};
   wallpaper = ./wallpapers/galaxy-red.png;
+  pkgs-stable = import inputs.nixpkgs-stable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
 in {
   stylix = {
     enable = true;
@@ -333,7 +338,7 @@ in {
     brightnessctl
     git-credential-oauth
 
-    (pkgs.python3.withPackages (python-pkgs:
+    (python3.withPackages (python-pkgs:
       with python-pkgs; [
         dbus-python
       ]))
@@ -341,7 +346,7 @@ in {
     # GUI
     pavucontrol
     qdirstat
-    sonobus
+    pkgs-stable.sonobus
     wineWow64Packages.stable
     qbittorrent
     gimp
