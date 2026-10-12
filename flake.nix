@@ -79,13 +79,13 @@
     nixosConfigurations = {
       nixbox-hp =
         mkHost "nixbox-hp" [
+          ./modules/nixos/nix-ld.nix
           ./modules/nixos/wayland.nix
           ./modules/nixos/hyprland.nix
-          ./modules/nixos/i3.nix
-          ./modules/nixos/nix-ld.nix
+          # ./modules/nixos/i3.nix
         ] [
           ./modules/home-manager/hyprland.nix
-          ./modules/home-manager/i3.nix
+          # ./modules/home-manager/i3.nix
         ];
     };
 

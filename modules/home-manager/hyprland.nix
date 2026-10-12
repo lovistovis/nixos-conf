@@ -17,6 +17,7 @@
   xdg.configFile."hypr/xdph.conf".text = import ../../config/hypr/xdph.nix {inherit pkgs;};
 
   programs = {
+    alacritty.settings.font.size = lib.mkForce 15;
     waybar = {
       enable = true;
       style = lib.mkAfter ''
