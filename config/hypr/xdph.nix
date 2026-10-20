@@ -1,5 +1,4 @@
-{pkgs}:
-let
+{pkgs}: let
   share-picker-cached = import ../../scripts/share-picker-cached.nix {
     inherit pkgs;
   };

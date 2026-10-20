@@ -15,10 +15,10 @@ pkgs.writeShellScriptBin "share-picker-cached" ''
   CACHE="$${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/xdph-share-picker.cache"
   TTL=15
   PICKER="$${XDPH_PICKER:-hyprland-share-picker}"
-  
+
   exec 9>"$CACHE.lock"
   flock 9 # a concurrent prompt waits here, then reads the fresh cache
-  
+
   if [ -f "$CACHE" ]; then
       ts=$(sed -n 1p "$CACHE")
       sel=$(sed -n 2p "$CACHE")
@@ -27,7 +27,7 @@ pkgs.writeShellScriptBin "share-picker-cached" ''
           exit 0
       fi
   fi
-  
+
   out=$("$PICKER" "$@")
   ec=$?
   sel=$(printf '%s\n' "$out" | grep -o '\[SELECTION\].*' | tail -1)
