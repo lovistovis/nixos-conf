@@ -30,7 +30,7 @@
 
   swapDevices = [
     {
-      device = "/dev/nvme0n1p4";
+      device = "/dev/nvme0n1p5";
       # size = 8388; # 838860800 bytes
     }
   ];

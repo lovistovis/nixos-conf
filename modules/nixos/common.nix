@@ -1,13 +1,27 @@
 {
   inputs,
   pkgs,
+  my,
   ...
-}: {
+}: let
+  wallpaper = ../../wallpapers/galaxy-red.png;
+in {
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
       inputs.nur.overlays.default
     ];
+  };
+
+  stylix = {
+    enable = true;
+    image = wallpaper;
+    polarity = "dark";
+  };
+
+  users.users.${my.username} = {
+    isNormalUser = true;
+    extraGroups = ["wheel" "libvirtd" "docker"];
   };
 
   environment.systemPackages = with pkgs; [

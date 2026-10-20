@@ -4,26 +4,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nixvim = {
       url = "github:nix-community/nixvim";
     };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
@@ -47,25 +42,29 @@
         username = import ./username.nix;
         hostname = hostname;
       };
+      pkgs-stable = import inputs.nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs my;};
+        specialArgs = {inherit inputs my pkgs-stable;};
         modules =
           [
+            stylix.nixosModules.stylix
+            ./modules/nixos/common.nix
             ./hosts/${hostname}/configuration.nix
             ./hosts/${hostname}/hardware-configuration.nix
-            ./modules/nixos/common.nix
             home-manager.nixosModules.home-manager
             {
               networking.hostName = hostname;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {inherit inputs my;};
+                extraSpecialArgs = {inherit inputs my pkgs-stable;};
                 sharedModules =
                   [
-                    stylix.homeModules.stylix
                     nixvim.homeModules.nixvim
                   ]
                   ++ extraHomeManagerModules;
@@ -79,6 +78,7 @@
     nixosConfigurations = {
       nixbox-hp =
         mkHost "nixbox-hp" [
+          ./modules/nixos/grub.nix
           ./modules/nixos/nix-ld.nix
           ./modules/nixos/wayland.nix
           ./modules/nixos/hyprland.nix

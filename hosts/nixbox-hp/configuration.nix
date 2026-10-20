@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   my,
@@ -16,13 +17,8 @@
       useOSProber = true;
       timeoutStyle = "countdown";
       default = "saved";
-      splashImage = null;
+      splashImage = lib.mkForce null;
     };
-  };
-
-  users.users.${my.username} = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd" "docker"];
   };
 
   programs = {
@@ -31,8 +27,6 @@
       mount-sd = "if [ ! -d /mnt/sd ]; then sudo mkdir /mnt/sd; fi; sudo mount -t exfat /dev/mmcblk0 /mnt/sd";
     };
   };
-
-  # time.hardwareClockInLocalTime = true;
 
   powerManagement.enable = true;
 

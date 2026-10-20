@@ -14,7 +14,7 @@
     extraConfig = import ../../config/hypr/hyprland-lua.nix {inherit pkgs config my;};
   };
 
-  xdg.configFile."hypr/xdph.conf".text = import ../../config/hypr/xdph.nix {inherit pkgs;};
+  # xdg.configFile."hypr/xdph.conf".text = import ../../config/hypr/xdph.nix {inherit pkgs;};
 
   programs = {
     alacritty.settings.font.size = lib.mkForce 15;

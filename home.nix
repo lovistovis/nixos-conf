@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  pkgs-stable,
   my,
   ...
 }: let
@@ -11,17 +12,9 @@
   tmux-create = import ./scripts/tmux-create.nix {inherit pkgs;};
   # tmux-delete = import ./scripts/tmux-delete.nix { inherit pkgs; };
   rebuild = import ./scripts/rebuild.nix {inherit pkgs path;};
-  logger = import ./scripts/logger.nix {inherit pkgs;};
-  wallpaper = ./wallpapers/galaxy-red.png;
-  pkgs-stable = import inputs.nixpkgs-stable {
-    system = pkgs.system;
-    config.allowUnfree = true;
-  };
+  logger = import ./scripts/logger.nix {inherit pkgs my;};
 in {
   stylix = {
-    enable = true;
-    image = wallpaper;
-    polarity = "dark";
     targets = {
       firefox = {
         enable = true;
@@ -351,11 +344,9 @@ in {
     qbittorrent
     gimp
     vesktop
-    unityhub
     spotdl
     steam
     tor-browser
-    prismlauncher
     kdePackages.dolphin
     protonup-qt
     feh
