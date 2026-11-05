@@ -104,7 +104,16 @@ in {
               installRustc = false;
               installCargo = false;
             };
+            hls = {
+              enable = true;
+              installGhc = true;
+            };
           };
+        };
+        telescope.enable = true;
+        haskell-tools = {
+          enable = true;
+          enableTelescope = true;
         };
       };
       extraConfigLua = builtins.readFile ./config/nvim/init.lua;

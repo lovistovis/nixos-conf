@@ -19,7 +19,6 @@
 
     # Required
     glib
-    gtk2
     gtk3
     bzip2
 
