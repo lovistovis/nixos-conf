@@ -98,6 +98,16 @@ in {
             clangd.enable = true;
             gopls.enable = true;
             pyright.enable = true;
+            jdtls = {
+              enable = true;
+              settings = {
+                java = {
+                  configuration = {
+                    updateBuildConfiguration = "automatic";
+                  };
+                };
+              };
+            };
             rust_analyzer = {
               enable = true;
               installRustc = false;
