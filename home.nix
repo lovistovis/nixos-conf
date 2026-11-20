@@ -98,7 +98,6 @@ in {
             clangd.enable = true;
             gopls.enable = true;
             pyright.enable = true;
-            jdtls.enable = true;
             rust_analyzer = {
               enable = true;
               installRustc = false;
@@ -359,6 +358,7 @@ in {
     kdePackages.dolphin
     protonup-qt
     feh
+    prism
     # davinci-resolve
     # chromium
     # opentoonz
